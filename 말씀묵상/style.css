@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --white:#FFFFFF;
+  --ghost:#F0F0F0;
+  --charcoal:#1C1C1C;
+  --steel:#A8C5CE;
+  --midgray:#888888;
+  --border:#E0E0E0;
+  --bg:#FAFAFA;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--charcoal);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 100px 24px;
+  position: relative;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  margin-bottom: 56px;
+}
+.eyebrow-row {
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--steel); }
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: var(--midgray);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.site-title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.site-sub {
+  font-size: 15px;
+  color: var(--midgray);
+}
+
+/* ---------- Index list ---------- */
+.day-list { border-top: 1px solid var(--charcoal); }
+.day-item {
+  display:flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+  transition: opacity 0.15s ease;
+}
+.day-item:hover { opacity: 0.6; }
+.day-num {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--steel);
+  flex: 0 0 44px;
+}
+.day-ref {
+  font-size: 17px;
+  font-weight: 500;
+  flex: 0 0 150px;
+}
+.day-theme {
+  font-size: 15px;
+  color: var(--midgray);
+  flex: 1;
+}
+
+/* ---------- Single day page ---------- */
+.back-link {
+  display:inline-block;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--midgray);
+  margin-bottom: 40px;
+}
+.headline {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 44px;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.headline .ref { font-size: 24px; color: var(--steel); font-weight: 400; margin-left: 10px; }
+.rule { height: 1px; background: var(--charcoal); margin: 28px 0 34px 0; }
+
+.scripture {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 18px;
+  line-height: 1.85;
+  text-align: justify;
+  margin-bottom: 48px;
+}
+.scripture .vnum {
+  font-size: 12px;
+  color: var(--steel);
+  font-weight: 700;
+  vertical-align: super;
+  margin-right: 2px;
+}
+
+.block { margin-bottom: 36px; }
+.block-head {
+  display:flex; align-items:baseline; gap: 12px;
+  margin-bottom: 12px;
+}
+.block-num { font-size: 13px; color: var(--steel); letter-spacing: 1px; }
+.block-label {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+.block-body {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  text-align: justify;
+}
+.block-body.prayer { font-style: italic; color: var(--charcoal); }
+.thin-divider { height: 1px; background: var(--border); margin-bottom: 36px; }
+
+.nav-row {
+  display:flex;
+  justify-content: space-between;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--midgray);
+}
+.nav-row a:hover { color: var(--charcoal); }
+
+.site-footer {
+  margin-top: 64px;
+  padding-top: 20px;
+  border-top: 1px solid var(--charcoal);
+  display:flex;
+  justify-content: space-between;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--midgray);
+}
+.site-footer .brand { color: var(--charcoal); font-weight: 500; }
+
+@media (max-width: 480px) {
+  .site-title { font-size: 30px; }
+  .headline { font-size: 32px; }
+  .headline .ref { font-size: 18px; }
+  .scripture { font-size: 16.5px; }
+  .day-item { flex-wrap: wrap; }
+  .day-theme { flex-basis: 100%; margin-top: 4px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
