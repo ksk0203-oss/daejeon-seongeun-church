@@ -165,6 +165,13 @@ h2.section-title { font-size: calc(22px * var(--fs-scale, 1)); font-weight: 700;
 .audio-play-btn:hover { background: var(--blue-dark); }
 .audio-status { flex: 0 0 auto; font-size: calc(11px * var(--fs-scale, 1)); font-weight: 700; color: var(--icon-gray); margin-right: 4px; }
 .audio-speed-group { flex: 0 0 auto; display: flex; gap: 3px; }
+.voice-pref-row { display: flex; justify-content: flex-end; margin: 4px 40px 0; }
+.voice-pref-link {
+  font-family: inherit; background: none; border: none; cursor: pointer;
+  font-size: calc(11px * var(--fs-scale, 1)); color: var(--icon-gray); text-decoration: underline;
+  padding: 0;
+}
+.voice-pref-link:hover { color: var(--blue); }
 .speed-btn {
   font-family: inherit; font-size: calc(11px * var(--fs-scale, 1)); font-weight: 700; color: var(--icon-gray);
   background: var(--white); border: 1px solid var(--divider); border-radius: 100px;
@@ -174,6 +181,7 @@ h2.section-title { font-size: calc(22px * var(--fs-scale, 1)); font-weight: 700;
 @media (max-width: 640px) {
   .audio-row { margin-left: 22px; margin-right: 22px; flex-wrap: wrap; }
   .audio-speed-group { gap: 3px; }
+  .voice-pref-row { margin-left: 22px; margin-right: 22px; }
 }
 
 .back-row { padding: 20px 40px 0; }
@@ -208,7 +216,12 @@ h2.section-title { font-size: calc(22px * var(--fs-scale, 1)); font-weight: 700;
 @media (max-width: 640px) {
   .hero-banner, .badge-row, .content-section, .closing-line, .page-label,
   .toc-wrap, .chapter-label, .back-row, .social-row, .footer-legal, .footer-links { padding-left: 22px; padding-right: 22px; }
-  .toc-ref { flex-basis: 96px; font-size: calc(14px * var(--fs-scale, 1)); }
+  .toc-item { flex-wrap: wrap; row-gap: 6px; }
+  .toc-date { order: 1; flex-basis: 96px; font-size: calc(13.5px * var(--fs-scale, 1)); }
+  .toc-ref { order: 2; flex-basis: 118px; font-size: calc(13.5px * var(--fs-scale, 1)); }
+  .toc-tag { order: 3; }
+  .toc-arrow { order: 4; }
+  .toc-theme { order: 5; flex: 1 1 100%; margin-top: 2px; }
 }
 </style>
 </head>
@@ -281,6 +294,9 @@ h2.section-title { font-size: calc(22px * var(--fs-scale, 1)); font-weight: 700;
         <button class="speed-btn" data-rate="1.25" onclick="setRate(1.25)">1.25x</button>
         <button class="speed-btn" data-rate="1.5" onclick="setRate(1.5)">1.5x</button>
       </div>
+    </div>
+    <div class="voice-pref-row">
+      <button class="voice-pref-link" id="voice-pref-link" onclick="toggleVoicePref()">음질 우선으로 듣기</button>
     </div>
 
     <div class="content-section" style="padding-top:16px;">
@@ -515,6 +531,10 @@ function openDay(n) {
   document.getElementById('view-cover').style.display = 'none';
   document.getElementById('view-day').style.display = 'block';
   window.scrollTo(0,0);
+
+  let vp = 'rate';
+  try { vp = localStorage.getItem('voicePref') || 'rate'; } catch (e) {}
+  updateVoicePrefLabel(vp);
 }
 
 function showCover() {
@@ -536,11 +556,19 @@ function pickBestKoreanVoice() {
   const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
   const koVoices = voices.filter(v => v.lang === 'ko-KR' || v.lang === 'ko_KR' || v.lang === 'ko');
   if (koVoices.length === 0) return null;
-  // 배속(rate) 조절은 기기에 설치된 로컬 음성에서만 안정적으로 동작하고,
-  // 크롬 등에서 제공하는 "Google" 네트워크 음성은 배속을 무시하는 경우가 많음.
-  // 배속 컨트롤이 실제로 동작하도록 로컬 음성을 우선 선택한다.
-  const ranked = koVoices.sort((a, b) => {
-    const score = v => (v.localService ? 5 : 0) + (/neural|premium|enhanced|natural/i.test(v.name) ? 1 : 0);
+
+  let prefer = 'rate';
+  try { prefer = localStorage.getItem('voicePref') || 'rate'; } catch (e) {}
+
+  const ranked = koVoices.slice().sort((a, b) => {
+    const isHQ = v => /neural|premium|enhanced|natural|yuna|sora|online/i.test(v.name);
+    const score = v => {
+      let s = 0;
+      if (isHQ(v)) s += 3; // 이름에 고음질 표시가 있으면 가산점
+      if (prefer === 'rate' && v.localService) s += 5; // 배속 우선: 로컬 음성 가산점
+      if (prefer === 'quality' && !v.localService) s += 2; // 품질 우선: 네트워크(구글) 음성도 허용
+      return s;
+    };
     return score(b) - score(a);
   });
   koVoiceCache = ranked[0];
@@ -611,6 +639,24 @@ function stopSpeech() {
   if (window.speechSynthesis) window.speechSynthesis.cancel();
   isSpeaking = false;
   currentUtterance = null;
+}
+
+function toggleVoicePref() {
+  let current = 'rate';
+  try { current = localStorage.getItem('voicePref') || 'rate'; } catch (e) {}
+  const next = current === 'rate' ? 'quality' : 'rate';
+  try { localStorage.setItem('voicePref', next); } catch (e) {}
+  koVoiceCache = null; // 다음 재생부터 새 기준으로 음성 다시 선택
+  updateVoicePrefLabel(next);
+  if (isSpeaking || (window.speechSynthesis && window.speechSynthesis.speaking)) {
+    speakFromStart();
+  }
+}
+
+function updateVoicePrefLabel(pref) {
+  const link = document.getElementById('voice-pref-link');
+  if (!link) return;
+  link.textContent = pref === 'rate' ? '음질 우선으로 듣기' : '배속 우선으로 듣기';
 }
 
 function setRate(r) {
