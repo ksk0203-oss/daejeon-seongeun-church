@@ -54,6 +54,21 @@
   .fs-control { padding: 0 22px; }
 }
 
+.scroll-top-btn {
+  position: fixed;
+  right: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom) + 10px);
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--ink-black); color: var(--white);
+  border: none; font-size: 18px; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  z-index: 999;
+  opacity: 0; transition: opacity 0.2s ease;
+  appearance: none; -webkit-appearance: none;
+}
+.scroll-top-btn.is-visible { display: flex; opacity: 1; }
+
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   background: var(--page-bg);
@@ -61,6 +76,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
   padding: 40px 16px;
+  padding-top: max(52px, env(safe-area-inset-top) + 12px);
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
 }
 .email-card {
   max-width: 680px; margin: 0 auto; background: var(--white);
@@ -244,6 +261,10 @@ h2.section-title { font-size: calc(22px * var(--fs-scale, 1)); font-weight: 700;
   <button class="fs-btn" data-scale="1.15" onclick="setFontScale(1.15)">가</button>
   <button class="fs-btn" data-scale="1.3" onclick="setFontScale(1.3)">가</button>
 </div>
+
+<button class="scroll-top-btn" id="scroll-top-btn" onclick="scrollToTop()" aria-label="맨 위로">
+  <span>&uarr;</span>
+</button>
 
 <div class="email-card">
 
@@ -672,6 +693,22 @@ function setFontScale(scale) {
       });
     });
   }
+})();
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+(function initScrollTopButton() {
+  const btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      btn.classList.add('is-visible');
+    } else {
+      btn.classList.remove('is-visible');
+    }
+  });
 })();
 
 buildTOC();
