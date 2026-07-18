@@ -130,7 +130,8 @@ a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * va
 .toc-item.is-active { background: rgba(21,110,246,0.08); }
 .toc-item.is-disabled { cursor: default; opacity: 0.55; }
 .toc-item.is-disabled:hover { background: none; }
-.toc-date { font-weight: 800; color: var(--blue); flex: 0 0 44px; font-size: calc(14.5px * var(--fs-scale, 1)); }
+.toc-date { font-weight: 800; color: var(--blue); flex: 0 0 92px; font-size: calc(14.5px * var(--fs-scale, 1)); }
+.toc-dow { font-size: 0.72em; font-weight: 600; color: var(--text-gray); margin-left: 2px; }
 .toc-ref { font-weight: 700; flex: 0 0 130px; font-size: calc(15px * var(--fs-scale, 1)); color: var(--text-black); }
 .toc-theme { flex: 1; font-size: calc(14px * var(--fs-scale, 1)); color: var(--text-gray); }
 .toc-tag {
@@ -190,7 +191,10 @@ a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * va
 }
 .back-btn:hover { color: var(--blue); }
 
-.closing-line { padding: 24px 40px 32px; font-size: calc(16px * var(--fs-scale, 1)); color: var(--text-black); }
+.closing-line {
+  padding: 20px 22px; font-size: calc(16px * var(--fs-scale, 1)); color: var(--text-black);
+  background: #EFF6FF; border-left: 3px solid var(--blue); border-radius: 4px;
+}
 .inline-link { color: var(--blue); font-weight: 600; text-decoration: none; }
 
 .social-row { display: flex; justify-content: center; gap: 14px; padding: 32px 40px 24px; background: var(--page-bg); }
@@ -217,7 +221,8 @@ a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * va
   .toc-wrap, .chapter-label, .back-row, .social-row, .footer-legal, .footer-links { padding-left: 22px; padding-right: 22px; }
   .divider { margin-left: 22px; margin-right: 22px; }
   .hero-title { font-size: calc(22px * var(--fs-scale, 1)); word-break: keep-all; overflow-wrap: break-word; }
-  .toc-ref { flex-basis: 102px; font-size: calc(14px * var(--fs-scale, 1)); }
+  .toc-date { flex-basis: 80px; font-size: calc(13px * var(--fs-scale, 1)); }
+  .toc-ref { flex-basis: 96px; font-size: calc(14px * var(--fs-scale, 1)); }
 }
 </style>
 </head>
@@ -469,12 +474,18 @@ const days = [
     prayer:'주님, 저는 스스로 건져낼 수 없는 곤고한 사람입니다. 그러나 예수 그리스도로 말미암아 감사할 수 있음을 고백하며, 8월 한 달의 묵상을 주님께 올려드립니다. 예수님의 이름으로 기도합니다. 아멘.'},
 ];
 
+function getWeekdayLabel(n) {
+  const labels = ['주일', '월', '화', '수', '목', '금', '토'];
+  const d = new Date(2026, 7, n); // August 2026 (month index 7)
+  return labels[d.getDay()];
+}
+
 function buildTOC() {
   const list = document.getElementById('toc-list');
   list.innerHTML = days.map(d => `
     <li>
       <button class="toc-item ${d.ready ? '' : 'is-disabled'}" onclick="${d.ready ? `openDay(${d.n})` : 'return false'}">
-        <span class="toc-date">${d.date}</span>
+        <span class="toc-date">${d.date}<span class="toc-dow">(${getWeekdayLabel(d.n)})</span></span>
         <span class="toc-ref">롬 ${d.ref}</span>
         <span class="toc-theme">${d.theme}</span>
         ${d.ready ? '<span class="toc-tag">보기</span>' : '<span class="toc-tag soon">준비중</span>'}
@@ -502,8 +513,8 @@ function openDay(n) {
       <li class="bullet-item"><strong>적용점</strong> — ${d.application}</li>
     </ul>
     <div class="divider" style="margin-left:0; margin-right:0;"></div>
-    <div class="closing-line" style="padding-left:0; padding-right:0;">
-      <em>${d.prayer}</em>
+    <div class="closing-line" style="margin: 24px 0 0;">
+      ${d.prayer}
     </div>
   `;
 
