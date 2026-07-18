@@ -2,8 +2,18 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>2026년 8월 5분 말씀 묵상</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#080808">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="5분 묵상">
+<meta name="mobile-web-app-capable" content="yes">
+
 <style>
 :root {
   --fs-scale: 1;
@@ -269,6 +279,9 @@ h2.section-title { font-size: calc(22px * var(--fs-scale, 1)); font-weight: 700;
     <div class="footer-legal" style="padding-top:32px;">
       <p>말씀과 함께 하루를</p>
       <p>2026년 8월 · 5분 말씀 묵상 시리즈</p>
+    </div>
+    <div class="footer-links" style="padding-top:0; padding-bottom:36px;">
+      <a href="archive/index.html">지난 묵상 보기</a>
     </div>
   </div>
 
@@ -662,6 +675,12 @@ function setFontScale(scale) {
 })();
 
 buildTOC();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 </script>
 
 

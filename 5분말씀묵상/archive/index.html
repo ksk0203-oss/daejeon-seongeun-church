@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>지난 묵상 · 5분 말씀 묵상</title>
+<style>
+:root {
+  --ink-black: #080808;
+  --blue: #156EF6;
+  --blue-light: #6FA8FF;
+  --blue-dark: #0F52B8;
+  --page-bg: #F0F0F0;
+  --white: #FFFFFF;
+  --text-black: #000000;
+  --text-gray: #696969;
+  --icon-gray: #7E7E7E;
+  --divider: #D9E1EC;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--page-bg);
+  color: var(--text-black);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 40px 16px;
+}
+.email-card {
+  max-width: 680px; margin: 0 auto; background: var(--white);
+  border-radius: 4px; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.hero-banner { background: var(--ink-black); padding: 32px 40px 40px; }
+.hero-top { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.logo-mark { width: 26px; height: 26px; background: var(--blue); border-radius: 6px; display: inline-block; }
+.logo-word { color: var(--white); font-weight: 800; font-size: 17px; }
+.hero-title { color: var(--white); font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
+
+.page-label {
+  padding: 20px 40px 0; font-size: 13px; font-weight: 700; letter-spacing: 2px;
+  color: var(--icon-gray); text-transform: uppercase;
+}
+.divider { height: 1px; background: var(--divider); margin: 20px 40px; }
+
+.archive-wrap { padding: 8px 40px 32px; }
+.archive-list { list-style: none; }
+.archive-item {
+  display: block; padding: 18px 0; border-bottom: 1px dotted var(--divider);
+  text-decoration: none; color: inherit;
+}
+.archive-item:hover { opacity: 0.7; }
+.archive-month { font-weight: 800; color: var(--blue); font-size: 18px; margin-bottom: 4px; }
+.archive-desc { font-size: 13.5px; color: var(--text-gray); }
+
+.empty-state { padding: 50px 40px; text-align: center; }
+.empty-state p { font-size: 14px; color: var(--text-gray); line-height: 1.7; }
+
+.back-row { padding: 24px 40px 0; }
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; color: var(--icon-gray); text-decoration: none; letter-spacing: 0.5px;
+}
+.back-btn:hover { color: var(--blue); }
+
+.footer-legal { background: var(--page-bg); text-align: center; padding: 32px 40px 40px; }
+.footer-legal p { font-size: 13.5px; color: var(--text-gray); line-height: 1.8; }
+
+@media (max-width: 640px) {
+  .hero-banner, .page-label, .archive-wrap, .back-row, .footer-legal { padding-left: 22px; padding-right: 22px; }
+  .divider { margin-left: 22px; margin-right: 22px; }
+  .hero-title { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="email-card">
+  <div class="hero-banner">
+    <div class="hero-top">
+      <span class="logo-mark"></span>
+      <span class="logo-word">말씀으로 시작하는 하루</span>
+    </div>
+    <div class="hero-title">지난 묵상 보관함</div>
+  </div>
+
+  <div class="back-row">
+    <a class="back-btn" href="../index.html">&larr; 이번 달 묵상으로 돌아가기</a>
+  </div>
+
+  <div class="page-label">Archive · 지난 달 목록</div>
+  <div class="divider"></div>
+
+  <div class="archive-wrap">
+    <!--
+      다음 달부터는 이 부분에 지난 달 목록을 추가합니다. 예시:
+      <a class="archive-item" href="2026-08.html">
+        <div class="archive-month">2026년 8월</div>
+        <div class="archive-desc">로마서 1장 ~ 7장 25절 · 31일치</div>
+      </a>
+    -->
+    <div class="empty-state">
+      <p>아직 지난 달 기록이 없습니다.<br>9월이 되면 8월 묵상이 이곳에 보관됩니다.</p>
+    </div>
+  </div>
+
+  <div class="footer-legal">
+    <p>대전성은교회 청년부 · 5분 말씀 묵상 시리즈</p>
+  </div>
+</div>
+
+</body>
+</html>
