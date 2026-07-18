@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026년 8월 5분 말씀 묵상</title>
+<style>
+:root {
+  --ink-black: #080808;
+  --blue: #156EF6;
+  --blue-dark: #0F52B8;
+  --page-bg: #F0F0F0;
+  --white: #FFFFFF;
+  --text-black: #000000;
+  --text-gray: #696969;
+  --icon-gray: #7E7E7E;
+  --divider: #D9E1EC;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--page-bg);
+  color: var(--text-black);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding: 40px 16px;
+}
+.email-card {
+  max-width: 680px; margin: 0 auto; background: var(--white);
+  border-radius: 4px; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+/* 히어로 배너 */
+.hero-banner { background: var(--ink-black); padding: 32px 40px 40px; position: relative; overflow: hidden; }
+.hero-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; }
+.hero-logo { display: flex; align-items: center; gap: 10px; }
+.logo-mark { width: 26px; height: 26px; background: var(--blue); border-radius: 6px; display: inline-block; }
+.logo-word { color: var(--white); font-weight: 800; font-size: 17px; }
+.hero-mockup { display: flex; gap: 8px; align-items: flex-start; }
+.mockup-play {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--white);
+  color: var(--ink-black); display: flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer; border: none;
+}
+.mockup-dots {
+  display: flex; gap: 6px; background: var(--blue); border-radius: 10px;
+  padding: 12px 14px; align-items: center; height: 20px;
+}
+.mockup-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--white); }
+.hero-title { color: var(--white); font-size: 30px; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 14px; white-space: nowrap; }
+.hero-subtitle { color: rgba(255,255,255,0.65); font-size: 15px; max-width: 380px; line-height: 1.5; }
+
+.page-label {
+  padding: 16px 40px 0; font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  color: var(--icon-gray); text-transform: uppercase;
+}
+
+.meta-row { padding: 28px 40px 0; }
+.meta-line { font-size: 15px; font-weight: 700; color: var(--text-black); }
+.divider { height: 1px; background: var(--divider); margin: 20px 40px; }
+.divider--blue { background: var(--blue); opacity: 0.25; margin-top: 20px; }
+.divider--thick { height: 6px; background: var(--ink-black); margin: 0; }
+
+.content-section { padding: 0 40px 4px; }
+.content-section p.body-text { font-size: 15px; line-height: 1.65; color: var(--text-black); margin-bottom: 14px; }
+h2.section-title { font-size: 21px; font-weight: 700; color: var(--text-black); line-height: 1.35; margin-bottom: 12px; }
+
+.bullet-list { padding: 0; margin: 14px 0; list-style: none; }
+.bullet-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 15px; line-height: 1.65; color: var(--text-black); }
+.bullet-item::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--text-black);
+}
+
+a.arrow-link { display: inline-block; margin-top: 4px; font-size: 15px; font-weight: 500; color: var(--blue); text-decoration: none; cursor: pointer; }
+
+.badge-row { padding: 32px 40px 0; }
+.verse-quote {
+  font-size: 16px; font-weight: 700; line-height: 1.6; color: var(--text-black);
+  padding-bottom: 4px;
+}
+.verse-quote-ref {
+  display: block; margin-top: 6px; font-size: 12.5px; font-weight: 700;
+  color: var(--blue); letter-spacing: 0.5px;
+}
+.pill-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blue); color: var(--white);
+  font-size: 14px; font-weight: 700; padding: 8px 16px; border-radius: 8px;
+}
+
+/* 목차 (책 형식 TOC, 클릭 가능) */
+.toc-wrap { padding: 20px 40px 32px; }
+.toc-list { list-style: none; }
+.toc-item {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 12px 0; border-bottom: 1px dotted var(--divider);
+  cursor: pointer; background: none; border-left: none; border-right: none; border-top: none;
+  width: 100%; text-align: left; font-family: inherit; font-size: inherit; color: inherit;
+  appearance: none; -webkit-appearance: none; outline: none;
+  transition: background 0.12s ease;
+}
+.toc-item:hover { background: rgba(21,110,246,0.06); }
+.toc-item.is-active { background: rgba(21,110,246,0.08); }
+.toc-item.is-disabled { cursor: default; opacity: 0.55; }
+.toc-item.is-disabled:hover { background: none; }
+.toc-date { font-weight: 800; color: var(--blue); flex: 0 0 44px; font-size: 13.5px; }
+.toc-ref { font-weight: 700; flex: 0 0 130px; font-size: 14px; color: var(--text-black); }
+.toc-theme { flex: 1; font-size: 13px; color: var(--text-gray); }
+.toc-tag {
+  flex: 0 0 auto; font-size: 11px; font-weight: 800; color: var(--white);
+  background: var(--blue); padding: 3px 8px; border-radius: 100px; letter-spacing: 0.5px;
+}
+.toc-tag.soon { background: var(--icon-gray); }
+.toc-arrow { flex: 0 0 auto; color: var(--icon-gray); font-size: 14px; }
+
+.scripture-box {
+  margin: 6px 0 20px; padding: 20px 22px; background: var(--page-bg);
+  border-left: 3px solid var(--blue); border-radius: 4px;
+  font-size: 14.5px; line-height: 1.85; color: var(--text-black);
+}
+.scripture-box .vnum { color: var(--blue); font-weight: 800; font-size: 12px; margin-right: 2px; }
+
+.chapter-label {
+  padding: 40px 40px 0; display: flex; align-items: center; gap: 14px;
+}
+.chapter-num {
+  font-size: 13px; font-weight: 800; color: var(--white); background: var(--ink-black);
+  width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.chapter-date { font-size: 13px; font-weight: 700; color: var(--icon-gray); letter-spacing: 1px; text-transform: uppercase; }
+
+.audio-row {
+  margin: 10px 40px 0; padding: 0;
+  background: none; border-radius: 0;
+  display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+}
+.audio-play-btn {
+  flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--blue); color: var(--white); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 9px;
+  appearance: none; -webkit-appearance: none;
+}
+.audio-play-btn:hover { background: var(--blue-dark); }
+.audio-status { flex: 0 0 auto; font-size: 10px; font-weight: 700; color: var(--icon-gray); margin-right: 4px; }
+.audio-speed-group { flex: 0 0 auto; display: flex; gap: 3px; }
+.speed-btn {
+  font-family: inherit; font-size: 10px; font-weight: 700; color: var(--icon-gray);
+  background: var(--white); border: 1px solid var(--divider); border-radius: 100px;
+  padding: 3px 7px; cursor: pointer; appearance: none; -webkit-appearance: none;
+}
+.speed-btn.is-active { background: var(--blue); color: var(--white); border-color: var(--blue); }
+@media (max-width: 640px) {
+  .audio-row { margin-left: 22px; margin-right: 22px; flex-wrap: wrap; }
+  .audio-speed-group { gap: 3px; }
+}
+
+.back-row { padding: 20px 40px 0; }
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none; border: none; cursor: pointer; font-family: inherit;
+  font-size: 13px; font-weight: 700; color: var(--icon-gray); letter-spacing: 0.5px; padding: 0;
+}
+.back-btn:hover { color: var(--blue); }
+
+.closing-line { padding: 24px 40px 32px; font-size: 15px; color: var(--text-black); }
+.inline-link { color: var(--blue); font-weight: 600; text-decoration: none; }
+
+.social-row { display: flex; justify-content: center; gap: 14px; padding: 32px 40px 24px; background: var(--page-bg); }
+.social-icon {
+  width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--icon-gray);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--icon-gray); font-size: 13px; text-decoration: none;
+}
+
+.footer-legal { background: var(--page-bg); text-align: center; padding: 0 40px 20px; }
+.footer-legal p { font-size: 12.5px; color: var(--text-gray); line-height: 1.8; }
+.footer-links { background: var(--page-bg); text-align: center; padding: 0 40px 40px; font-size: 12.5px; }
+.footer-links a { color: var(--blue); text-decoration: underline; cursor: pointer; }
+.footer-links span { color: var(--text-gray); margin: 0 8px; }
+
+.soon-box { padding: 60px 40px; text-align: center; }
+.soon-box .soon-icon { font-size: 28px; margin-bottom: 14px; }
+.soon-box p { font-size: 14px; color: var(--text-gray); line-height: 1.7; }
+
+#view-day { display: none; }
+
+@media (max-width: 640px) {
+  .hero-banner, .meta-row, .badge-row, .content-section, .closing-line, .page-label,
+  .toc-wrap, .chapter-label, .back-row, .social-row, .footer-legal, .footer-links { padding-left: 22px; padding-right: 22px; }
+  .divider { margin-left: 22px; margin-right: 22px; }
+  .hero-title { font-size: 30px; }
+  .toc-ref { flex-basis: 102px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="email-card">
+
+  <!-- ============ 표지 + 목차 화면 ============ -->
+  <div id="view-cover">
+    <div class="hero-banner">
+      <div class="hero-top">
+        <div class="hero-logo">
+          <span class="logo-mark"></span>
+          <span class="logo-word">말씀으로 시작하는 하루</span>
+        </div>
+      </div>
+      <div class="hero-title">2026년 8월 5분 말씀 묵상</div>
+    </div>
+
+    <div class="page-label">Contents · 목차</div>
+
+    <div class="content-section" style="padding-top:14px; padding-bottom:0;">
+      <div class="verse-quote">
+        “주의 말씀은 내 발에 등이요 내 길에 빛이니이다”
+        <span class="verse-quote-ref">— 시편 119:105</span>
+      </div>
+    </div>
+
+    <div class="badge-row" style="padding-top:18px;">
+      <span class="pill-badge">📖 날짜를 눌러 그날의 묵상을 읽어보세요</span>
+    </div>
+    <div class="divider divider--blue" style="margin-top:14px;"></div>
+
+    <div class="toc-wrap">
+      <ul class="toc-list" id="toc-list"><!-- JS로 채워짐 --></ul>
+    </div>
+
+    <div class="footer-legal" style="padding-top:32px;">
+      <p>말씀과 함께 하루를</p>
+      <p>2026년 8월 · 5분 말씀 묵상 시리즈</p>
+    </div>
+  </div>
+
+  <!-- ============ 개별 날짜 본문 화면 ============ -->
+  <div id="view-day">
+    <div class="back-row">
+      <button class="back-btn" onclick="showCover()">&larr; 목차로 돌아가기</button>
+    </div>
+
+    <div class="chapter-label">
+      <div class="chapter-num" id="d-num">01</div>
+      <div class="chapter-date" id="d-date">8월 1일 · 로마서 1:1&ndash;7</div>
+    </div>
+
+    <div class="audio-row">
+      <button class="audio-play-btn" id="audio-play-btn" onclick="togglePlay()">
+        <span id="audio-play-icon">▶</span>
+      </button>
+      <div class="audio-status" id="audio-status">듣기</div>
+      <div class="audio-speed-group">
+        <button class="speed-btn" data-rate="0.75" onclick="setRate(0.75)">0.75x</button>
+        <button class="speed-btn is-active" data-rate="1" onclick="setRate(1)">1x</button>
+        <button class="speed-btn" data-rate="1.25" onclick="setRate(1.25)">1.25x</button>
+        <button class="speed-btn" data-rate="1.5" onclick="setRate(1.5)">1.5x</button>
+      </div>
+    </div>
+
+    <div class="content-section" style="padding-top:16px;">
+      <h2 class="section-title" id="d-theme">인사, 복음의 요약</h2>
+      <div id="d-body"><!-- JS로 채워짐 --></div>
+    </div>
+
+    <div class="footer-legal" style="padding-top:32px;">
+      <p>말씀과 함께 하루를</p>
+      <p>2026년 8월 · 5분 말씀 묵상 시리즈</p>
+    </div>
+    <div class="footer-links">
+      <a onclick="showCover()">목차 보기</a><span>|</span>
+      <a onclick="showCover()">웹에서 보기</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const days = [
+  {n:1, date:"08.01", ref:"1:1&ndash;7", theme:"인사, 복음의 요약", ready:true,
+    scripture:'<span class="vnum">1</span>예수 그리스도의 종 바울은 사도로 부르심을 받아 하나님의 복음을 위하여 택정함을 입었으니 <span class="vnum">2</span>이 복음은 하나님이 선지자들을 통하여 그의 아들에 관하여 성경에 미리 약속하신 것이라 <span class="vnum">3</span>그의 아들에 관하여 말하면 육신으로는 다윗의 혈통에서 나셨고 <span class="vnum">4</span>성결의 영으로는 죽은 자들 가운데서 부활하사 능력으로 하나님의 아들로 선포되셨으니 곧 우리 주 예수 그리스도시니라 <span class="vnum">5</span>그로 말미암아 우리가 은혜와 사도의 직분을 받아 그의 이름을 위하여 모든 이방인 중에서 믿어 순종하게 하나니 <span class="vnum">6</span>너희도 그들 중에서 예수 그리스도의 것으로 부르심을 받은 자니라 <span class="vnum">7</span>로마에서 하나님의 사랑하심을 받고 성도로 부르심을 받은 모든 자에게 하나님 우리 아버지와 주 예수 그리스도로부터 은혜와 평강이 있기를 원하노라',
+    meditation:'바울은 "예수 그리스도의 종"이라는 자리를 사도직보다 먼저 둡니다. 다윗의 혈통으로 오신 예수님이 부활을 통해 능력으로 하나님의 아들로 선포되셨다는 복음의 핵심을, 그는 편지의 첫머리에서 담대히 선언합니다. 이 복음은 어느 날 갑자기 생겨난 것이 아니라 선지자들을 통해 이미 오래전부터 약속되어 있던 것이었습니다. 바울에게 사도의 직분은 스스로 이룬 성취가 아니라 은혜로 값없이 받은 부르심이었고, 그 부르심의 목적은 분명했습니다 — 모든 민족이 그리스도를 믿어 순종하게 하는 것이었습니다.',
+    application:"오늘 나의 정체성을 무엇으로 규정하고 있는지 돌아봅니다. 직분이나 역할보다 먼저 '그리스도의 종'이라는 자리를 붙잡고 하루를 시작해 봅니다.",
+    prayer:"주님, 저도 바울처럼 무엇보다 먼저 주님의 종으로 부르심을 받은 자임을 기억하게 하소서. 오늘 제게 맡겨진 자리에서 복음의 능력을 의지하며 살게 하소서. 예수님의 이름으로 기도합니다. 아멘."},
+  {n:2, date:"08.02", ref:"1:8&ndash;15", theme:"로마 방문 소원", ready:true,
+    scripture:'<span class="vnum">8</span>먼저 내가 예수 그리스도로 말미암아 너희 모든 사람에 관하여 내 하나님께 감사함은 너희 믿음이 온 세상에 전파됨이로다 <span class="vnum">9</span>내가 그의 아들의 복음 안에서 내 심령으로 섬기는 하나님이 나의 증인이 되시거니와 항상 내 기도에 쉬지 않고 너희를 말하며 <span class="vnum">10</span>어떻게 하든지 이제 하나님의 뜻 안에서 너희에게로 나아갈 좋은 길 얻기를 구하노라 <span class="vnum">11</span>내가 너희 보기를 간절히 원하는 것은 어떤 신령한 은사를 너희에게 나누어 주어 너희를 견고하게 하려 함이니 <span class="vnum">12</span>이는 곧 내가 너희 가운데서 너희와 나의 믿음으로 말미암아 피차 안위함을 얻으려 함이라 <span class="vnum">13</span>형제들아 내가 여러 번 너희에게 가고자 한 것을 너희가 모르기를 원하지 아니하노니 이는 너희 중에서도 다른 이방인 중에서와 같이 열매를 맺게 하려 함이로되 지금까지 길이 막혔도다 <span class="vnum">14</span>헬라인이나 야만인이나 지혜 있는 자나 어리석은 자에게 다 내가 빚진 자라 <span class="vnum">15</span>그러므로 나는 할 수 있는 대로 로마에 있는 너희에게도 복음 전하기를 원하노라',
+    meditation:'바울은 얼굴 한 번 본 적 없는 로마 성도들을 위해 쉬지 않고 기도합니다. 그가 로마에 가려는 이유는 자신을 드러내기 위함이 아니라, 서로의 믿음으로 피차 안위함을 얻고 은사를 나누기 위함이었습니다. 특히 14절의 고백이 인상 깊습니다 — 바울은 스스로를 모든 사람에게 \'빚진 자\'라고 말합니다. 복음을 받은 사람은 그 자체로 갚아야 할 빚을 진 사람이라는 뜻입니다. 지혜 있는 자와 어리석은 자를 가리지 않는 이 마음은, 복음이 특정한 사람들만을 위한 것이 아니라 모든 사람을 향해 열려 있다는 사실을 보여줍니다.',
+    application:'내가 아직 갚지 못한 \'복음의 빚\'이 있다면 누구에게, 어떤 모습으로 갚아야 할지 생각해 봅니다. 오늘 마주치는 사람 중 한 사람을 위해 짧게라도 기도해 봅니다.',
+    prayer:'주님, 제가 받은 은혜가 갚아야 할 빚임을 기억하게 하소서. 만나는 사람을 가리지 않고 복음을 전할 마음을 허락하시고, 서로의 믿음으로 함께 견고해지는 공동체가 되게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:3, date:"08.03", ref:"1:16&ndash;17", theme:"복음은 하나님의 능력", ready:true,
+    scripture:'<span class="vnum">16</span>내가 복음을 부끄러워하지 아니하노니 이 복음은 모든 믿는 자에게 구원을 주시는 하나님의 능력이 됨이라 먼저는 유대인에게요 그리고 헬라인에게로다 <span class="vnum">17</span>복음에는 하나님의 의가 나타나서 믿음으로 믿음에 이르게 하나니 기록된 바 오직 의인은 믿음으로 말미암아 살리라 함과 같으니라',
+    meditation:'단 두 절이지만 로마서 전체, 나아가 종교개혁 전체를 떠받친 구절입니다. 바울은 복음을 부끄러워하지 않는다고 선언합니다. 로마의 권력과 철학, 종교 앞에서 십자가에 달린 메시아를 전하는 것이 결코 자랑스러운 일로 보이지 않았을 시대에, 그는 오히려 이 복음이야말로 \'구원을 주시는 하나님의 능력\'이라고 말합니다. 그리고 그 구원에 이르는 길은 단 하나, 믿음입니다. 유대인이든 헬라인이든, 신분이나 배경과 상관없이 오직 믿음으로 하나님 앞에 설 수 있다는 이 선언은, 당시에도 지금도 세상의 논리를 뒤엎는 파격적인 진리입니다.',
+    application:'오늘 하루, 복음을 부끄러워하게 만드는 상황이 있다면 무엇인지 돌아봅니다. \'오직 믿음으로\'라는 이 짧은 문장을 마음에 새기고 하루를 시작해 봅니다.',
+    prayer:'주님, 제가 복음을 부끄러워하지 않게 하소서. 세상의 기준이 아니라 오직 믿음으로 살아가는 하루가 되게 하시고, 이 복음이 제 삶에도 구원의 능력으로 나타나게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:4, date:"08.04", ref:"1:18&ndash;25", theme:"인간의 불경건과 우상숭배", ready:true,
+    scripture:'<span class="vnum">18</span>하나님의 진노가 불의로 진리를 막는 사람들의 모든 경건하지 않음과 불의에 대하여 하늘로부터 나타나나니 <span class="vnum">19</span>이는 하나님을 알 만한 것이 그들 속에 보임이라 하나님께서 이를 그들에게 보이셨느니라 <span class="vnum">20</span>창세로부터 그의 보이지 아니하는 것들 곧 그의 영원하신 능력과 신성이 그가 만드신 만물에 분명히 보여 알려졌나니 그러므로 그들이 핑계하지 못할지니라 <span class="vnum">21</span>하나님을 알되 하나님을 영화롭게도 아니하며 감사하지도 아니하고 오히려 그 생각이 허망하여지며 미련한 마음이 어두워졌나니 <span class="vnum">22</span>스스로 지혜 있다 하나 어리석게 되어 <span class="vnum">23</span>썩어지지 아니하는 하나님의 영광을 썩어질 사람과 새와 짐승과 기어다니는 동물 모양의 우상으로 바꾸었느니라 <span class="vnum">24</span>그러므로 하나님께서 그들을 마음의 정욕대로 더러움에 내버려 두사 그들의 몸을 서로 욕되게 하게 하셨으니 <span class="vnum">25</span>이는 그들이 하나님의 진리를 거짓 것으로 바꾸어 피조물을 조물주보다 더 경배하고 섬김이라 주는 곧 영원히 찬송할 이시로다 아멘',
+    meditation:'바울은 여기서 인류가 하나님을 몰라서 죄를 짓는 것이 아니라고 말합니다. 만물을 통해 하나님의 영원하신 능력과 신성이 이미 분명히 드러나 있기에, 사람에게는 핑계할 여지가 없습니다(20절). 문제는 무지가 아니라 \'알고도 영화롭게 하지 않은 것\'입니다. 하나님을 하나님으로 인정하지 않을 때, 생각은 허망해지고 마음은 어두워집니다. 그 결과 사람은 결국 창조주의 자리에 피조물을 앉히는 우상숭배로 나아가게 됩니다. 이것은 먼 옛날의 이야기가 아니라, 오늘 우리가 무엇을 가장 사랑하고 의지하는지를 묻는 질문이기도 합니다.',
+    application:'내 삶에서 하나님의 자리를 대신 차지하고 있는 것은 없는지 조용히 돌아봅니다. 돈, 성공, 관계, 인정 — 무엇이든 하나님보다 먼저 의지하고 있는 것이 있다면 오늘 그것을 정직하게 이름 붙여 봅니다.',
+    prayer:'주님, 제가 알고도 외면했던 것들을 용서하여 주소서. 창조주이신 주님만을 영화롭게 하며, 그 어떤 것도 주님의 자리에 앉히지 않는 마음을 허락하여 주소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:5, date:"08.05", ref:"1:26&ndash;32", theme:"하나님이 내버려두신 죄악들", ready:true,
+    scripture:'<span class="vnum">26</span>이 때문에 하나님께서 그들을 부끄러운 욕심에 내버려 두셨으니 곧 그들의 여자들도 순리대로 쓸 것을 바꾸어 역리로 쓰며 <span class="vnum">27</span>그와 같이 남자들도 순리대로 여자 쓰기를 버리고 서로 향하여 음욕이 불 일듯 하매 남자가 남자와 더불어 부끄러운 일을 행하여 그들의 그릇됨에 상당한 보응을 그들 자신이 받았느니라 <span class="vnum">28</span>또한 그들이 마음에 하나님 두기를 싫어하매 하나님께서 그들을 그 상실한 마음대로 내버려 두사 합당하지 못한 일을 하게 하셨으니 <span class="vnum">29</span>곧 모든 불의, 추악, 탐욕, 악의가 가득한 자요 시기, 살인, 분쟁, 사기, 악독이 가득한 자요 수군수군하는 자요 <span class="vnum">30</span>비방하는 자요 하나님께서 미워하시는 자요 능욕하는 자요 교만한 자요 자랑하는 자요 악을 도모하는 자요 부모를 거역하는 자요 <span class="vnum">31</span>우매한 자요 배약하는 자요 무정한 자요 무자비한 자라 <span class="vnum">32</span>그들이 이같은 일을 행하는 자는 사형에 해당한다고 하나님께서 정하심을 알고도 자기들만 행할 뿐 아니라 또한 그런 일을 행하는 자들을 옳다 하느니라',
+    meditation:'바울은 하나님을 떠난 마음이 결국 어디까지 이르는지를 목록으로 나열합니다. 그런데 이 목록을 찬찬히 읽어보면 특정한 죄 하나를 겨냥한 것이 아니라, 탐욕, 시기, 다툼, 수군거림, 비방, 교만, 부모에 대한 거역까지 — 우리 모두가 삶의 어느 순간 스쳐 지나갔을 법한 지극히 \'일상적인\' 죄들이 함께 놓여 있다는 것을 알게 됩니다. 바울의 요점은 몇몇 사람만 문제라는 것이 아니라, 하나님을 마음에 두기 싫어하는 인간의 마음이 내버려질 때 누구든 이 목록 어딘가에 서게 된다는 것입니다. 그래서 다음 장에서 바울은 곧바로 “그러므로 남을 판단하는 사람아 네가 핑계하지 못할 것은”이라고 이어갑니다.',
+    application:'이 목록 중에 오늘 내 안에서 가장 익숙하게 발견되는 것은 무엇인지 정직하게 하나만 골라 봅니다. 그것을 회개의 자리로 가져와 하나님 앞에 내려놓아 봅니다.',
+    prayer:'주님, 이 목록에서 저 자신을 발견합니다. 제 안의 교만과 비방과 무정함을 용서하여 주시고, 하나님을 마음에 모시기 원하는 자로 매일 새롭게 하여 주소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:6, date:"08.06", ref:"2:1&ndash;5", theme:"남을 판단하는 자의 문제", ready:true,
+    scripture:'<span class="vnum">1</span>그러므로 남을 판단하는 사람아, 누구를 막론하고 네가 핑계하지 못할 것은 남을 판단하는 것으로 네가 너를 정죄함이니 판단하는 네가 같은 일을 행함이니라 <span class="vnum">2</span>이런 일을 행하는 자에게 하나님의 심판이 진리대로 되는 줄 우리가 아노라 <span class="vnum">3</span>이런 일을 행하는 자를 판단하고도 같은 일을 행하는 사람아, 네가 하나님의 심판을 피할 줄로 생각하느냐 <span class="vnum">4</span>혹 네가 하나님의 인자하심이 너를 인도하여 회개하게 하심을 알지 못하여 그의 인자하심과 용납하심과 길이 참으심이 풍성함을 멸시하느냐 <span class="vnum">5</span>다만 네 고집과 회개하지 아니한 마음을 따라 진노의 날 곧 하나님의 의로우신 심판이 나타나는 그 날에 임할 진노를 네게 쌓는도다',
+    meditation:'1장 마지막에서 타인의 죄악을 나열하던 바울은, 2장에 들어서자마자 그 목록을 읽고 있는 독자를 향해 정면으로 돌아섭니다. 남을 판단하는 것 자체가 스스로를 정죄하는 행위라는 것입니다 — 판단하는 사람도 결국 같은 일을 행하기 때문입니다. 특히 4절이 마음을 찌릅니다. 하나님의 인자하심과 오래 참으심은 심판을 유예하기 위한 것이 아니라 회개로 이끌기 위한 것인데, 우리는 종종 그 인자하심을 당연한 것으로 여기며 자신을 돌아보지 않습니다.',
+    application:'오늘 누군가를 판단하고 싶은 마음이 들 때, 그 판단의 기준을 먼저 내 삶에 대어 봅니다. 하나님의 인자하심이 나를 참아주신 시간을 떠올리며 하루를 시작해 봅니다.',
+    prayer:'주님, 남을 판단하기 전에 저 자신을 먼저 비추어 보게 하소서. 주님의 오래 참으심이 저를 회개로 이끄셨음을 기억하며, 오늘도 겸손히 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:7, date:"08.07", ref:"2:6&ndash;11", theme:"하나님의 공의로운 심판", ready:true,
+    scripture:'<span class="vnum">6</span>하나님께서 각 사람에게 그 행한 대로 보응하시되 <span class="vnum">7</span>참고 선을 행하여 영광과 존귀와 썩지 아니함을 구하는 자에게는 영생으로 하시고 <span class="vnum">8</span>오직 당을 지어 진리를 따르지 아니하고 불의를 따르는 자에게는 진노와 분노로 하시리라 <span class="vnum">9</span>악을 행하는 각 사람의 영에는 환난과 곤고가 있으리니 먼저는 유대인에게요 그리고 헬라인에게며 <span class="vnum">10</span>선을 행하는 각 사람에게는 영광과 존귀와 평강이 있으리니 먼저는 유대인에게요 그리고 헬라인에게라 <span class="vnum">11</span>이는 하나님께서 외모로 사람을 취하지 아니하심이라',
+    meditation:'바울은 하나님의 심판이 신분이나 배경이 아니라 \'행한 대로\' 이루어진다고 말합니다. 참고 선을 행하는 자에게는 영생이, 진리를 따르지 않고 불의를 따르는 자에게는 진노가 임한다는 이 선언은 단순한 인과응보가 아니라, 하나님이 사람을 외모로 취하지 않으신다는 공의의 원칙을 보여줍니다. 유대인이든 헬라인이든 순서만 다를 뿐 같은 기준 앞에 서게 된다는 것이 11절의 핵심입니다.',
+    application:'내가 은근히 기대하고 있는 \'예외\'는 없는지 돌아봅니다. 하나님 앞에서는 나 역시 특별 대우를 받는 존재가 아니라는 사실을 오늘 하루 겸손히 받아들여 봅니다.',
+    prayer:'주님, 공평하신 주님의 심판 앞에 제 자신을 정직하게 세웁니다. 외모나 배경을 의지하지 않고, 오직 주님이 기뻐하시는 삶을 참고 행하는 자가 되게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:8, date:"08.08", ref:"2:12&ndash;16", theme:"율법과 양심", ready:true,
+    scripture:'<span class="vnum">12</span>무릇 율법 없이 범죄한 자는 또한 율법 없이 망하고 무릇 율법이 있고 범죄한 자는 율법으로 말미암아 심판을 받으리라 <span class="vnum">13</span>하나님 앞에서는 율법을 듣는 자가 의인이 아니요 오직 율법을 행하는 자라야 의롭다 하심을 얻으리니 <span class="vnum">14</span>율법 없는 이방인이 본성으로 율법의 일을 행할 때에는 이 사람은 율법이 없어도 자기가 자기에게 율법이 되나니 <span class="vnum">15</span>이런 이들은 그 양심이 증거가 되어 그 생각들이 서로 혹은 고발하며 혹은 변명하여 그 마음에 새긴 율법의 행위를 나타내느니라 <span class="vnum">16</span>곧 나의 복음에 이른 바와 같이 하나님이 예수 그리스도로 말미암아 사람들의 은밀한 것을 심판하시는 그 날이라',
+    meditation:'율법을 받은 유대인이나 받지 못한 이방인이나, 결국 심판의 기준은 \'들었느냐\'가 아니라 \'행하였느냐\'입니다. 흥미로운 것은 15절입니다 — 율법을 알지 못하는 이방인 속에도 양심이라는 내적 증거가 있어서, 그 생각들이 서로 고발하거나 변명한다는 것입니다. 이는 하나님이 사람의 마음 깊은 곳에 이미 옳고 그름을 분별하는 흔적을 새겨 두셨다는 뜻이며, 동시에 그 양심마저도 완전한 의의 기준이 되지 못한다는 냉정한 진단이기도 합니다.',
+    application:'오늘 내 양심이 조용히 지적하는 것이 있다면 무엇인지 귀 기울여 봅니다. 그 소리를 변명으로 덮지 않고 하나님 앞에 정직하게 가져가 봅니다.',
+    prayer:'주님, 제 안에 새겨주신 양심의 소리를 외면하지 않게 하소서. 듣는 것에 그치지 않고 행하는 자가 되도록 오늘도 붙들어 주소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:9, date:"08.09", ref:"2:17&ndash;24", theme:"유대인과 율법", ready:true,
+    scripture:'<span class="vnum">17</span>유대인이라 불리는 네가 율법을 의지하며 하나님을 자랑하며 <span class="vnum">18</span>율법의 교훈을 받아 하나님의 뜻을 알고 지극히 선한 것을 분간하며 <span class="vnum">19</span>맹인의 길을 인도하는 자요 어둠에 있는 자의 빛이요 <span class="vnum">20</span>율법에 있는 지식과 진리의 모본을 가진 자로서 어리석은 자의 교사요 어린 아이의 선생이라고 스스로 믿으니 <span class="vnum">21</span>그러면 다른 사람을 가르치는 네가 네 자신은 가르치지 아니하느냐 도둑질하지 말라 선포하는 네가 도둑질하느냐 <span class="vnum">22</span>간음하지 말라 말하는 네가 간음하느냐 우상을 가증히 여기는 네가 신전 물건을 도둑질하느냐 <span class="vnum">23</span>율법을 자랑하는 네가 율법을 범함으로 하나님을 욕되게 하느냐 <span class="vnum">24</span>기록된 바와 같이 하나님의 이름이 너희 때문에 이방인 중에서 모독을 받는도다',
+    meditation:'바울은 이제 구체적으로 유대인을 겨냥합니다. 율법을 의지하고 하나님을 자랑하며 스스로 맹인의 인도자요 어둠의 빛이라 자부하던 이들에게, 바울은 날카로운 질문을 던집니다 — 도둑질하지 말라 가르치는 네가 도둑질하지 않느냐, 우상을 가증히 여기는 네가 신전 물건을 도둑질하지 않느냐. 지식과 가르침이 곧 삶은 아니라는 것입니다. 24절의 인용은 더 무겁습니다. 이런 이중성 때문에 하나님의 이름이 이방인 중에서 모독을 받는다는 것입니다.',
+    application:'내가 알고 가르치는 것과 실제로 살아내는 것 사이에 벌어진 틈은 없는지 돌아봅니다. 오늘 하루, 말과 삶의 간격을 좁히는 작은 실천 하나를 정해 봅니다.',
+    prayer:'주님, 제가 아는 것을 삶으로 증명하지 못해 주님의 이름을 가리는 자가 되지 않게 하소서. 가르치는 대로 살아가는 정직함을 허락하여 주소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:10, date:"08.10", ref:"2:25&ndash;29", theme:"참 할례란 무엇인가", ready:true,
+    scripture:'<span class="vnum">25</span>네가 율법을 행하면 할례가 유익하나 만일 율법을 범하면 네 할례는 무할례가 되느니라 <span class="vnum">26</span>그런즉 무할례자가 율법의 규례를 지키면 그 무할례를 할례와 같이 여길 것이 아니냐 <span class="vnum">27</span>또한 본래 무할례자가 율법을 온전히 지키면 율법 조문과 할례를 가지고 율법을 범하는 너를 정죄하지 아니하겠느냐 <span class="vnum">28</span>무릇 표면적 유대인이 유대인이 아니요 표면적 육신의 할례가 할례가 아니니라 <span class="vnum">29</span>오직 이면적 유대인이 유대인이며 할례는 마음에 할지니 영에 있고 율법 조문에 있지 아니한 것이라 그 칭찬이 사람에게서가 아니요 다만 하나님에게서니라',
+    meditation:'할례는 유대인에게 하나님 백성이라는 표시였지만, 바울은 그 표시가 마음의 순종 없이는 무의미하다고 말합니다. 오히려 율법을 지키는 무할례자가 율법을 범하는 할례자보다 낫다는 역설을 던집니다. 29절의 결론은 선명합니다 — 참 유대인, 참 할례는 표면적인 것이 아니라 마음과 영에 있는 것이며, 그 칭찬은 사람이 아니라 오직 하나님에게서 옵니다. 신앙의 본질이 외적 표식이 아니라 마음의 상태에 있다는 선언입니다.',
+    application:'내가 신앙의 증표로 삼고 있는 것이 겉모습인지 마음인지 돌아봅니다. 사람에게 보이기 위한 신앙의 표지가 있다면 오늘 내려놓아 봅니다.',
+    prayer:'주님, 사람의 눈이 아니라 주님의 눈에 합한 마음의 사람이 되게 하소서. 겉모습이 아니라 중심을 보시는 주님 앞에 정직하게 서게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:11, date:"08.11", ref:"3:1&ndash;8", theme:"유대인의 유익, 하나님의 신실하심", ready:true,
+    scripture:'<span class="vnum">1</span>그런즉 유대인의 나음이 무엇이며 할례의 유익이 무엇이냐 <span class="vnum">2</span>범사에 많으니 우선은 그들이 하나님의 말씀을 맡았음이니라 <span class="vnum">3</span>어떤 자들이 믿지 아니하였으면 어찌하리요 그 믿지 아니함이 하나님의 미쁘심을 폐하겠느냐 <span class="vnum">4</span>그럴 수 없느니라 사람은 다 거짓되되 오직 하나님은 참되시다 할지어다 기록된 바 주께서 주의 말씀에 의롭다 함을 얻으시고 판단 받으실 때에 이기려 하심이라 함과 같으니라 <span class="vnum">5</span>그러나 우리 불의가 하나님의 의를 드러나게 하면 무슨 말 하리요 진노를 내리시는 하나님이 불의하시냐 <span class="vnum">6</span>결코 그렇지 아니하니라 만일 그러하면 하나님께서 어찌 세상을 심판하시리요 <span class="vnum">7</span>그러나 나의 거짓말로 하나님의 참되심이 더 풍성하여 그의 영광이 되었다면 어찌 내가 죄인처럼 심판을 받으리요 <span class="vnum">8</span>또는 그러면 선을 이루기 위하여 악을 행하자 하지 않겠느냐 어떤 이들이 이렇게 비방하여 우리가 이런 말을 한다고 하니 그들은 정죄 받는 것이 마땅하니라',
+    meditation:'2장에서 유대인의 특권을 무너뜨린 바울은, 3장 초반에서 균형을 잡습니다. 그렇다면 유대인의 나음은 전혀 없는가? 그렇지 않다는 것입니다 — 그들은 하나님의 말씀을 맡은 자들이었습니다. 사람의 믿지 아니함이 하나님의 신실하심을 폐하지 못한다는 3-4절의 선언은, 인간의 실패가 하나님의 성품을 흔들 수 없다는 굳건한 진리를 보여줍니다. 하나님은 사람이 신실하지 않아도 여전히 참되십니다.',
+    application:'내가 실패하고 흔들릴 때에도 하나님의 신실하심은 변하지 않는다는 사실을 오늘 붙잡아 봅니다. 내 믿음의 크기가 아니라 하나님의 성품에 소망을 두는 하루를 살아 봅니다.',
+    prayer:'주님, 제가 흔들릴 때에도 주님은 언제나 참되고 신실하심을 고백합니다. 제 연약함이 주님의 신실하심을 가리지 못함을 감사하며 오늘을 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:12, date:"08.12", ref:"3:9&ndash;14", theme:"모든 사람이 죄 아래 있음", ready:true,
+    scripture:'<span class="vnum">9</span>그러면 어떠하냐 우리는 나으냐 결코 아니라 유대인이나 헬라인이나 다 죄 아래에 있다고 우리가 이미 선언하였느니라 <span class="vnum">10</span>기록된 바 의인은 없나니 하나도 없으며 <span class="vnum">11</span>깨닫는 자도 없고 하나님을 찾는 자도 없고 <span class="vnum">12</span>다 치우쳐 함께 무익하게 되고 선을 행하는 자는 없나니 하나도 없도다 <span class="vnum">13</span>그들의 목구멍은 열린 무덤이요 그 혀로는 속임을 일삼으며 그 입술에는 독사의 독이 있고 <span class="vnum">14</span>그 입에는 저주와 악독이 가득하고',
+    meditation:'유대인이나 헬라인이나 다 죄 아래 있다는 바울의 선언은 구약 여러 본문을 엮어 만든 강력한 고발입니다. 의인은 없다, 깨닫는 자도 없다, 하나님을 찾는 자도 없다 — 이 반복되는 부정은 인간이 스스로의 선함으로는 결코 하나님 앞에 설 수 없다는 진단을 내립니다. 목구멍, 혀, 입술, 입이라는 신체 부위의 나열은 죄가 얼마나 우리의 말과 관계 속에 깊이 스며들어 있는지를 생생하게 보여줍니다.',
+    application:'오늘 내 말과 언어 습관 속에 무심코 스며든 속임이나 독함은 없는지 돌아봅니다. 말 한마디를 내뱉기 전에 잠시 멈추어 보는 하루를 살아 봅니다.',
+    prayer:'주님, 저의 입술과 혀를 주장하여 주소서. 스스로 의롭다 여기지 않고, 오직 주님의 은혜만을 의지하게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:13, date:"08.13", ref:"3:15&ndash;20", theme:"율법으로는 의롭게 될 수 없음", ready:true,
+    scripture:'<span class="vnum">15</span>그 발은 피 흘리는 데 빠른지라 <span class="vnum">16</span>파멸과 고생이 그 길에 있어 <span class="vnum">17</span>평강의 길을 알지 못하였고 <span class="vnum">18</span>그들의 눈 앞에 하나님을 두려워함이 없느니라 함과 같으니라 <span class="vnum">19</span>우리가 알거니와 무릇 율법이 말하는 바는 율법 아래에 있는 자들에게 말하는 것이니 이는 모든 입을 막고 온 세상으로 하나님의 심판 아래에 있게 하려 함이라 <span class="vnum">20</span>그러므로 율법의 행위로 그의 앞에 의롭다 하심을 얻을 육체가 없나니 율법으로는 죄를 깨달음이니라',
+    meditation:'파멸과 고생이 그 길에 있고 평강의 길을 알지 못했다는 묘사는, 하나님을 두려워함이 없는 삶이 결국 어디로 향하는지를 보여줍니다. 그리고 바울은 결정적인 선언을 합니다 — 율법의 행위로는 어떤 육체도 하나님 앞에 의롭다 하심을 얻을 수 없다는 것입니다. 율법의 역할은 우리를 의롭게 만드는 것이 아니라, 우리가 죄인임을 깨닫게 하는 거울이었습니다.',
+    application:'내가 은연중에 \'이 정도면 괜찮은 사람\'이라는 기준으로 나를 평가하고 있지는 않은지 돌아봅니다. 율법이 아니라 은혜가 필요한 존재임을 오늘 다시 인정해 봅니다.',
+    prayer:'주님, 저는 스스로 의롭게 될 수 없는 존재임을 고백합니다. 율법이 아니라 오직 주님의 은혜로만 설 수 있음을 겸손히 받아들이게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:14, date:"08.14", ref:"3:21&ndash;26", theme:"믿음으로 말미암는 하나님의 의", ready:true,
+    scripture:'<span class="vnum">21</span>이제는 율법 외에 하나님의 한 의가 나타났으니 율법과 선지자들에게 증거를 받은 것이라 <span class="vnum">22</span>곧 예수 그리스도를 믿음으로 말미암아 모든 믿는 자에게 미치는 하나님의 의니 차별이 없느니라 <span class="vnum">23</span>모든 사람이 죄를 범하였으매 하나님의 영광에 이르지 못하더니 <span class="vnum">24</span>그리스도 예수 안에 있는 속량으로 말미암아 하나님의 은혜로 값 없이 의롭다 하심을 얻은 자 되었느니라 <span class="vnum">25</span>이 예수를 하나님이 그의 피로써 믿음으로 말미암는 화목제물로 세우셨으니 이는 하나님께서 길이 참으시는 중에 전에 지은 죄를 간과하심으로 자기의 의로우심을 나타내려 하심이니 <span class="vnum">26</span>곧 이 때에 자기의 의로우심을 나타내사 자기도 의로우시며 또한 예수 믿는 자를 의롭다 하려 하심이라',
+    meditation:'3장에서 가장 밝은 빛이 비치는 자리입니다. 율법으로 정죄받은 인류에게 \'율법 외에\' 하나님의 한 의가 나타났습니다 — 예수 그리스도를 믿음으로 말미암는 의, 차별이 없는 의입니다. 모든 사람이 죄를 범했지만, 그리스도 예수 안에 있는 속량으로 말미암아 값없이 의롭다 하심을 얻었습니다. 25-26절은 십자가가 하나님의 사랑인 동시에 하나님의 공의가 나타난 자리임을 보여줍니다 — 죄를 간과하지 않으시면서도 믿는 자를 의롭다 하시는 길을 여신 것입니다.',
+    application:'오늘 내가 값없이 받은 의를 다시 값을 치르려는 듯 노력으로 되찾으려 하지는 않는지 돌아봅니다. 이미 받은 은혜를 감사함으로 받아들이는 하루를 살아 봅니다.',
+    prayer:'주님, 제 힘으로 이를 수 없던 의를 그리스도 예수 안에서 값없이 주셨음을 감사합니다. 이 은혜를 의지하여 오늘도 담대히 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:15, date:"08.15", ref:"3:27&ndash;31", theme:"믿음으로 세워지는 율법", ready:true,
+    scripture:'<span class="vnum">27</span>그런즉 자랑할 데가 어디냐 있을 수가 없느니라 무슨 법으로냐 행위로냐 아니라 오직 믿음의 법으로니라 <span class="vnum">28</span>그러므로 사람이 의롭다 하심을 얻는 것은 율법의 행위에 있지 않고 믿음으로 되는 줄 우리가 인정하노라 <span class="vnum">29</span>하나님은 다만 유대인의 하나님이시냐 또한 이방인의 하나님은 아니시냐 진실로 이방인의 하나님도 되시느니라 <span class="vnum">30</span>할례자도 믿음으로 말미암아 또한 무할례자도 믿음으로 말미암아 의롭다 하실 하나님은 한 분이시니라 <span class="vnum">31</span>그런즉 우리가 믿음으로 말미암아 율법을 파기하느냐 그럴 수 없느니라 도리어 율법을 굳게 세우느니라',
+    meditation:'믿음으로 의롭다 하심을 얻는다면, 자랑할 것이 전혀 없어집니다. 행위의 법이 아니라 믿음의 법이기 때문입니다. 바울은 이 믿음의 의가 유대인만이 아니라 이방인에게도 동일하게 적용된다고 말하며, 하나님이 한 분이시듯 의롭다 하시는 길도 하나임을 강조합니다. 그리고 마지막 반전 — 그렇다면 믿음이 율법을 파기하는가? 오히려 율법을 굳게 세운다는 것입니다. 율법이 가리켰던 그 의가 마침내 그리스도 안에서 성취되었기 때문입니다.',
+    application:'내 신앙 안에 은근히 남아있는 \'자랑거리\'는 없는지 돌아봅니다. 오늘 하루, 자랑이 아니라 감사로 하나님 앞에 서 봅니다.',
+    prayer:'주님, 제게는 자랑할 것이 없고 오직 믿음으로 서 있을 뿐임을 고백합니다. 이 겸손한 자리에서 오늘도 감사하며 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:16, date:"08.16", ref:"4:1&ndash;8", theme:"아브라함의 믿음, 다윗의 고백", ready:true,
+    scripture:'<span class="vnum">1</span>그런즉 육신으로 우리 조상인 아브라함이 무엇을 얻었다 하리요 <span class="vnum">2</span>만일 아브라함이 행위로써 의롭다 하심을 받았으면 자랑할 것이 있으려니와 하나님 앞에서는 없느니라 <span class="vnum">3</span>성경이 무엇을 말하느냐 아브라함이 하나님을 믿으매 그것이 그에게 의로 여겨진 바 되었느니라 <span class="vnum">4</span>일하는 자에게는 그 삯이 은혜로 여겨지지 아니하고 보수로 여겨지거니와 <span class="vnum">5</span>일을 아니할지라도 경건하지 아니한 자를 의롭다 하시는 이를 믿는 자에게는 그의 믿음을 의로 여기시나니 <span class="vnum">6</span>일한 것이 없이 하나님께 의로 여기심을 받는 사람의 복에 대하여 다윗이 말한 바 <span class="vnum">7</span>불법이 사함을 받고 죄가 가리어짐을 받는 사람들은 복이 있고 <span class="vnum">8</span>주께서 그 죄를 인정하지 아니하실 사람은 복이 있도다 함과 같으니라',
+    meditation:'바울은 유대인들이 가장 존경하는 두 인물, 아브라함과 다윗을 예로 듭니다. 아브라함은 행위가 아니라 믿음으로 의로 여겨졌습니다 — 하나님을 믿으매 그것이 의로 여겨진 바 되었다는 것입니다. 다윗 역시 자신의 공로가 아니라 죄가 가리어지고 인정되지 않는 은혜의 복을 노래했습니다. 두 사람 모두 자기 성취가 아니라 하나님의 은혜를 붙잡은 사람들이었습니다.',
+    application:'오늘 내가 하나님 앞에서 내세우고 싶은 \'나의 공로\'가 있다면, 그것을 내려놓고 아브라함처럼 그저 믿는 자로 서 봅니다.',
+    prayer:'주님, 저의 행위가 아니라 주님을 믿는 믿음으로 의롭다 여겨주심을 감사합니다. 다윗처럼 은혜의 복을 노래하며 오늘을 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:17, date:"08.17", ref:"4:9&ndash;16", theme:"할례 전에 의로 여기심을 받은 아브라함", ready:true,
+    scripture:'<span class="vnum">9</span>그런즉 이 복이 할례자에게냐 혹은 무할례자에게도냐 무릇 우리가 말하기를 아브라함에게는 그 믿음이 의로 여겨졌다 하노라 <span class="vnum">10</span>그런즉 그것이 어떻게 여겨졌느냐 할례시냐 무할례시냐 할례시가 아니요 무할례시니라 <span class="vnum">11</span>그가 할례의 표를 받은 것은 무할례시에 믿음으로 된 의를 인친 것이니 이는 무할례자로서 믿는 모든 자의 조상이 되어 그들도 의로 여기심을 얻게 하려 하심이라 <span class="vnum">12</span>또한 할례자의 조상이 되었나니 곧 할례 받을 자에게뿐 아니라 우리 조상 아브라함이 무할례시에 가졌던 믿음의 자취를 따르는 자들에게도 그러하니라 <span class="vnum">13</span>아브라함이나 그 후손에게 세상의 상속자가 되리라고 하신 언약은 율법으로 말미암은 것이 아니요 오직 믿음의 의로 말미암은 것이니라 <span class="vnum">14</span>만일 율법에 속한 자들이 상속자이면 믿음은 헛것이 되고 약속은 파기되었느니라 <span class="vnum">15</span>율법은 진노를 이루게 하나니 율법이 없는 곳에는 범법도 없느니라 <span class="vnum">16</span>그러므로 상속자가 되는 그것이 은혜에 속하기 위하여 믿음으로 되나니 이는 그 약속을 그 모든 후손에게 굳게 하려 하심이라 율법에 속한 자에게뿐만 아니라 아브라함의 믿음에 속한 자에게도 그러하니 아브라함은 우리 모든 사람의 조상이라',
+    meditation:'바울은 시간의 순서를 짚습니다 — 아브라함이 의로 여겨진 것은 할례를 받기 전이었습니다. 즉 할례라는 표식이 그를 의롭게 한 것이 아니라, 이미 있던 믿음의 의를 나중에 확인하는 도장이었을 뿐입니다. 그래서 아브라함은 할례자든 무할례자든, 믿음의 길을 걷는 모든 사람의 조상이 될 수 있었습니다. 약속은 율법이 아니라 믿음의 의로 말미암은 것이기에, 모든 믿는 자에게 굳게 서 있습니다.',
+    application:'내가 신앙의 자격으로 삼고 있는 조건들 — 경력, 신분, 특정한 절차 — 이 믿음보다 앞서 있지는 않은지 돌아봅니다. 오늘은 그런 조건 없이, 그저 믿음으로 하나님 앞에 서 봅니다.',
+    prayer:'주님, 어떤 표식이나 조건보다 먼저 믿음으로 저를 받아주심을 감사합니다. 아브라함의 믿음의 길을 따르는 자로 오늘도 걷게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:18, date:"08.18", ref:"4:17&ndash;21", theme:"죽은 자를 살리시는 하나님을 믿은 아브라함", ready:true,
+    scripture:'<span class="vnum">17</span>기록된 바 내가 너를 많은 민족의 조상으로 세웠다 하심과 같으니 그가 믿은 바 하나님은 죽은 자를 살리시며 없는 것을 있는 것으로 부르시는 이시니라 <span class="vnum">18</span>아브라함이 바랄 수 없는 중에 바라고 믿었으니 이는 네 후손이 이같으리라 하신 말씀대로 많은 민족의 조상이 되게 하려 하심이라 <span class="vnum">19</span>그가 백 세나 되어 자기 몸이 죽은 것 같고 사라의 태가 죽은 것 같음을 알고도 믿음이 약하여지지 아니하고 <span class="vnum">20</span>믿음이 없어 하나님의 약속을 의심하지 않고 믿음으로 견고하여져서 하나님께 영광을 돌리며 <span class="vnum">21</span>약속하신 그것을 또한 능히 이루실 줄을 확신하였으니',
+    meditation:'백 세가 된 몸, 죽은 것 같은 사라의 태 — 인간적으로는 바랄 수 없는 상황이었지만 아브라함은 바랄 수 없는 중에 바라고 믿었습니다. 그가 믿은 하나님은 죽은 자를 살리시며 없는 것을 있는 것으로 부르시는 분이었기 때문입니다. 믿음이 약해지지 않고 오히려 견고해져 하나님께 영광을 돌렸다는 20절의 표현은, 진짜 믿음이 상황을 부정하는 것이 아니라 상황보다 크신 하나님을 바라보는 것임을 보여줍니다.',
+    application:'지금 내 삶에서 \'바랄 수 없는\' 상황처럼 보이는 것이 있다면, 그 상황이 아니라 그 상황보다 크신 하나님을 오늘 바라보는 연습을 해 봅니다.',
+    prayer:'주님, 제 눈에 불가능해 보이는 상황 속에서도 죽은 자를 살리시고 없는 것을 있게 하시는 주님을 신뢰하게 하소서. 아브라함처럼 믿음으로 견고해지게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:19, date:"08.19", ref:"4:22&ndash;25", theme:"우리를 위해 기록된 말씀", ready:true,
+    scripture:'<span class="vnum">22</span>그러므로 그것이 그에게 의로 여겨졌느니라 <span class="vnum">23</span>그에게 의로 여겨졌다 기록된 것은 아브라함만 위한 것이 아니요 <span class="vnum">24</span>의로 여기심을 받을 우리도 위함이니 곧 예수 우리 주를 죽은 자 가운데서 살리신 이를 믿는 자니라 <span class="vnum">25</span>예수는 우리가 범죄한 것 때문에 내줌이 되고 또한 우리를 의롭다 하시기 위하여 살아나셨느니라',
+    meditation:'아브라함이 의로 여겨졌다는 기록은 그 한 사람만을 위한 것이 아니라, 예수를 죽은 자 가운데서 살리신 이를 믿는 \'우리\'를 위한 것이기도 하다고 바울은 말합니다. 이 짧은 본문은 로마서 3-4장 전체의 결론이자 다음 장으로 넘어가는 다리입니다. 예수는 우리의 범죄 때문에 내줌이 되셨고, 우리를 의롭다 하시기 위해 살아나셨습니다. 십자가와 부활, 이 두 사건이 우리의 의의 근거입니다.',
+    application:'오늘 예수님의 죽으심과 부활, 이 두 사건이 다른 누구도 아닌 나를 위한 사건이었음을 구체적으로 되새겨 봅니다.',
+    prayer:'주님, 예수님의 죽으심과 살아나심이 저를 위한 것이었음을 감사합니다. 이 믿음을 붙잡고 오늘 하루를 담대히 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:20, date:"08.20", ref:"5:1&ndash;5", theme:"의롭다 하심을 받은 자의 평강", ready:true,
+    scripture:'<span class="vnum">1</span>그러므로 우리가 믿음으로 의롭다 하심을 받았으니 우리 주 예수 그리스도로 말미암아 하나님과 화평을 누리자 <span class="vnum">2</span>또한 그로 말미암아 우리가 믿음으로 서 있는 이 은혜에 들어감을 얻었으며 하나님의 영광을 바라고 즐거워하느니라 <span class="vnum">3</span>다만 이뿐 아니라 우리가 환난 중에도 즐거워하나니 이는 환난은 인내를, <span class="vnum">4</span>인내는 연단을, 연단은 소망을 이루는 줄 앎이로다 <span class="vnum">5</span>소망이 우리를 부끄럽게 하지 아니함은 우리에게 주신 성령으로 말미암아 하나님의 사랑이 우리 마음에 부은 바 됨이니',
+    meditation:'믿음으로 의롭다 하심을 받은 사람에게 주어지는 첫 열매는 평강입니다. 하나님과의 관계가 회복되었기에, 이제는 환난 중에도 즐거워할 수 있다는 것입니다. 환난이 인내를, 인내가 연단을, 연단이 소망을 이룬다는 이 연결 고리는, 고난이 헛되이 낭비되지 않고 하나님의 사랑을 더 깊이 경험하는 통로가 될 수 있음을 보여줍니다. 그 소망이 부끄럽지 않은 이유는, 성령을 통해 하나님의 사랑이 이미 우리 마음에 부어졌기 때문입니다.',
+    application:'지금 내가 겪고 있는 어려움이 있다면, 그것을 회피하기보다 인내와 연단과 소망으로 이어지는 과정으로 바라보는 연습을 오늘 해 봅니다.',
+    prayer:'주님, 환난 중에도 소망을 잃지 않게 하시고, 이미 부어주신 성령의 사랑을 오늘 새롭게 경험하게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:21, date:"08.21", ref:"5:6&ndash;11", theme:"그리스도의 죽으심으로 화목함", ready:true,
+    scripture:'<span class="vnum">6</span>우리가 아직 연약할 때에 기약대로 그리스도께서 경건하지 않은 자를 위하여 죽으셨도다 <span class="vnum">7</span>의인을 위하여 죽는 자가 쉽지 않고 선인을 위하여 용감히 죽는 자가 혹 있거니와 <span class="vnum">8</span>우리가 아직 죄인 되었을 때에 그리스도께서 우리를 위하여 죽으심으로 하나님께서 우리에 대한 자기의 사랑을 확증하셨느니라 <span class="vnum">9</span>그러면 이제 우리가 그의 피로 말미암아 의롭다 하심을 받았으니 더욱 그로 말미암아 진노하심에서 구원을 받을 것이니 <span class="vnum">10</span>곧 우리가 원수 되었을 때에 그의 아들의 죽으심으로 말미암아 하나님과 화목하게 되었은즉 화목하게 된 자로서는 더욱 그의 살아나심으로 말미암아 구원을 받을 것이니라 <span class="vnum">11</span>그뿐 아니라 이제 우리로 화목하게 하신 우리 주 예수 그리스도로 말미암아 하나님 안에서 또한 즐거워하느니라',
+    meditation:'의인을 위해 죽는 사람도 드문데, 그리스도는 우리가 아직 죄인 되었을 때, 아직 원수 되었을 때 우리를 위해 죽으셨습니다. 이것이 하나님의 사랑을 확증하는 방식이었습니다 — 우리의 자격이 아니라 그리스도의 희생이 화목의 근거였다는 것입니다. 원수 되었을 때도 화목하게 하셨다면, 이미 화목하게 된 지금은 더욱 확실하게 구원을 이루실 것이라는 논리는, 하나님의 사랑이 얼마나 견고한 기초 위에 서 있는지를 보여줍니다.',
+    application:'내가 하나님과 가장 멀리 있다고 느꼈던 순간에도 이미 그리스도께서 나를 위해 죽으셨다는 사실을 오늘 기억해 봅니다.',
+    prayer:'주님, 제가 자격 없었을 때에도 먼저 사랑하시고 화목하게 하셨음을 감사합니다. 그 사랑을 의지하여 오늘도 확신 가운데 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:22, date:"08.22", ref:"5:12&ndash;17", theme:"아담과 그리스도의 대조", ready:true,
+    scripture:'<span class="vnum">12</span>그러므로 한 사람으로 말미암아 죄가 세상에 들어오고 죄로 말미암아 사망이 들어왔나니 이와 같이 모든 사람이 죄를 지었으므로 사망이 모든 사람에게 이르렀느니라 <span class="vnum">13</span>죄가 율법 있기 전에도 세상에 있었으나 율법이 없었을 때에는 죄를 죄로 여기지 아니하였느니라 <span class="vnum">14</span>그러나 아담으로부터 모세까지 아담의 범죄와 같은 죄를 짓지 아니한 자들까지도 사망이 왕 노릇 하였나니 아담은 오실 자의 모형이라 <span class="vnum">15</span>그러나 이 은사는 그 범죄와 같지 아니하니 곧 한 사람의 범죄를 인하여 많은 사람이 죽었은즉 더욱 하나님의 은혜와 또한 한 사람 예수 그리스도의 은혜로 말미암은 선물은 많은 사람에게 넘쳤느니라 <span class="vnum">16</span>또 이 선물은 범죄한 한 사람으로 말미암은 것과 같지 아니하니 심판은 한 사람으로 말미암아 정죄에 이르렀으나 은사는 많은 범죄로 말미암아 의롭다 하심에 이름이니라 <span class="vnum">17</span>한 사람의 범죄로 말미암아 사망이 그 한 사람을 통하여 왕 노릇 하였은즉 더욱 은혜와 의의 선물을 넘치게 받는 자들은 한 분 예수 그리스도를 통하여 생명 안에서 왕 노릇 하리로다',
+    meditation:'바울은 인류 역사를 두 사람으로 압축합니다 — 아담과 그리스도. 한 사람의 범죄로 죄와 사망이 모든 사람에게 이르렀듯, 한 사람 예수 그리스도의 순종과 은혜로 생명의 선물이 넘치게 되었습니다. 아담이 대표한 것은 정죄였고, 그리스도가 대표하시는 것은 넘치는 은혜입니다. 이 대조는 내가 속한 자리가 아담 안에서의 정죄가 아니라 그리스도 안에서의 생명이라는 것을 분명히 하기 위함입니다.',
+    application:'오늘 내가 여전히 정죄와 죄책의 자리에 머물러 있지는 않은지 돌아봅니다. 그리스도 안에서 이미 넘치게 주어진 은혜의 자리로 옮겨가 봅니다.',
+    prayer:'주님, 아담 안에서 정죄받았던 저를 그리스도 안에서 생명으로 옮겨주셨음을 감사합니다. 그 넘치는 은혜를 오늘 기억하며 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:23, date:"08.23", ref:"5:18&ndash;21", theme:"은혜가 죄보다 넘침", ready:true,
+    scripture:'<span class="vnum">18</span>그런즉 한 범죄로 많은 사람이 정죄에 이른 것 같이 한 의로운 행위로 말미암아 많은 사람이 의롭다 하심을 받아 생명에 이르렀느니라 <span class="vnum">19</span>한 사람이 순종하지 아니함으로 많은 사람이 죄인 된 것 같이 한 사람이 순종하심으로 많은 사람이 의인이 되리라 <span class="vnum">20</span>율법이 들어온 것은 범죄를 더하게 하려 함이라 그러나 죄가 더한 곳에 은혜가 더욱 넘쳤나니 <span class="vnum">21</span>이는 죄가 사망 안에서 왕 노릇 한 것 같이 은혜도 또한 의로 말미암아 왕 노릇 하여 우리 주 예수 그리스도로 말미암아 영생에 이르게 하려 함이라',
+    meditation:'율법이 들어온 것은 범죄를 더하게 하려는 목적이었다는 20절은 낯설게 들리지만, 바울의 요점은 분명합니다 — 죄가 얼마나 심각한지 드러날수록, 그것을 덮는 은혜가 얼마나 큰지도 함께 드러난다는 것입니다. 죄가 더한 곳에 은혜가 더욱 넘쳤다는 이 선언은 로마서 전체에서 가장 담대한 복음의 요약 중 하나입니다. 죄가 사망 안에서 왕 노릇 한 것처럼, 은혜도 의로 말미암아 영생에 이르도록 왕 노릇 합니다.',
+    application:'내 죄의 깊이를 두려워하기보다, 그 죄보다 넘치는 은혜의 크기를 오늘 더 깊이 묵상해 봅니다.',
+    prayer:'주님, 제 죄가 아무리 깊어도 주님의 은혜가 더 넘친다는 사실에 소망을 둡니다. 이 은혜 안에서 담대히 오늘을 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:24, date:"08.24", ref:"6:1&ndash;7", theme:"그리스도와 함께 죽고 사는 세례", ready:true,
+    scripture:'<span class="vnum">1</span>그런즉 우리가 무슨 말을 하리요 은혜를 더하게 하려고 죄에 거하겠느냐 <span class="vnum">2</span>그럴 수 없느니라 죄에 대하여 죽은 우리가 어찌 그 가운데 더 살리요 <span class="vnum">3</span>무릇 그리스도 예수와 합하여 세례를 받은 우리는 그의 죽으심과 합하여 세례를 받은 줄을 알지 못하느냐 <span class="vnum">4</span>그러므로 우리가 그의 죽으심과 합하여 세례를 받음으로 그와 함께 장사되었나니 이는 아버지의 영광으로 말미암아 그리스도를 죽은 자 가운데서 살리심과 같이 우리로 또한 새 생명 가운데서 행하게 하려 함이라 <span class="vnum">5</span>만일 우리가 그의 죽으심과 같은 모양으로 연합한 자가 되었으면 또한 그의 부활과 같은 모양으로 연합한 자도 되리라 <span class="vnum">6</span>우리가 알거니와 우리의 옛 사람이 예수와 함께 십자가에 못 박힌 것은 죄의 몸이 죽어 다시는 우리가 죄에게 종 노릇 하지 아니하려 함이니 <span class="vnum">7</span>이는 죽은 자가 죄에서 벗어나 의롭다 하심을 얻었음이라',
+    meditation:'은혜가 넘친다면 죄를 더 지어도 되는가? 바울은 단호히 아니라고 답합니다. 세례는 단순한 의식이 아니라, 그리스도의 죽으심과 합하여 우리의 옛 사람이 함께 십자가에 못 박혔다는 것을 나타내는 사건입니다. 죄에 대해 죽은 자가 어찌 그 가운데 더 살 수 있겠느냐는 것입니다. 그리스도와 함께 장사되었다면, 그리스도와 함께 새 생명 가운데서 행하는 것이 마땅한 결론입니다.',
+    application:'내 삶에서 아직 \'옛 사람\'처럼 반응하는 영역이 있다면 무엇인지 돌아봅니다. 오늘 하루, 죽은 자가 아니라 살아난 자로서 그 영역을 대해 봅니다.',
+    prayer:'주님, 그리스도와 함께 죽고 함께 살아난 자임을 기억하게 하소서. 옛 사람의 습관이 아니라 새 생명의 능력으로 오늘을 살게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:25, date:"08.25", ref:"6:8&ndash;14", theme:"죄에 대하여 죽은 자로 여길 것", ready:true,
+    scripture:'<span class="vnum">8</span>만일 우리가 그리스도와 함께 죽었으면 또한 그와 함께 살 줄을 믿노니 <span class="vnum">9</span>이는 그리스도께서 죽은 자 가운데서 살아나셨으매 다시 죽지 아니하시고 사망이 다시 그를 주장하지 못할 줄을 앎이로라 <span class="vnum">10</span>그가 죽으심은 죄에 대하여 단번에 죽으심이요 그가 살아 계심은 하나님께 대하여 살아 계심이니 <span class="vnum">11</span>이와 같이 너희도 너희 자신을 죄에 대하여는 죽은 자요 그리스도 예수 안에서 하나님께 대하여는 살아 있는 자로 여길지어다 <span class="vnum">12</span>그러므로 너희는 죄가 너희 죽을 몸을 지배하지 못하게 하여 몸의 사욕에 순종하지 말고 <span class="vnum">13</span>또한 너희 지체를 불의의 무기로 죄에게 내주지 말고 오직 너희 자신을 죽은 자 가운데서 다시 살아난 자 같이 하나님께 드리며 너희 지체를 의의 무기로 하나님께 드리라 <span class="vnum">14</span>죄가 너희를 주장하지 못하리니 이는 너희가 법 아래에 있지 아니하고 은혜 아래에 있음이라',
+    meditation:'그리스도는 죄에 대해 단번에 죽으셨고, 이제는 하나님께 대하여 살아 계십니다. 바울은 이 사실을 우리에게도 적용하라고 명합니다 — \'여길지어다.\' 이는 감정이 아니라 믿음의 결단입니다. 죄가 너희를 주장하지 못하는 이유는 법 아래가 아니라 은혜 아래 있기 때문입니다. 그래서 우리 지체를 불의의 무기가 아니라 의의 무기로 하나님께 드리라는 실제적인 권면으로 이어집니다.',
+    application:'오늘 내 몸과 시간, 언어를 \'의의 무기\'로 하나님께 드릴 수 있는 구체적인 순간 하나를 정해 봅니다.',
+    prayer:'주님, 저를 죄에 대하여는 죽은 자요 주님께 대하여는 살아있는 자로 여기게 하소서. 제 지체를 의의 무기로 오늘 드리게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:26, date:"08.26", ref:"6:15&ndash;19", theme:"의의 종이 된 자유", ready:true,
+    scripture:'<span class="vnum">15</span>그런즉 어찌하리요 우리가 법 아래에 있지 아니하고 은혜 아래에 있으니 죄를 지으리요 그럴 수 없느니라 <span class="vnum">16</span>너희 자신을 종으로 내주어 누구에게 순종하든지 그 순종함을 받는 자의 종이 되는 줄을 너희가 알지 못하느냐 혹은 죄의 종으로 사망에 이르고 혹은 순종의 종으로 의에 이르느니라 <span class="vnum">17</span>하나님께 감사하리로다 너희가 본래 죄의 종이더니 너희에게 전하여 준 바 교훈의 본을 마음으로 순종하여 <span class="vnum">18</span>죄로부터 해방되어 의에게 종이 되었느니라 <span class="vnum">19</span>너희 육신이 연약하므로 내가 사람의 예대로 말하노니 전에 너희가 너희 지체를 부정과 불법에 내주어 불법에 이른 것 같이 이제는 너희 지체를 의에게 종으로 내주어 거룩함에 이르라',
+    meditation:'바울은 누구든 순종하는 대상의 종이 된다는 원리를 짚습니다. 자유란 아무것도 섬기지 않는 상태가 아니라, 무엇을 섬기느냐의 문제라는 것입니다. 전에는 죄의 종이었지만 이제는 마음으로 순종하여 의의 종이 되었다는 17-18절은, 신앙이 규칙의 목록이 아니라 마음의 순종에서 시작됨을 보여줍니다. 전에 지체를 부정과 불법에 내주었던 것처럼, 이제는 의에게 내주어 거룩함에 이르라는 권면이 이어집니다.',
+    application:'오늘 내가 무의식적으로 \'순종\'하고 있는 것이 무엇인지 돌아봅니다 — 그것이 여전히 옛 습관인지, 의를 향한 순종인지 점검해 봅니다.',
+    prayer:'주님, 제가 마음으로부터 주님께 순종하는 의의 종이 되게 하소서. 거룩함에 이르는 삶의 열매를 오늘 맺게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:27, date:"08.27", ref:"6:20&ndash;23", theme:"죄의 삯은 사망, 은사는 영생", ready:true,
+    scripture:'<span class="vnum">20</span>너희가 죄의 종이 되었을 때에는 의에 대하여 자유로웠느니라 <span class="vnum">21</span>너희가 그 때에 무슨 열매를 얻었느냐 이제는 너희가 그 일을 부끄러워하나니 이는 그 마지막이 사망임이라 <span class="vnum">22</span>그러나 이제는 너희가 죄로부터 해방되고 하나님께 종이 되어 거룩함에 이르는 열매를 맺었으니 그 마지막은 영생이라 <span class="vnum">23</span>죄의 삯은 사망이요 하나님의 은사는 그리스도 예수 우리 주 안에 있는 영생이니라',
+    meditation:'죄의 종이었을 때 무슨 열매를 얻었느냐는 바울의 질문에 대한 답은 부끄러움과 사망뿐이었습니다. 반면 이제 하나님께 종이 되어 맺는 열매는 거룩함이며, 그 마지막은 영생입니다. 23절은 로마서 전체에서 가장 널리 알려진 구절 중 하나로, 죄의 삯(당연히 받아야 할 값)은 사망이지만 하나님의 은사(값없이 주시는 선물)는 그리스도 예수 우리 주 안에 있는 영생이라는 극명한 대조를 보여줍니다.',
+    application:'오늘 내가 맺고 있는 삶의 열매가 부끄러움을 향하는지, 거룩함을 향하는지 정직하게 점검해 봅니다.',
+    prayer:'주님, 제가 받아야 마땅한 것이 아니라 값없이 주신 영생의 선물을 받았음을 감사합니다. 그 은혜에 합당한 열매를 오늘 맺게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:28, date:"08.28", ref:"7:1&ndash;6", theme:"율법에서 벗어나 그리스도께 속함", ready:true,
+    scripture:'<span class="vnum">1</span>형제들아 내가 법 아는 자들에게 말하노니 너희는 그 법이 사람이 살 동안만 그를 주관하는 줄 알지 못하느냐 <span class="vnum">2</span>남편 있는 여인이 그 남편 생전에는 법으로 그에게 매인 바 되나 만일 그 남편이 죽으면 남편의 법에서 벗어나느니라 <span class="vnum">3</span>그러므로 만일 그 남편 생전에 다른 남자에게 가면 음녀라 그러나 만일 남편이 죽으면 그 법에서 자유롭게 되나니 다른 남자에게 갈지라도 음녀가 되지 아니하느니라 <span class="vnum">4</span>그러므로 내 형제들아 너희도 그리스도의 몸으로 말미암아 율법에 대하여 죽임을 당하였으니 이는 다른 이 곧 죽은 자 가운데서 살아나신 이에게 가서 우리가 하나님을 위하여 열매를 맺게 하려 함이라 <span class="vnum">5</span>우리가 육신에 있을 때에는 율법으로 말미암는 죄의 정욕이 우리 지체 중에 역사하여 우리로 사망을 위하여 열매를 맺게 하였더니 <span class="vnum">6</span>이제는 우리가 얽매였던 것에 대하여 죽었으므로 율법에서 벗어났으니 이러므로 우리가 영의 새로운 것으로 섬길 것이요 율법 조문의 묵은 것으로 아니할지니라',
+    meditation:'바울은 결혼 관계를 비유로 듭니다 — 남편이 살아있는 동안 아내는 법으로 매여 있지만, 남편이 죽으면 자유롭게 됩니다. 마찬가지로 우리도 그리스도의 몸으로 말미암아 율법에 대하여 죽임을 당했으니, 이제는 죽은 자 가운데서 살아나신 이에게 속하여 하나님을 위한 열매를 맺게 되었습니다. 율법 조문의 묵은 것이 아니라 영의 새로운 것으로 섬긴다는 6절의 표현은, 신앙이 규정 준수가 아니라 살아있는 관계임을 보여줍니다.',
+    application:'내 신앙생활이 여전히 \'조문\'을 지키는 방식으로 굳어 있지는 않은지 돌아봅니다. 오늘은 영의 새로움으로, 관계로서 하나님을 섬겨 봅니다.',
+    prayer:'주님, 저를 율법의 묵은 것에서 벗어나 영의 새로움으로 섬기게 하소서. 그리스도께 속한 자로서 살아있는 열매를 맺게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:29, date:"08.29", ref:"7:7&ndash;13", theme:"율법과 죄의 관계", ready:true,
+    scripture:'<span class="vnum">7</span>그런즉 우리가 무슨 말을 하리요 율법이 죄냐 그럴 수 없느니라 율법으로 말미암지 않고는 내가 죄를 알지 못하였으니 곧 율법이 탐내지 말라 하지 아니하였더라면 내가 탐심을 알지 못하였으리라 <span class="vnum">8</span>그러나 죄가 기회를 타서 계명으로 말미암아 내 속에서 온갖 탐심을 이루었나니 이는 율법이 없으면 죄가 죽은 것임이라 <span class="vnum">9</span>전에 율법을 깨닫지 못했을 때에는 내가 살았더니 계명이 이르매 죄는 살아나고 나는 죽었도다 <span class="vnum">10</span>생명에 이르게 할 그 계명이 내게 대하여 도리어 사망에 이르게 하는 것이 되었도다 <span class="vnum">11</span>죄가 기회를 타서 계명으로 말미암아 나를 속이고 그것으로 나를 죽였는지라 <span class="vnum">12</span>이로 보건대 율법은 거룩하고 계명도 거룩하고 의로우며 선하도다 <span class="vnum">13</span>그런즉 선한 것이 내게 사망이 되었느냐 그럴 수 없느니라 오직 죄가 죄로 드러나기 위하여 선한 그것으로 말미암아 나를 죽게 만들었으니 이는 계명으로 말미암아 죄로 심히 죄 되게 하려 함이라',
+    meditation:'그렇다면 율법 자체가 죄인가? 바울은 단호히 부정합니다. 오히려 율법이 아니었다면 탐심이 무엇인지도 몰랐을 것이라고 말합니다. 문제는 율법이 아니라, 그 계명을 기회로 삼아 우리 속에서 온갖 탐심을 일으키는 죄입니다. 생명에 이르게 할 계명이 오히려 사망에 이르게 하는 것이 되었다는 역설은, 율법이 선하고 거룩함에도 불구하고 죄의 실체를 더욱 선명하게 드러내는 거울 역할을 했음을 보여줍니다.',
+    application:'율법이나 규칙 자체를 탓하기보다, 그 안에서 기회를 타는 내 안의 욕심을 오늘 정직하게 들여다봅니다.',
+    prayer:'주님, 율법은 거룩하고 선하지만 제 안의 죄가 문제임을 고백합니다. 계명을 통해 제 자신을 더 깊이 깨닫고 주님께 나아가게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:30, date:"08.30", ref:"7:14&ndash;20", theme:"원함과 행함 사이의 갈등", ready:true,
+    scripture:'<span class="vnum">14</span>우리가 율법은 신령한 줄 알거니와 나는 육신에 속하여 죄 아래에 팔렸도다 <span class="vnum">15</span>내가 행하는 것을 내가 알지 못하노니 곧 내가 원하는 것은 행하지 아니하고 도리어 미워하는 것을 행함이라 <span class="vnum">16</span>만일 내가 원하지 아니하는 그것을 행하면 내가 이로써 율법이 선한 것을 시인하노니 <span class="vnum">17</span>이제는 그것을 행하는 자가 내가 아니요 내 속에 거하는 죄니라 <span class="vnum">18</span>내 속 곧 내 육신에 선한 것이 거하지 아니하는 줄을 아노니 원함은 내게 있으나 선을 행하는 것은 없노라 <span class="vnum">19</span>내가 원하는 바 선은 행하지 아니하고 도리어 원하지 아니하는 바 악을 행하는도다 <span class="vnum">20</span>만일 내가 원하지 아니하는 그것을 하면 이를 행하는 자는 내가 아니요 내 속에 거하는 죄니라',
+    meditation:'바울의 자기 고백은 신자라면 누구나 공감할 내적 갈등을 생생하게 보여줍니다. 원하는 선은 행하지 않고, 원하지 않는 악을 행한다는 것입니다. 이것은 신앙의 실패를 정당화하는 변명이 아니라, 육신에 속한 인간이 스스로의 힘만으로는 선을 온전히 이룰 수 없다는 정직한 진단입니다. 이 갈등을 인식하는 것 자체가, 하나님의 법을 즐거워하는 속사람이 살아있다는 증거이기도 합니다.',
+    application:'오늘 내 안에서 원함과 행함이 어긋나는 지점이 있다면, 그것을 숨기지 않고 하나님 앞에 정직하게 인정해 봅니다.',
+    prayer:'주님, 원하는 선을 행하지 못하는 저의 연약함을 아룁니다. 제 힘이 아니라 주님의 은혜로 이 갈등을 이기게 하소서. 예수님의 이름으로 기도합니다. 아멘.'},
+  {n:31, date:"08.31", ref:"7:21&ndash;25", theme:"곤고한 사람, 그러나 감사", ready:true,
+    scripture:'<span class="vnum">21</span>그러므로 내가 한 법을 깨달았노니 곧 선을 행하기 원하는 나에게 악이 함께 있는 것이로다 <span class="vnum">22</span>내 속사람으로는 하나님의 법을 즐거워하되 <span class="vnum">23</span>내 지체 속에서 한 다른 법이 내 마음의 법과 싸워 내 지체 속에 있는 죄의 법으로 나를 사로잡는 것을 보는도다 <span class="vnum">24</span>오호라 나는 곤고한 사람이로다 이 사망의 몸에서 누가 나를 건져내랴 <span class="vnum">25</span>우리 주 예수 그리스도로 말미암아 하나님께 감사하리로다 그런즉 내 자신이 마음으로는 하나님의 법을 육신으로는 죄의 법을 섬기노라',
+    meditation:'7장의 절정입니다. 선을 행하기 원하는 마음에 악이 함께 있다는 깨달음은 바울을 \'곤고한 사람\'이라는 탄식으로 이끕니다. 이 사망의 몸에서 누가 나를 건져내랴 — 이 질문은 절망처럼 들리지만, 바로 다음 절에서 답이 주어집니다. 우리 주 예수 그리스도로 말미암아 하나님께 감사할 수 있다는 것입니다. 마음으로는 하나님의 법을, 육신으로는 죄의 법을 섬기는 이 긴장은 8장에서 성령의 능력으로 풀려나갈 것을 예고합니다.',
+    application:'내 힘으로 해결할 수 없는 영역을 붙잡고 씨름하고 있다면, 오늘은 그 짐을 그리스도께 맡기고 먼저 감사로 반응해 봅니다.',
+    prayer:'주님, 저는 스스로 건져낼 수 없는 곤고한 사람입니다. 그러나 예수 그리스도로 말미암아 감사할 수 있음을 고백하며, 8월 한 달의 묵상을 주님께 올려드립니다. 예수님의 이름으로 기도합니다. 아멘.'},
+];
+
+function buildTOC() {
+  const list = document.getElementById('toc-list');
+  list.innerHTML = days.map(d => `
+    <li>
+      <button class="toc-item ${d.ready ? '' : 'is-disabled'}" onclick="${d.ready ? `openDay(${d.n})` : 'return false'}">
+        <span class="toc-date">${d.date}</span>
+        <span class="toc-ref">롬 ${d.ref}</span>
+        <span class="toc-theme">${d.theme}</span>
+        ${d.ready ? '<span class="toc-tag">보기</span>' : '<span class="toc-tag soon">준비중</span>'}
+        <span class="toc-arrow">${d.ready ? '›' : ''}</span>
+      </button>
+    </li>
+  `).join('');
+}
+
+function openDay(n) {
+  const d = days.find(x => x.n === n);
+  if (!d || !d.ready) return;
+
+  stopSpeech();
+  currentDay = d;
+
+  document.getElementById('d-num').textContent = (d.n < 10 ? '0' + d.n : String(d.n));
+  document.getElementById('d-date').innerHTML = `8월 ${d.n}일 · 로마서 ${d.ref}`;
+  document.getElementById('d-theme').textContent = d.theme;
+
+  document.getElementById('d-body').innerHTML = `
+    <div class="scripture-box">${d.scripture}</div>
+    <p class="body-text">${d.meditation}</p>
+    <ul class="bullet-list">
+      <li class="bullet-item"><strong>적용점</strong> — ${d.application}</li>
+    </ul>
+    <div class="divider" style="margin-left:0; margin-right:0;"></div>
+    <div class="closing-line" style="padding-left:0; padding-right:0;">
+      <em>${d.prayer}</em>
+    </div>
+  `;
+
+  document.getElementById('view-cover').style.display = 'none';
+  document.getElementById('view-day').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+function showCover() {
+  stopSpeech();
+  document.getElementById('view-day').style.display = 'none';
+  document.getElementById('view-cover').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+/* ===================== 음성 지원 (TTS) ===================== */
+let currentDay = null;
+let currentUtterance = null;
+let currentRate = 1;
+let isSpeaking = false;
+let koVoiceCache = null;
+
+function pickBestKoreanVoice() {
+  if (koVoiceCache) return koVoiceCache;
+  const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+  const koVoices = voices.filter(v => v.lang === 'ko-KR' || v.lang === 'ko_KR' || v.lang === 'ko');
+  if (koVoices.length === 0) return null;
+  // 배속(rate) 조절은 기기에 설치된 로컬 음성에서만 안정적으로 동작하고,
+  // 크롬 등에서 제공하는 "Google" 네트워크 음성은 배속을 무시하는 경우가 많음.
+  // 배속 컨트롤이 실제로 동작하도록 로컬 음성을 우선 선택한다.
+  const ranked = koVoices.sort((a, b) => {
+    const score = v => (v.localService ? 5 : 0) + (/neural|premium|enhanced|natural/i.test(v.name) ? 1 : 0);
+    return score(b) - score(a);
+  });
+  koVoiceCache = ranked[0];
+  return koVoiceCache;
+}
+if (window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = () => { koVoiceCache = null; };
+}
+
+function getSpeechText(d) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = d.scripture.replace(/<span class="vnum">\d+<\/span>/g, ' ');
+  const scriptureText = tmp.textContent.replace(/\s+/g, ' ').trim();
+  return `${scriptureText}. 잠시 후, 오늘의 묵상입니다. ${d.meditation} 적용점입니다. ${d.application} 기도로 마칩니다. ${d.prayer}`;
+}
+
+function updateAudioUI() {
+  const icon = document.getElementById('audio-play-icon');
+  const status = document.getElementById('audio-status');
+  if (!icon || !status) return;
+  if (isSpeaking) {
+    icon.textContent = '❚❚';
+    status.textContent = '오늘의 묵상을 듣는 중 · ' + currentRate + 'x';
+  } else {
+    icon.textContent = '▶';
+    status.textContent = '듣기';
+  }
+}
+
+function speakFromStart() {
+  if (!currentDay || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const text = getSpeechText(currentDay);
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'ko-KR';
+  utter.rate = currentRate;
+  const voice = pickBestKoreanVoice();
+  if (voice) utter.voice = voice;
+  utter.onend = () => { isSpeaking = false; updateAudioUI(); };
+  utter.onerror = () => { isSpeaking = false; updateAudioUI(); };
+  currentUtterance = utter;
+  window.speechSynthesis.speak(utter);
+  isSpeaking = true;
+  updateAudioUI();
+}
+
+function togglePlay() {
+  if (!window.speechSynthesis) {
+    alert('이 브라우저는 음성 읽기를 지원하지 않습니다.');
+    return;
+  }
+  if (isSpeaking && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+    window.speechSynthesis.pause();
+    isSpeaking = false;
+    updateAudioUI();
+    return;
+  }
+  if (window.speechSynthesis.paused) {
+    window.speechSynthesis.resume();
+    isSpeaking = true;
+    updateAudioUI();
+    return;
+  }
+  speakFromStart();
+}
+
+function stopSpeech() {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  isSpeaking = false;
+  currentUtterance = null;
+}
+
+function setRate(r) {
+  currentRate = r;
+  document.querySelectorAll('.speed-btn').forEach(btn => {
+    btn.classList.toggle('is-active', parseFloat(btn.dataset.rate) === r);
+  });
+  // 재생 중이었다면 새 배속으로 처음부터 다시 읽기 시작 (대부분의 브라우저는 재생 중 배속 변경을 지원하지 않음)
+  if (isSpeaking || (window.speechSynthesis && window.speechSynthesis.speaking)) {
+    speakFromStart();
+  }
+  updateAudioUI();
+}
+
+buildTOC();
+</script>
+
+
+</body>
+</html>
