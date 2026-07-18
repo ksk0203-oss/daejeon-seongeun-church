@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026년 8월 5분 말씀 묵상</title>
-<style>:root { --fs-scale: 1; }
+<style>
+:root {
+  --fs-scale: 1;
 
 .fs-control {
   max-width: 680px; margin: 0 auto 8px;
@@ -31,9 +33,9 @@
   .fs-control { padding: 0 22px; }
 }
 
-:root {
   --ink-black: #080808;
   --blue: #156EF6;
+  --blue-light: #6FA8FF;
   --blue-dark: #0F52B8;
   --page-bg: #F0F0F0;
   --white: #FFFFFF;
@@ -62,17 +64,6 @@ body {
 .hero-logo { display: flex; align-items: center; gap: 10px; }
 .logo-mark { width: 26px; height: 26px; background: var(--blue); border-radius: 6px; display: inline-block; }
 .logo-word { color: var(--white); font-weight: 800; font-size: calc(18px * var(--fs-scale, 1)); }
-.hero-mockup { display: flex; gap: 8px; align-items: flex-start; }
-.mockup-play {
-  width: 44px; height: 44px; border-radius: 50%; background: var(--white);
-  color: var(--ink-black); display: flex; align-items: center; justify-content: center;
-  font-size: calc(15px * var(--fs-scale, 1)); cursor: pointer; border: none;
-}
-.mockup-dots {
-  display: flex; gap: 6px; background: var(--blue); border-radius: 10px;
-  padding: 12px 14px; align-items: center; height: 20px;
-}
-.mockup-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--white); }
 .hero-title { color: var(--white); font-size: calc(31px * var(--fs-scale, 1)); font-weight: 800; line-height: 1.25; letter-spacing: -0.5px; margin-bottom: 14px; overflow-wrap: break-word; word-break: keep-all; }
 .hero-subtitle { color: rgba(255,255,255,0.65); font-size: calc(16px * var(--fs-scale, 1)); max-width: 380px; line-height: 1.5; }
 
@@ -81,33 +72,30 @@ body {
   color: var(--icon-gray); text-transform: uppercase;
 }
 
-.meta-row { padding: 28px 40px 0; }
-.meta-line { font-size: calc(16px * var(--fs-scale, 1)); font-weight: 700; color: var(--text-black); }
 .divider { height: 1px; background: var(--divider); margin: 20px 40px; }
 .divider--blue { background: var(--blue); opacity: 0.25; margin-top: 20px; }
 .divider--thick { height: 6px; background: var(--ink-black); margin: 0; }
 
 .content-section { padding: 0 40px 4px; }
-.content-section p.body-text { font-size: calc(16px * var(--fs-scale, 1)); line-height: 1.65; color: var(--text-black); margin-bottom: 14px; }
 h2.section-title { font-size: calc(22px * var(--fs-scale, 1)); font-weight: 700; color: var(--text-black); line-height: 1.35; margin-bottom: 12px; }
 
-.bullet-list { padding: 0; margin: 14px 0; list-style: none; }
-.bullet-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: calc(16px * var(--fs-scale, 1)); line-height: 1.65; color: var(--text-black); }
-.bullet-item::before {
-  content: ''; position: absolute; left: 0; top: 9px;
-  width: 5px; height: 5px; border-radius: 50%; background: var(--text-black);
+  display: inline-block; background: var(--blue); color: var(--white);
+  font-size: calc(12.5px * var(--fs-scale, 1)); font-weight: 800; letter-spacing: 0.5px;
+  padding: 4px 10px; border-radius: 100px; margin-bottom: 10px;
 }
-
-a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * var(--fs-scale, 1)); font-weight: 500; color: var(--blue); text-decoration: none; cursor: pointer; }
+.section-text {
+  font-size: calc(16px * var(--fs-scale, 1)); line-height: 1.65; color: var(--text-black); text-align: justify;
+}
 
 .badge-row { padding: 32px 40px 0; }
-.verse-quote {
-  font-size: calc(17px * var(--fs-scale, 1)); font-weight: 700; line-height: 1.6; color: var(--text-black);
-  padding-bottom: 4px;
+.hero-verse {
+  margin-top: 26px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.18);
+  font-size: calc(15.5px * var(--fs-scale, 1)); font-weight: 600; line-height: 1.6;
+  color: rgba(255,255,255,0.92); font-style: normal;
 }
-.verse-quote-ref {
-  display: block; margin-top: 6px; font-size: calc(13.5px * var(--fs-scale, 1)); font-weight: 700;
-  color: var(--blue); letter-spacing: 0.5px;
+.hero-verse-ref {
+  display: block; margin-top: 8px; font-size: calc(12.5px * var(--fs-scale, 1)); font-weight: 700;
+  color: var(--blue-light); letter-spacing: 0.5px;
 }
 .pill-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -145,6 +133,7 @@ a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * va
   margin: 6px 0 20px; padding: 20px 22px; background: var(--page-bg);
   border-left: 3px solid var(--blue); border-radius: 4px;
   font-size: calc(15.5px * var(--fs-scale, 1)); line-height: 1.85; color: var(--text-black);
+  text-align: justify;
 }
 .scripture-box .vnum { color: var(--blue); font-weight: 800; font-size: calc(13px * var(--fs-scale, 1)); margin-right: 2px; }
 
@@ -192,10 +181,9 @@ a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * va
 .back-btn:hover { color: var(--blue); }
 
 .closing-line {
-  padding: 20px 22px; font-size: calc(16px * var(--fs-scale, 1)); color: var(--text-black);
-  background: #EFF6FF; border-left: 3px solid var(--blue); border-radius: 4px;
+  font-size: calc(16px * var(--fs-scale, 1)); color: var(--text-black);
+  text-align: justify;
 }
-.inline-link { color: var(--blue); font-weight: 600; text-decoration: none; }
 
 .social-row { display: flex; justify-content: center; gap: 14px; padding: 32px 40px 24px; background: var(--page-bg); }
 .social-icon {
@@ -210,18 +198,12 @@ a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * va
 .footer-links a { color: var(--blue); text-decoration: underline; cursor: pointer; }
 .footer-links span { color: var(--text-gray); margin: 0 8px; }
 
-.soon-box { padding: 60px 40px; text-align: center; }
-.soon-box .soon-icon { font-size: calc(29px * var(--fs-scale, 1)); margin-bottom: 14px; }
-.soon-box p { font-size: calc(15px * var(--fs-scale, 1)); color: var(--text-gray); line-height: 1.7; }
 
 #view-day { display: none; }
 
 @media (max-width: 640px) {
-  .hero-banner, .meta-row, .badge-row, .content-section, .closing-line, .page-label,
+  .hero-banner, .badge-row, .content-section, .closing-line, .page-label,
   .toc-wrap, .chapter-label, .back-row, .social-row, .footer-legal, .footer-links { padding-left: 22px; padding-right: 22px; }
-  .divider { margin-left: 22px; margin-right: 22px; }
-  .hero-title { font-size: calc(22px * var(--fs-scale, 1)); word-break: keep-all; overflow-wrap: break-word; }
-  .toc-date { flex-basis: 80px; font-size: calc(13px * var(--fs-scale, 1)); }
   .toc-ref { flex-basis: 96px; font-size: calc(14px * var(--fs-scale, 1)); }
 }
 </style>
@@ -248,16 +230,14 @@ a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * va
         </div>
       </div>
       <div class="hero-title">2026년 8월 5분 말씀 묵상</div>
+
+      <div class="hero-verse">
+        “주의 말씀은 내 발에 등이요 내 길에 빛이니이다”
+        <span class="hero-verse-ref">— 시편 119:105</span>
+      </div>
     </div>
 
     <div class="page-label">Contents · 목차</div>
-
-    <div class="content-section" style="padding-top:14px; padding-bottom:0;">
-      <div class="verse-quote">
-        “주의 말씀은 내 발에 등이요 내 길에 빛이니이다”
-        <span class="verse-quote-ref">— 시편 119:105</span>
-      </div>
-    </div>
 
     <div class="badge-row" style="padding-top:18px;">
       <span class="pill-badge">📖 날짜를 눌러 그날의 묵상을 읽어보세요</span>
@@ -280,7 +260,8 @@ a.arrow-link { display: inline-block; margin-top: 4px; font-size: calc(16px * va
       <button class="back-btn" onclick="showCover()">&larr; 목차로 돌아가기</button>
     </div>
 
-    <div class="chapter-label">
+    <div class="page-label" style="padding-top:28px;">Daily Bible Meditation</div>
+    <div class="chapter-label" style="padding-top:10px;">
       <div class="chapter-num" id="d-num">01</div>
       <div class="chapter-date" id="d-date">8월 1일 · 로마서 1:1&ndash;7</div>
     </div>
@@ -508,13 +489,22 @@ function openDay(n) {
 
   document.getElementById('d-body').innerHTML = `
     <div class="scripture-box">${d.scripture}</div>
-    <p class="body-text">${d.meditation}</p>
-    <ul class="bullet-list">
-      <li class="bullet-item"><strong>적용점</strong> — ${d.application}</li>
-    </ul>
+
+    <div class="section-block">
+      <span class="section-label">묵상</span>
+      <p class="section-text">${d.meditation}</p>
+    </div>
+
+    <div class="section-block">
+      <span class="section-label">적용</span>
+      <p class="section-text">${d.application}</p>
+    </div>
+
     <div class="divider" style="margin-left:0; margin-right:0;"></div>
-    <div class="closing-line" style="margin: 24px 0 0;">
-      ${d.prayer}
+
+    <div class="section-block" style="margin-bottom:0;">
+      <span class="section-label">기도</span>
+      <p class="section-text closing-line">${d.prayer}</p>
     </div>
   `;
 
@@ -560,7 +550,7 @@ function getSpeechText(d) {
   const tmp = document.createElement('div');
   tmp.innerHTML = d.scripture.replace(/<span class="vnum">\d+<\/span>/g, ' ');
   const scriptureText = tmp.textContent.replace(/\s+/g, ' ').trim();
-  return `${scriptureText}. 잠시 후, 오늘의 묵상입니다. ${d.meditation} 적용점입니다. ${d.application} 기도로 마칩니다. ${d.prayer}`;
+  return `${scriptureText}. 잠시 후, 오늘의 묵상입니다. ${d.meditation} 적용입니다. ${d.application} 기도로 마칩니다. ${d.prayer}`;
 }
 
 function updateAudioUI() {
