@@ -193,74 +193,105 @@ body{
 }
 .week .section{ padding: 40px 32px 0; }
 
-/* ---------- ORDER OF SERVICE (balanced fixed-column layout) ---------- */
-.order-card{
-  background: var(--paper-card);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 8px 26px 6px;
-  box-shadow: 0 2px 14px rgba(27,42,74,.05);
+/* ---------- ORDER OF SERVICE (numbered timeline) ---------- */
+.order-timeline{
+  display: flex;
+  flex-direction: column;
 }
-.order-list{ }
-.order-item{
+.step{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 15px 4px;
+}
+.step:not(:last-child)::after{
+  content: "";
+  position: absolute;
+  left: 19px;
+  bottom: -1px;
+  width: 1px;
+  height: 18px;
+  background: var(--line);
+}
+.step-num{
+  flex: none;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--dawn-soft), var(--dawn));
+  color: #fff;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(232,147,90,.32);
+}
+.step-body{
+  flex: 1;
   display: flex;
   align-items: baseline;
-  padding: 16px 0;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-width: 0;
 }
-.order-item:not(:last-child){
-  border-bottom: 1px solid var(--line);
-}
-.order-item .label{
-  flex: 0 0 78px;
+.step-role{
   font-family: 'Noto Serif KR', serif;
-  font-weight: 600;
-  font-size: 17px;
-  letter-spacing: .08em;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .06em;
   color: var(--navy);
   white-space: nowrap;
 }
-.order-item .dots{
-  flex: 0 0 30px;
-  height: 0;
-  border-bottom: 1.5px dotted var(--ink-soft);
-  opacity: .45;
-  transform: translateY(-5px);
-  margin: 0 10px 0 0;
-}
-.order-item .who{
-  flex: 1;
-  text-align: left;
+.step-who{
   font-family: 'Noto Serif KR', serif;
-  font-size: 14.5px;
+  font-size: 13.5px;
   color: var(--ink-soft);
-  letter-spacing: .04em;
+  letter-spacing: .03em;
+  text-align: right;
 }
-.order-item.is-highlight .label{ color: var(--dawn); }
-.order-item.sermon{
+
+/* sermon: the peak of the timeline */
+.step-sermon{
+  align-items: flex-start;
+  margin: 8px 0;
+  padding: 18px 16px;
+  background: linear-gradient(155deg, #FFFBF8 0%, #FFF2E7 100%);
+  border: 1px solid var(--dawn-soft);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(232,147,90,.14);
+}
+.step-sermon::after{ display: none; }
+.step-sermon .step-num{
+  width: 44px; height: 44px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(232,147,90,.4);
+}
+.step-sermon .step-body{
   flex-direction: column;
   align-items: stretch;
+  gap: 4px;
 }
-.order-item.sermon .row-main{
-  display: flex; align-items: baseline;
+.step-sermon .step-top{
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
 }
-.order-item.sermon .sermon-detail{
-  margin-top: 10px;
-  padding-left: 88px;
-  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
-}
-.order-item.sermon .sermon-sub{
+.step-sermon .step-role{ color: var(--dawn); font-size: 17px; }
+.step-sermon .step-who{ text-align: right; }
+.step-sermon .step-series{
   font-family: 'Noto Serif KR', serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
   color: var(--ink-soft);
-  white-space: nowrap;
+  margin-top: 6px;
 }
-.order-item.sermon .sermon-title{
+.step-sermon .step-title{
   font-family: 'Noto Serif KR', serif;
   font-style: italic;
   font-weight: 600;
-  font-size: 14px;
-  color: var(--dawn);
+  font-size: 15.5px;
+  color: var(--navy);
+  margin-top: 4px;
 }
 
 /* ---------- ANNOUNCEMENTS ---------- */
@@ -361,6 +392,16 @@ body{
   .week .section{ padding: 34px 22px 0; }
   .notice-card{ padding: 18px 18px 4px; }
   .vision{ margin: 34px 22px 0; }
+
+  .step{ gap: 12px; padding: 13px 2px; }
+  .step-num{ width: 32px; height: 32px; font-size: 12px; }
+  .step:not(:last-child)::after{ left: 16px; height: 15px; }
+  .step-role{ font-size: 15px; }
+  .step-who{ font-size: 12.5px; }
+  .step-sermon{ margin: 8px 0; padding: 16px 14px; }
+  .step-sermon .step-num{ width: 40px; height: 40px; font-size: 13px; }
+  .step-sermon .step-role{ font-size: 16px; }
+  .step-sermon .step-title{ font-size: 14.5px; }
 }
 </style>
 </head>
@@ -422,36 +463,53 @@ body{
         <span class="rule"></span>
       </div>
 
-      <div class="order-card">
-      <div class="order-list">
-        <div class="order-item">
-          <span class="label">찬&nbsp;&nbsp;양</span><span class="dots"></span><span class="who">다&nbsp;같&nbsp;이</span>
-        </div>
-        <div class="order-item">
-          <span class="label">봉&nbsp;&nbsp;헌</span><span class="dots"></span><span class="who">다&nbsp;같&nbsp;이</span>
-        </div>
-        <div class="order-item">
-          <span class="label">대표기도</span><span class="dots"></span><span class="who">허&nbsp;예&nbsp;나&nbsp;청&nbsp;년</span>
-        </div>
-        <div class="order-item">
-          <span class="label">성경봉독</span><span class="dots"></span><span class="who">빌립보서&nbsp;2:12-30</span>
-        </div>
-        <div class="order-item is-highlight sermon">
-          <div class="row-main">
-            <span class="label">설&nbsp;&nbsp;교</span><span class="dots"></span><span class="who">김&nbsp;성&nbsp;국&nbsp;목&nbsp;사</span>
-          </div>
-          <div class="sermon-detail">
-            <span class="sermon-sub">빌립보서 강해4</span>
-            <span class="sermon-title">"두려움과 떨림으로"</span>
+      <div class="order-timeline">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <span class="step-role">찬양</span><span class="step-who">다같이</span>
           </div>
         </div>
-        <div class="order-item">
-          <span class="label">광&nbsp;&nbsp;고</span><span class="dots"></span><span class="who">맡&nbsp;은&nbsp;이</span>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <span class="step-role">봉헌</span><span class="step-who">다같이</span>
+          </div>
         </div>
-        <div class="order-item">
-          <span class="label">축&nbsp;&nbsp;도</span><span class="dots"></span><span class="who">김&nbsp;성&nbsp;국&nbsp;목&nbsp;사</span>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <span class="step-role">대표기도</span><span class="step-who">허예나 청년</span>
+          </div>
         </div>
-      </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <span class="step-role">성경봉독</span><span class="step-who">빌립보서 2:12-30</span>
+          </div>
+        </div>
+        <div class="step step-sermon">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <div class="step-top">
+              <span class="step-role">설교</span><span class="step-who">김성국 목사</span>
+            </div>
+            <div class="step-series">빌립보서 강해4</div>
+            <div class="step-title">"두려움과 떨림으로"</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">06</div>
+          <div class="step-body">
+            <span class="step-role">광고</span><span class="step-who">맡은이</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">07</div>
+          <div class="step-body">
+            <span class="step-role">축도</span><span class="step-who">김성국 목사</span>
+          </div>
+        </div>
       </div>
     </div>
 
