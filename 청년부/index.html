@@ -164,7 +164,7 @@ body{
 }
 
 /* ---------- WEEK DETAIL BLOCK ---------- */
-.week{ scroll-margin-top: 16px; }
+.week{ scroll-margin-top: 16px; display: none; }
 .week-bar{
   margin: 46px 32px 0;
   background: linear-gradient(165deg, var(--navy-deep) 0%, var(--navy) 55%, #2C3F63 100%);
@@ -365,6 +365,7 @@ body{
 <div class="wrap">
 
   <!-- ============ 표지 ============ -->
+  <div id="cover">
   <div class="hero" id="top">
     <div class="hero-inner">
       <div class="eyebrow"><span class="dot"></span>YOUNG ADULTS BULLETIN ARCHIVE</div>
@@ -400,6 +401,8 @@ body{
       -->
     </div>
   </div>
+  </div>
+  <!-- /#cover -->
 
   <!-- ============ 주보 본문 ============ -->
 
@@ -478,6 +481,7 @@ body{
 
   <!-- ============ 공통 하단 ============ -->
 
+  <div id="shared-footer">
   <div class="footer">
     <p class="verse">"두세 사람이 내 이름으로 모인 곳에는 나도 그들 중에 있느니라"<br><span class="verse-ref">마태복음 18:20</span></p>
   </div>
@@ -494,7 +498,32 @@ body{
   <div class="footer" style="padding-top:34px;">
     <p class="church">대전성은교회 청년부 · Daejeon Sungeun Church</p>
   </div>
+  </div>
+  <!-- /#shared-footer -->
 
 </div>
+<script>
+(function(){
+  function route(){
+    var hash = window.location.hash.replace('#','');
+    var weeks = document.querySelectorAll('.week');
+    var cover = document.getElementById('cover');
+    var footer = document.getElementById('shared-footer');
+    var target = (hash && hash !== 'top') ? document.getElementById(hash) : null;
+
+    if(target && target.classList.contains('week')){
+      cover.style.display = 'none';
+      footer.style.display = 'none';
+      weeks.forEach(function(w){ w.style.display = (w === target) ? 'block' : 'none'; });
+    } else {
+      cover.style.display = 'block';
+      footer.style.display = 'block';
+      weeks.forEach(function(w){ w.style.display = 'none'; });
+    }
+  }
+  window.addEventListener('hashchange', route);
+  window.addEventListener('DOMContentLoaded', route);
+})();
+</script>
 </body>
 </html>
