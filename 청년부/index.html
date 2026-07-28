@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보 · 2026</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
@@ -45,6 +44,7 @@
 }
 
 *{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
 html,body{ margin:0; padding:0; }
 body{
   background: var(--paper);
@@ -66,6 +66,7 @@ body{
   overflow: hidden;
   isolation: isolate;
   text-align: center;
+  scroll-margin-top: 0;
 }
 .hero::before{
   content:"";
@@ -93,11 +94,11 @@ body{
   font-size: 15.5px; color: #C9D2E6; font-weight: 400; margin: 18px 0 0;
 }
 
-/* ---------- ARCHIVE LIST ---------- */
+/* ---------- SECTION LABELS (shared) ---------- */
 .section{ padding: 46px 32px 0; }
 .section-head{
   display: flex; align-items: center; gap: 14px;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 .section-head .num{
   font-family: Georgia, 'Times New Roman', serif;
@@ -123,6 +124,7 @@ body{
   flex: 1; height: 1px; background: var(--line);
 }
 
+/* ---------- ARCHIVE LIST ---------- */
 .archive-list{
   display: flex; flex-direction: column; gap: 12px;
 }
@@ -160,19 +162,149 @@ body{
   border-radius: 6px; padding: 3px 9px;
   white-space: nowrap;
 }
-.archive-arrow{
-  color: var(--ink-soft); font-size: 15px; flex: none;
-}
 
-.archive-empty{
-  text-align: center;
+/* ---------- WEEK DETAIL BLOCK ---------- */
+.week{ scroll-margin-top: 16px; }
+.week-bar{
+  margin: 46px 32px 0;
+  background: linear-gradient(165deg, var(--navy-deep) 0%, var(--navy) 55%, #2C3F63 100%);
+  border-radius: 18px;
+  padding: 22px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  flex-wrap: wrap;
+}
+.back-link{
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500;
+  color: #C9D2E6;
+  text-decoration: none;
+  opacity: .85;
+  transition: opacity .15s ease;
+}
+.back-link:hover{ opacity: 1; text-decoration: underline; }
+.week-date{
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px; font-weight: 700; color: #FFFFFF;
+}
+.week-date .week-sub{
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif;
+  font-size: 12.5px; font-weight: 500; color: var(--dawn-soft);
+  margin-left: 8px;
+}
+.week .section{ padding: 40px 32px 0; }
+
+/* ---------- ORDER OF SERVICE (dotted leader, invitation-style) ---------- */
+.order-card{
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 8px 26px 6px;
+  box-shadow: 0 2px 14px rgba(27,42,74,.05);
+}
+.order-list{ }
+.order-item{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 15px 0;
+}
+.order-item:not(:last-child){
+  border-bottom: 1px solid var(--line);
+}
+.order-item .label{
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: .12em;
+  color: var(--navy);
+  white-space: nowrap;
+  flex: none;
+}
+.order-item .label .label-sub{
+  font-size: 15px; font-weight: 500; color: var(--ink-soft);
+  letter-spacing: .04em;
+}
+.order-item .dots{
+  flex: 1;
+  height: 0;
+  border-bottom: 1.5px dotted var(--ink-soft);
+  opacity: .45;
+  transform: translateY(-5px);
+  margin: 0 2px;
+}
+.order-item .who{
+  flex: none;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14.5px;
   color: var(--ink-soft);
-  font-size: 13.5px;
-  padding: 24px 0;
-  border-top: 1px dashed var(--line);
-  margin-top: 6px;
+  white-space: nowrap;
+  letter-spacing: .04em;
+}
+.order-item.is-highlight .label{ color: var(--dawn); }
+.order-item.sermon{
+  flex-direction: column;
+  align-items: stretch;
+}
+.order-item.sermon .row-main{
+  display: flex; align-items: baseline; gap: 10px;
+}
+.order-item.sermon .sermon-detail{
+  margin-top: 8px;
+  display: flex; justify-content: center; align-items: baseline;
+}
+.order-item.sermon .sermon-title{
+  font-family: 'Noto Serif KR', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--dawn);
 }
 
+/* ---------- ANNOUNCEMENTS ---------- */
+.notice-card{
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px 22px 6px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 10px rgba(27,42,74,.04);
+}
+.notice{
+  display: flex; gap: 16px;
+  padding-bottom: 20px;
+}
+.notice:not(:last-child){
+  border-bottom: 1px dashed var(--line);
+  margin-bottom: 4px;
+}
+.notice .flag{
+  flex: none;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display:flex; align-items:center; justify-content:center;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 18px; font-weight: 700;
+  color: #fff;
+}
+.notice.new .flag{ background: var(--sage); }
+.notice.trip .flag{ background: var(--dawn); }
+.notice-body{ flex: 1; }
+.notice-body .title{
+  font-size: 15.5px; font-weight: 600; color: var(--navy); margin-bottom: 6px;
+}
+.notice-body .desc{
+  font-size: 14.5px; color: var(--ink-soft); line-height: 1.85;
+}
+.notice-body .desc + .desc{ margin-top: 2px; }
+.tag{
+  display:inline-block;
+  font-size: 12px; font-weight: 600; color: var(--dawn);
+  background: rgba(232,147,90,.12);
+  border-radius: 6px; padding: 2px 8px;
+  margin-top: 8px;
+}
+
+/* ---------- FOOTER / VISION (shared, once) ---------- */
 .footer{
   padding: 50px 32px 0;
   text-align: center;
@@ -193,8 +325,6 @@ body{
 .footer .church{
   font-size: 13.5px; color: var(--ink-soft); letter-spacing: .04em;
 }
-
-/* ---------- VISION ---------- */
 .vision{
   margin: 40px 32px 0;
   background: var(--paper-card);
@@ -224,6 +354,9 @@ body{
   .hero{ padding: 64px 22px 56px; }
   .hero h1{ font-size: 33px; }
   .section{ padding: 38px 22px 0; }
+  .week-bar{ margin: 38px 22px 0; padding: 18px 20px; }
+  .week .section{ padding: 34px 22px 0; }
+  .notice-card{ padding: 18px 18px 4px; }
   .vision{ margin: 34px 22px 0; }
 }
 </style>
@@ -231,7 +364,8 @@ body{
 <body>
 <div class="wrap">
 
-  <div class="hero">
+  <!-- ============ 표지 ============ -->
+  <div class="hero" id="top">
     <div class="hero-inner">
       <div class="eyebrow"><span class="dot"></span>YOUNG ADULTS BULLETIN ARCHIVE</div>
       <p class="year">2026</p>
@@ -248,7 +382,7 @@ body{
     </div>
 
     <div class="archive-list">
-      <a class="archive-item" href="청년부주보_20260802.html">
+      <a class="archive-item" href="#week-20260802">
         <div class="archive-left">
           <span class="archive-date">2026. 08. 02.</span>
           <span class="archive-week">주일예배</span>
@@ -257,13 +391,92 @@ body{
       </a>
 
       <!--
-        새 주보 추가 방법:
-        위 <a class="archive-item">...</a> 블록을 복사해서
-        이 주석 바로 위에 붙여넣고 날짜/링크만 바꿔주세요.
-        (최근 날짜가 항상 맨 위로 오도록 이 자리에 추가)
+        새 주보 추가 방법 (매주):
+        1) 위 <a class="archive-item">...</a> 블록을 복사해서 이 주석 바로 위에 붙여넣고
+           날짜(archive-date/archive-week)와 href(#week-YYYYMMDD)를 새 주일 날짜로 수정
+        2) 아래 "주보 본문" 영역에서 <div class="week" id="week-20260802">...</div> 블록 전체를
+           복사해서 그 다음 자리에 붙여넣고, id와 내용(예배 순서/공지사항)을 새로 채우기
+        (항상 archive-list 맨 위 = 최신 주가 되도록 이 자리에 추가)
       -->
     </div>
   </div>
+
+  <!-- ============ 주보 본문 ============ -->
+
+  <div class="week" id="week-20260802">
+    <div class="week-bar">
+      <a class="back-link" href="#top">← 표지로 돌아가기</a>
+      <div class="week-date">2026. 08. 02. <span class="week-sub">주일예배</span></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="num">Ⅰ</span>
+        <h2>예배 순서 <span class="head-en">Order of Worship</span></h2>
+        <span class="rule"></span>
+      </div>
+
+      <div class="order-card">
+      <div class="order-list">
+        <div class="order-item">
+          <span class="label">찬&nbsp;&nbsp;양</span><span class="dots"></span><span class="who">다&nbsp;같&nbsp;이</span>
+        </div>
+        <div class="order-item">
+          <span class="label">봉&nbsp;&nbsp;헌</span><span class="dots"></span><span class="who">다&nbsp;같&nbsp;이</span>
+        </div>
+        <div class="order-item">
+          <span class="label">대표기도</span><span class="dots"></span><span class="who">허&nbsp;예&nbsp;나&nbsp;청&nbsp;년</span>
+        </div>
+        <div class="order-item">
+          <span class="label">성경봉독</span><span class="dots"></span><span class="who">빌립보서&nbsp;2:12-30</span>
+        </div>
+        <div class="order-item is-highlight sermon">
+          <div class="row-main">
+            <span class="label">설교(<span class="label-sub">빌립보서 강해4</span>)</span><span class="dots"></span><span class="who">김&nbsp;성&nbsp;국&nbsp;목&nbsp;사</span>
+          </div>
+          <div class="sermon-detail">
+            <span class="sermon-title">"두려움과 떨림으로"</span>
+          </div>
+        </div>
+        <div class="order-item">
+          <span class="label">광&nbsp;&nbsp;고</span><span class="dots"></span><span class="who">맡&nbsp;은&nbsp;이</span>
+        </div>
+        <div class="order-item">
+          <span class="label">축&nbsp;&nbsp;도</span><span class="dots"></span><span class="who">김&nbsp;성&nbsp;국&nbsp;목&nbsp;사</span>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="num">Ⅱ</span>
+        <h2>공지사항 <span class="head-en">Announcements</span></h2>
+        <span class="rule"></span>
+      </div>
+
+      <div class="notice-card">
+        <div class="notice new">
+          <div class="flag">1</div>
+          <div class="notice-body">
+            <div class="title">예배 중 봉헌 시간 신설</div>
+            <div class="desc">다음 주부터는 예배 중 봉헌 시간이 있습니다.</div>
+          </div>
+        </div>
+        <div class="notice trip">
+          <div class="flag">2</div>
+          <div class="notice-body">
+            <div class="title">청년부 국내성지순례 (여수·순천)</div>
+            <div class="desc">8월 21일(금) – 22일(토)</div>
+            <div class="desc">21일 오전 9시, 교회에서 출발</div>
+            <span class="tag">D-19</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 공통 하단 ============ -->
 
   <div class="footer">
     <p class="verse">"두세 사람이 내 이름으로 모인 곳에는 나도 그들 중에 있느니라"<br><span class="verse-ref">마태복음 18:20</span></p>
