@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>청소년부 주보 · 2026</title>
+<title>주보 상세 · 청소년부 주보 2026</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -380,36 +380,35 @@ body{
 }
 </style>
 <style>
-.more-link{
-  display:block; text-align:center; margin-top:16px;
-  font-size:14px; font-weight:600; color: var(--dawn);
-  text-decoration:none;
-}
-.more-link:hover{ text-decoration: underline; }
 .empty-msg{ text-align:center; color: var(--ink-soft); font-size:14px; padding: 30px 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="hero" id="hero">
-    <div class="hero-inner">
-      <div class="eyebrow"><span class="dot"></span>YOUTH MINISTRY BULLETIN ARCHIVE</div>
-      <h1>청소년부 주보</h1>
-      <p class="sub">대전성은교회 청소년부 · 주일마다 함께 자라가는 믿음의 기록</p>
-    </div>
+  <div class="week-bar" style="margin-top:32px;">
+    <a class="back-link" href="../archive.html">← 목록으로 돌아가기</a>
+    <span class="week-date" id="week-date-label">불러오는 중...</span>
   </div>
 
   <div class="section">
     <div class="section-head">
       <span class="num">I</span>
-      <h2>최근 주보 <span class="head-en">Recent Bulletins</span></h2>
+      <h2>예배 순서 <span class="head-en">Order of Worship</span></h2>
       <span class="rule"></span>
     </div>
-    <div class="archive-list" id="archive-list">
-      <div class="empty-msg">불러오는 중...</div>
+    <div class="order-card">
+      <div class="order-timeline" id="order-timeline"></div>
     </div>
-    <a class="more-link" href="archive.html">전체 주보 보기 →</a>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="num">II</span>
+      <h2>공지사항 <span class="head-en">Announcements</span></h2>
+      <span class="rule"></span>
+    </div>
+    <div class="notice-card" id="notice-card"></div>
   </div>
 
   <div id="shared-footer">
@@ -434,26 +433,71 @@ body{
 </div>
 <script>
 (async function(){
-  const listEl = document.getElementById('archive-list');
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const dateLabel = document.getElementById('week-date-label');
+  const orderEl = document.getElementById('order-timeline');
+  const noticeEl = document.getElementById('notice-card');
+
+  function esc(s){
+    const d = document.createElement('div');
+    d.textContent = s == null ? '' : s;
+    return d.innerHTML;
+  }
+
   try{
-    const res = await fetch('data/posts.json');
+    const res = await fetch('../data/posts.json');
     const data = await res.json();
-    const posts = (data.posts || []).slice(0, 3);
-    if(posts.length === 0){
-      listEl.innerHTML = '<div class="empty-msg">등록된 주보가 없습니다.</div>';
+    const post = (data.posts || []).find(function(p){ return p.id === id; });
+
+    if(!post){
+      dateLabel.textContent = '주보를 찾을 수 없습니다';
+      orderEl.innerHTML = '<div class="empty-msg">해당 주차 주보가 없습니다.</div>';
+      noticeEl.innerHTML = '';
       return;
     }
-    listEl.innerHTML = posts.map(function(p){
-      return '<a class="archive-item" href="posts/detail.html?id=' + encodeURIComponent(p.id) + '">' +
-        '<div class="archive-left">' +
-          '<span class="archive-date">' + p.date + '</span>' +
-          '<span class="archive-week">' + p.weekLabel + '</span>' +
-        '</div>' +
-        (p.badge ? '<span class="archive-badge">' + p.badge + '</span>' : '') +
-      '</a>';
+
+    dateLabel.innerHTML = esc(post.date) + ' <span class="week-sub">' + esc(post.weekLabel) + '</span>';
+    document.title = post.date + ' · 청소년부 주보';
+
+    orderEl.innerHTML = (post.order || []).map(function(step){
+      if(step.isSermon){
+        return '<div class="step step-sermon">' +
+          '<div class="step-top">' +
+            '<span class="step-role">' + esc(step.role) + '</span>' +
+            '<span class="step-dots"></span>' +
+            '<span class="step-who">' + esc(step.who) + '</span>' +
+          '</div>' +
+          (step.sermonSeries ? '<div class="step-series">' + esc(step.sermonSeries) + '</div>' : '') +
+          '<div class="step-title">' + esc(step.sermonTitle) + '</div>' +
+        '</div>';
+      }
+      return '<div class="step">' +
+        '<span class="step-role">' + esc(step.role) + '</span>' +
+        '<span class="step-dots"></span>' +
+        '<span class="step-who">' + esc(step.who) + '</span>' +
+      '</div>';
     }).join('');
+
+    const notices = post.notices || [];
+    if(notices.length === 0){
+      noticeEl.innerHTML = '<div class="empty-msg">등록된 공지사항이 없습니다.</div>';
+    } else {
+      noticeEl.innerHTML = notices.map(function(n){
+        const descHtml = (n.desc || []).map(function(d){ return '<div class="desc">' + esc(d) + '</div>'; }).join('');
+        const tagHtml = n.tag ? '<span class="tag">' + esc(n.tag) + '</span>' : '';
+        return '<div class="notice ' + (n.kind || '') + '">' +
+          '<div class="flag">' + esc(n.flag) + '</div>' +
+          '<div class="notice-body">' +
+            '<div class="title">' + esc(n.title) + '</div>' +
+            descHtml + tagHtml +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
   } catch(e){
-    listEl.innerHTML = '<div class="empty-msg">주보를 불러오지 못했습니다.</div>';
+    dateLabel.textContent = '불러오기 실패';
+    orderEl.innerHTML = '<div class="empty-msg">주보를 불러오지 못했습니다.</div>';
   }
 })();
 </script>

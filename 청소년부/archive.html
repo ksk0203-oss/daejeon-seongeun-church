@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>청소년부 주보 · 2026</title>
+<title>전체 주보 · 청소년부 주보 2026</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -380,55 +380,30 @@ body{
 }
 </style>
 <style>
-.more-link{
-  display:block; text-align:center; margin-top:16px;
-  font-size:14px; font-weight:600; color: var(--dawn);
-  text-decoration:none;
-}
-.more-link:hover{ text-decoration: underline; }
 .empty-msg{ text-align:center; color: var(--ink-soft); font-size:14px; padding: 30px 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <div class="hero" id="hero">
-    <div class="hero-inner">
-      <div class="eyebrow"><span class="dot"></span>YOUTH MINISTRY BULLETIN ARCHIVE</div>
-      <h1>청소년부 주보</h1>
-      <p class="sub">대전성은교회 청소년부 · 주일마다 함께 자라가는 믿음의 기록</p>
-    </div>
+  <div class="week-bar" style="margin-top:32px;">
+    <a class="back-link" href="index.html">← 표지로 돌아가기</a>
+    <span class="week-date">전체 주보 <span class="week-sub">All Bulletins</span></span>
   </div>
 
   <div class="section">
     <div class="section-head">
       <span class="num">I</span>
-      <h2>최근 주보 <span class="head-en">Recent Bulletins</span></h2>
+      <h2>주보 목록 <span class="head-en">Archive</span></h2>
       <span class="rule"></span>
     </div>
     <div class="archive-list" id="archive-list">
       <div class="empty-msg">불러오는 중...</div>
     </div>
-    <a class="more-link" href="archive.html">전체 주보 보기 →</a>
   </div>
 
-  <div id="shared-footer">
-  <div class="footer">
-    <p class="verse">"두세 사람이 내 이름으로 모인 곳에는 나도 그들 중에 있느니라"<br><span class="verse-ref">마태복음 18:20</span></p>
-  </div>
-
-  <div class="vision">
-    <div class="vision-title">청소년부 비전 선언문</div>
-    <ul class="vision-list">
-      <li>말씀 위에 굳게 서는 청소년부</li>
-      <li>서로 격려하며 함께 자라가는 청소년부</li>
-      <li>세상 속에 하나님 나라의 백성으로 살아가는 청소년부</li>
-    </ul>
-  </div>
-
-  <div class="footer" style="padding-top:34px;">
+  <div class="footer" style="padding-top:34px; padding-bottom:60px;">
     <p class="church">대전성은교회 청소년부 · Daejeon Sungeun Church</p>
-  </div>
   </div>
 
 </div>
@@ -438,7 +413,7 @@ body{
   try{
     const res = await fetch('data/posts.json');
     const data = await res.json();
-    const posts = (data.posts || []).slice(0, 3);
+    const posts = data.posts || [];
     if(posts.length === 0){
       listEl.innerHTML = '<div class="empty-msg">등록된 주보가 없습니다.</div>';
       return;
