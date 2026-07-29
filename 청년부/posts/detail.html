@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>청년부 주보</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div style="height:32px;"></div>
+  <div id="week-bar-container"></div>
+  <div id="content-container">
+    <div class="state-msg">불러오는 중…</div>
+  </div>
+</div>
+
+<script>
+function esc(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+function renderOrder(order){
+  var html = '<div class="order-card"><div class="order-list">';
+  (order || []).forEach(function(item){
+    if (item.sermon) {
+      html += '<div class="step step-sermon">' +
+        '<div class="step-top">' +
+          '<span class="step-role">' + esc(item.role) + '</span>' +
+          '<span class="step-dots"></span>' +
+          '<span class="step-who">' + esc(item.who) + '</span>' +
+        '</div>' +
+        (item.series ? '<div class="step-series">' + esc(item.series) + '</div>' : '') +
+        (item.title ? '<div class="step-title">&quot;' + esc(item.title) + '&quot;</div>' : '') +
+      '</div>';
+    } else {
+      html += '<div class="step">' +
+        '<span class="step-role">' + esc(item.role) + '</span>' +
+        '<span class="step-dots"></span>' +
+        '<span class="step-who">' + esc(item.who) + '</span>' +
+      '</div>';
+    }
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function renderNotices(notices){
+  var html = '<div class="notice-card">';
+  (notices || []).forEach(function(n){
+    var colorClass = n.color === 'dawn' ? 'c-dawn' : 'c-sage';
+    html += '<div class="notice">' +
+      '<div class="flag ' + colorClass + '">' + esc(n.flag || '') + '</div>' +
+      '<div class="notice-body">' +
+        '<div class="title">' + esc(n.title) + '</div>' +
+        (n.desc || []).map(function(d){ return '<div class="desc">' + esc(d) + '</div>'; }).join('') +
+        (n.tag ? '<span class="tag">' + esc(n.tag) + '</span>' : '') +
+      '</div>' +
+    '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function render(post){
+  document.title = post.date + ' 청년부 주보';
+
+  document.getElementById('week-bar-container').innerHTML =
+    '<div class="week-bar">' +
+      '<a class="back-link" href="../archive.html">← 목록으로</a>' +
+      '<div class="week-date">' + esc(post.date) + ' <span class="week-sub">' + esc(post.week || '') + '</span></div>' +
+    '</div>';
+
+  var html = '';
+  html += '<div class="section">' +
+    '<div class="section-head"><span class="num">Ⅰ</span><h2>예배 순서 <span class="head-en">Order of Worship</span></h2><span class="rule"></span></div>' +
+    renderOrder(post.order) +
+  '</div>';
+
+  html += '<div class="section">' +
+    '<div class="section-head"><span class="num">Ⅱ</span><h2>공지사항 <span class="head-en">Announcements</span></h2><span class="rule"></span></div>' +
+    renderNotices(post.notices) +
+  '</div>';
+
+  document.getElementById('content-container').innerHTML = html;
+}
+
+var params = new URLSearchParams(window.location.search);
+var id = params.get('id');
+
+fetch('../data/posts.json')
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var posts = data.posts || [];
+    var target = id
+      ? posts.filter(function(p){ return p.id === id; })[0]
+      : posts.slice().sort(function(a,b){ return b.id.localeCompare(a.id); })[0];
+
+    if (!target) {
+      document.getElementById('week-bar-container').innerHTML =
+        '<div class="week-bar"><a class="back-link" href="../archive.html">← 목록으로</a><div class="week-date">주보를 찾을 수 없습니다</div></div>';
+      document.getElementById('content-container').innerHTML =
+        '<div class="state-msg">해당 주보가 존재하지 않습니다.</div>';
+      return;
+    }
+    render(target);
+  })
+  .catch(function(){
+    document.getElementById('content-container').innerHTML =
+      '<div class="state-msg">주보 데이터를 불러오지 못했습니다.</div>';
+  });
+</script>
+</body>
+</html>

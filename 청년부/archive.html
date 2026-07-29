@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>주보 목록 · 청년부 주보</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .page-head{
+    padding: 44px 32px 0;
+    text-align: center;
+  }
+  .page-head .back-link{ color: var(--ink-soft); justify-content: center; display: inline-flex; margin-bottom: 18px; }
+  .page-head h1{
+    font-size: 24px; font-weight: 700; color: var(--navy); margin: 0 0 6px;
+  }
+  .page-head .sub{ font-size: 13.5px; color: var(--ink-soft); margin: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="page-head">
+    <a class="back-link" href="index.html">← 표지로 돌아가기</a>
+    <h1>주보 목록</h1>
+    <p class="sub">대전성은교회 청년부 · Archive</p>
+  </div>
+
+  <div class="section">
+    <div id="archive-container">
+      <div class="state-msg">불러오는 중…</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+fetch('data/posts.json')
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var posts = (data.posts || []).slice().sort(function(a,b){
+      return b.id.localeCompare(a.id);
+    });
+    var container = document.getElementById('archive-container');
+    if (!posts.length) {
+      container.innerHTML = '<div class="state-msg">등록된 주보가 아직 없습니다.</div>';
+      return;
+    }
+    var html = '<div class="archive-list">';
+    posts.forEach(function(p, i){
+      html += '<a class="archive-item' + (i === 0 ? ' is-latest' : '') + '" href="posts/detail.html?id=' + p.id + '">' +
+        '<div class="archive-left">' +
+          '<span class="archive-date">' + p.date + '</span>' +
+          '<span class="archive-week">' + (p.week || '') + '</span>' +
+        '</div>' +
+        (i === 0 ? '<span class="archive-badge">최신</span>' : '') +
+      '</a>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+  })
+  .catch(function(){
+    document.getElementById('archive-container').innerHTML =
+      '<div class="state-msg">주보 데이터를 불러오지 못했습니다.</div>';
+  });
+</script>
+</body>
+</html>
