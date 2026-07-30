@@ -196,24 +196,31 @@ h2.section-title { font-family: 'Noto Serif KR', serif; font-size: calc(24px * v
   margin: 6px 0 24px; padding: 22px 24px; background: var(--softgray);
   border-left: 3px solid var(--charcoal); border-radius: 4px;
   font-family: 'Noto Serif KR', serif;
-  font-size: calc(15.5px * var(--fs-scale, 1)); line-height: 1.9; color: var(--charcoal);
-  text-align: justify; word-break: keep-all;
+  font-size: calc(16.5px * var(--fs-scale, 1)); line-height: 2.0; color: var(--charcoal);
+  word-break: keep-all;
 }
 .scripture-box .vnum { color: var(--steel); font-weight: 800; font-size: calc(11px * var(--fs-scale, 1)); margin-right: 2px; }
 
 /* 묵상/적용/기도 — 동일 패턴 */
-.section-block { margin: 24px 0; }
+.section-block { margin: 26px 0; }
 .section-label {
   display: inline-block; background: var(--charcoal); color: var(--white);
   font-size: calc(11.5px * var(--fs-scale, 1)); font-weight: 800; letter-spacing: 1px;
   padding: 4px 11px; border-radius: 100px; margin-bottom: 12px;
 }
 .section-text {
-  font-size: calc(15.5px * var(--fs-scale, 1)); line-height: 1.75; color: var(--charcoal);
-  text-align: justify; word-break: keep-all;
+  font-size: calc(16.5px * var(--fs-scale, 1)); line-height: 1.9; color: var(--charcoal);
+  word-break: keep-all;
 }
 
 .footer-legal { text-align: center; padding: 32px 40px 40px; background: var(--softgray); }
 .footer-legal p { font-size: calc(12.5px * var(--fs-scale, 1)); color: var(--midgray); line-height: 1.8; }
 .footer-links { text-align: center; padding: 0 40px 36px; background: var(--softgray); font-size: calc(12.5px * var(--fs-scale, 1)); }
 .footer-links a { color: var(--charcoal); text-decoration: underline; cursor: pointer; }
+
+@media (max-width: 640px) {
+  .scripture-box { padding: 18px 16px; font-size: calc(16px * var(--fs-scale, 1)); line-height: 1.95; }
+  .section-text { font-size: calc(16px * var(--fs-scale, 1)); line-height: 1.9; }
+  .section-block { margin: 24px 0; }
+  h2.section-title { font-size: calc(21px * var(--fs-scale, 1)); line-height: 1.4; }
+}
