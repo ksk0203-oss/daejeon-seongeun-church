@@ -93,17 +93,17 @@ function render(post){
     renderOrder(post.order) +
   '</div>';
 
-  html += '<div class="section">' +
-    '<div class="section-head"><span class="num">Ⅱ</span><h2>공지사항 <span class="head-en">Announcements</span></h2><span class="rule"></span></div>' +
-    renderNotices(post.notices) +
-  '</div>';
-
   if (post.discussion && post.discussion.length) {
     html += '<div class="section">' +
-      '<div class="section-head"><span class="num">Ⅲ</span><h2>말씀 나눔 <span class="head-en">Discussion</span></h2><span class="rule"></span></div>' +
+      '<div class="section-head"><span class="num">Ⅱ</span><h2>말씀 나눔 <span class="head-en">Discussion</span></h2><span class="rule"></span></div>' +
       renderDiscussion(post.discussion) +
     '</div>';
   }
+
+  html += '<div class="section">' +
+    '<div class="section-head"><span class="num">Ⅲ</span><h2>공지사항 <span class="head-en">Announcements</span></h2><span class="rule"></span></div>' +
+    renderNotices(post.notices) +
+  '</div>';
 
   document.getElementById('content-container').innerHTML = html;
 }
