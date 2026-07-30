@@ -47,6 +47,20 @@ function renderOrder(order){
   return html;
 }
 
+function renderSharing(sharing){
+  var html = '<div class="notice-card">';
+  (sharing || []).forEach(function(item){
+    html += '<div class="notice">' +
+      '<div class="flag c-dawn">' + esc(item.flag || '') + '</div>' +
+      '<div class="notice-body">' +
+        '<div class="title">' + esc(item.text) + '</div>' +
+      '</div>' +
+    '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
 function renderNotices(notices){
   var html = '<div class="notice-card">';
   (notices || []).forEach(function(n){
@@ -80,8 +94,15 @@ function render(post){
     renderOrder(post.order) +
   '</div>';
 
+  if (post.sharing && post.sharing.length) {
+    html += '<div class="section">' +
+      '<div class="section-head"><span class="num">Ⅱ</span><h2>말씀 나눔 <span class="head-en">Sharing the Word</span></h2><span class="rule"></span></div>' +
+      renderSharing(post.sharing) +
+    '</div>';
+  }
+
   html += '<div class="section">' +
-    '<div class="section-head"><span class="num">Ⅱ</span><h2>공지사항 <span class="head-en">Announcements</span></h2><span class="rule"></span></div>' +
+    '<div class="section-head"><span class="num">Ⅲ</span><h2>공지사항 <span class="head-en">Announcements</span></h2><span class="rule"></span></div>' +
     renderNotices(post.notices) +
   '</div>';
 
