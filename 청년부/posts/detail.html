@@ -57,6 +57,7 @@ function renderNotices(notices){
         '<div class="title">' + esc(n.title) + '</div>' +
         (n.desc || []).map(function(d){ return '<div class="desc">' + esc(d) + '</div>'; }).join('') +
         (n.tag ? '<span class="tag">' + esc(n.tag) + '</span>' : '') +
+        (n.link ? '<a class="notice-link" href="' + esc(n.link.url) + '" target="_blank" rel="noopener">' + esc(n.link.label) + ' →</a>' : '') +
       '</div>' +
     '</div>';
   });
