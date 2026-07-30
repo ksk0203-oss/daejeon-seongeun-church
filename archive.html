@@ -62,6 +62,9 @@
 <script>
 async function init() {
   const container = document.getElementById('list-container');
+  const params = new URLSearchParams(window.location.search);
+  const monthFilter = params.get('month'); // e.g. "2026-08"
+
   let posts;
   try {
     posts = await loadPosts('data/posts.json');
@@ -82,8 +85,19 @@ async function init() {
     groups[key].push(p);
   });
 
-  const sortedKeys = Object.keys(groups).sort();
+  let sortedKeys = Object.keys(groups).sort();
+  if (monthFilter) {
+    sortedKeys = sortedKeys.filter(k => k === monthFilter);
+    if (!sortedKeys.length) {
+      container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128269;</div><div class="empty-text">해당 달의 기록이 없습니다.</div></div>';
+      return;
+    }
+  }
+
   let html = '';
+  if (monthFilter) {
+    html += `<div class="back-row" style="padding-left:0; padding-top:0;"><a class="back-btn" href="archive.html" style="text-decoration:none;">&larr; 전체 달 보기</a></div>`;
+  }
   sortedKeys.forEach(key => {
     const [y, m] = key.split('-');
     html += `<div class="month-label" id="month-${key}">${y}년 ${parseInt(m)}월</div>`;
