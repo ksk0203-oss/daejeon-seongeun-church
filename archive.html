@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>전체 목록 · 5분 말씀 묵상</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#080808">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="5분 묵상">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="fs-control" id="fs-control">
+  <span class="fs-label">글씨 크기</span>
+  <button class="fs-btn" data-scale="0.9" onclick="setFontScale(0.9)">가</button>
+  <button class="fs-btn fs-active" data-scale="1" onclick="setFontScale(1)">가</button>
+  <button class="fs-btn" data-scale="1.15" onclick="setFontScale(1.15)">가</button>
+  <button class="fs-btn" data-scale="1.3" onclick="setFontScale(1.3)">가</button>
+</div>
+
+<div class="card">
+  <div class="hero">
+    <div class="ghost-wm">ROMANS</div>
+    <div class="hero-inner">
+      <div class="eyebrow-row">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow">Archive</div>
+      </div>
+      <div class="hero-title">전체 목록</div>
+      <div class="hero-sub">5분 말씀 묵상 · 지금까지의 모든 날짜</div>
+    </div>
+  </div>
+
+  <div class="page-label">Contents &middot; 목차</div>
+  <div class="badge-row">
+    <span class="pill-badge">날짜를 눌러 그날의 묵상을 읽어보세요</span>
+  </div>
+  <div class="divider divider--steel"></div>
+
+  <div class="toc-wrap">
+    <div id="list-container"></div>
+  </div>
+
+  <div class="footer-legal">
+    <p>말씀과 함께 하루를</p>
+    <p>대전성은교회 청년부 · 5분 말씀 묵상 시리즈</p>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">&larr; 처음으로 돌아가기</a>
+  </div>
+</div>
+
+<button class="scroll-top-btn" id="scroll-top-btn" onclick="scrollToTop()" aria-label="맨 위로"><span>&uarr;</span></button>
+
+<script src="js/app.js"></script>
+<script>
+async function init() {
+  const container = document.getElementById('list-container');
+  let posts;
+  try {
+    posts = await loadPosts('data/posts.json');
+  } catch (e) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#9888;&#65039;</div><div class="empty-text">목록을 불러오지 못했습니다.<br>잠시 후 다시 시도해주세요.</div></div>';
+    return;
+  }
+
+  if (!posts.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128237;</div><div class="empty-text">아직 등록된 묵상이 없습니다.</div></div>';
+    return;
+  }
+
+  const groups = {};
+  posts.forEach(p => {
+    const key = `${p.year}-${String(p.month).padStart(2,'0')}`;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(p);
+  });
+
+  const sortedKeys = Object.keys(groups).sort();
+  let html = '';
+  sortedKeys.forEach(key => {
+    const [y, m] = key.split('-');
+    html += `<div class="month-label" id="month-${key}">${y}년 ${parseInt(m)}월</div>`;
+    html += '<ul class="toc-list">';
+    groups[key].sort((a,b) => a.day - b.day).forEach(p => {
+      const dow = getWeekdayLabel(p.year, p.month, p.day);
+      if (p.ready) {
+        html += `
+          <li>
+            <a class="toc-item" href="posts/detail.html?id=${p.id}">
+              <span class="toc-date">${p.date_label}<span class="toc-dow">(${dow})</span></span>
+              <span class="toc-ref">롬 ${p.ref}</span>
+              <span class="toc-theme">${p.theme}</span>
+              <span class="toc-tag">보기</span>
+              <span class="toc-arrow">&rsaquo;</span>
+            </a>
+          </li>`;
+      } else {
+        html += `
+          <li>
+            <div class="toc-item is-disabled">
+              <span class="toc-date">${p.date_label}<span class="toc-dow">(${dow})</span></span>
+              <span class="toc-ref">롬 ${p.ref || ''}</span>
+              <span class="toc-theme">${p.theme || '준비중입니다'}</span>
+              <span class="toc-tag soon">준비중</span>
+              <span class="toc-arrow"></span>
+            </div>
+          </li>`;
+      }
+    });
+    html += '</ul>';
+  });
+
+  container.innerHTML = html;
+}
+init();
+</script>
+</body>
+</html>

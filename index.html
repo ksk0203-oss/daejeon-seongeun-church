@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>5분 말씀 묵상</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#080808">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="5분 묵상">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="fs-control" id="fs-control">
+  <span class="fs-label">글씨 크기</span>
+  <button class="fs-btn" data-scale="0.9" onclick="setFontScale(0.9)">가</button>
+  <button class="fs-btn fs-active" data-scale="1" onclick="setFontScale(1)">가</button>
+  <button class="fs-btn" data-scale="1.15" onclick="setFontScale(1.15)">가</button>
+  <button class="fs-btn" data-scale="1.3" onclick="setFontScale(1.3)">가</button>
+</div>
+
+<div class="card">
+  <div class="hero">
+    <div class="ghost-wm">ROMANS</div>
+    <div class="hero-inner">
+      <div class="eyebrow-row">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow">Daily Bible Meditation</div>
+      </div>
+      <div class="hero-title">5분 말씀 묵상</div>
+      <div class="hero-sub">대전성은교회 청년부 · 로마서</div>
+
+      <div class="hero-verse">
+        "주의 말씀은 내 발에 등이요 내 길에 빛이니이다"
+        <span class="hero-verse-ref">&mdash; 시편 119:105</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-label">Contents &middot; 목차</div>
+
+  <div id="month-grid-container" style="padding: 8px 40px 32px;"></div>
+
+  <div class="footer-legal">
+    <p>말씀과 함께 하루를</p>
+    <p>대전성은교회 청년부 · 5분 말씀 묵상 시리즈</p>
+  </div>
+</div>
+
+<button class="scroll-top-btn" id="scroll-top-btn" onclick="scrollToTop()" aria-label="맨 위로"><span>&uarr;</span></button>
+
+<script src="js/app.js"></script>
+<script>
+async function init() {
+  const container = document.getElementById('month-grid-container');
+  let posts;
+  try {
+    posts = await loadPosts('data/posts.json');
+  } catch (e) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">&#9888;&#65039;</div><div class="empty-text">목록을 불러오지 못했습니다.</div></div>';
+    return;
+  }
+
+  const monthKeys = [...new Set(posts.map(p => `${p.year}-${String(p.month).padStart(2,'0')}`))].sort();
+  const cardGradients = [
+    'linear-gradient(160deg, #1C1C1C 0%, #3A3A3A 100%)',
+    'linear-gradient(160deg, #4C6B75 0%, #1C1C1C 100%)',
+    'linear-gradient(160deg, #6B5B4C 0%, #1C1C1C 100%)',
+  ];
+
+  let html = '<div style="display:flex; gap:12px;">';
+  monthKeys.forEach((key, i) => {
+    const [y, m] = key.split('-');
+    const monthPosts = posts.filter(p => `${p.year}-${String(p.month).padStart(2,'0')}` === key)
+                             .sort((a,b) => a.day - b.day);
+    const first = monthPosts[0];
+    const last = monthPosts[monthPosts.length - 1];
+    const startChapVerse = first.ref.split(/[\u2013-]/)[0];
+    const endChapVerse = `${last.ref.split(':')[0]}:${last.ref.split(/[\u2013-]/).pop()}`;
+    const gradient = cardGradients[i % cardGradients.length];
+
+    html += `
+      <a href="archive.html#month-${key}" style="flex:1; text-decoration:none; aspect-ratio: 3/4; display:block;">
+        <div style="background:${gradient}; border-radius:4px; padding:22px 18px; height:100%; box-sizing:border-box; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.08);">
+          <div style="position:absolute; top:-30px; right:-30px; width:100px; height:100px; border-radius:50%; background:rgba(255,255,255,0.05);"></div>
+          <div style="position:relative; z-index:1;">
+            <div style="color:var(--steel); font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase;">${y}</div>
+            <div style="color:var(--white); font-size:36px; font-weight:900; font-family:'Noto Serif KR',serif; line-height:1.1; margin-top:6px;">${parseInt(m)}월</div>
+          </div>
+          <div style="position:relative; z-index:1;">
+            <div style="color:rgba(255,255,255,0.75); font-size:13px; font-weight:500; line-height:1.6;">로마서<br>${startChapVerse} ~ ${endChapVerse}</div>
+            <div style="color:var(--steel); font-size:13px; font-weight:700; margin-top:10px;">보러가기 &rarr;</div>
+          </div>
+        </div>
+      </a>`;
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+init();
+</script>
+</body>
+</html>

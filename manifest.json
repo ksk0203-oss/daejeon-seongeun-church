@@ -1,0 +1,11 @@
+{
+  "name": "5분 말씀 묵상 - 대전성은교회 청년부",
+  "short_name": "5분 묵상",
+  "description": "대전성은교회 청년부 로마서 하루 5분 말씀 묵상",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F0F0F0",
+  "theme_color": "#080808"
+}
