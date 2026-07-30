@@ -292,6 +292,16 @@ body{
   font-size: 14.5px; color: var(--ink-soft); line-height: 1.85;
 }
 .notice-body .desc + .desc{ margin-top: 2px; }
+.notice-link{
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dawn);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.notice-link:hover{ color: var(--navy); }
 .tag{
   display:inline-block;
   font-size: 12px; font-weight: 600; color: var(--dawn);
