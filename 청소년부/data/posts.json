@@ -7,8 +7,9 @@
       "order": [
         {
           "role": "찬양",
-          "who": "찬 289 다같이",
-          "sheetUrl": "../hymns/새찬송가_289장.jpg"
+          "badge": "찬 289",
+          "badgeSheetUrl": "../hymns/새찬송가_289장.jpg",
+          "who": "다같이"
         },
         {
           "role": "봉헌",
@@ -20,12 +21,13 @@
         },
         {
           "role": "성경봉독",
-          "who": "디모데전서 4:7-8",
-          "verseVersion": "새한글성경",
-          "verseText": [
+          "badge": "디모데전서 4:7-8",
+          "badgeVerseVersion": "새한글성경",
+          "badgeVerseText": [
             "7 저속하고 허황한 신화들을 물리치시게. 스스로를 훈련시켜 경건에 이르도록 하시게.",
             "8 몸을 훈련시키는 것은 조금 유익하지만, 경건은 모든 면에서 유익하니까 말일세. 경건은 지금 세대와 장차 올 세대에서 누릴 생명을 약속해 주는 것이네."
-          ]
+          ],
+          "who": "다같이"
         },
         {
           "role": "설교",
@@ -80,6 +82,11 @@
             "url": "https://ksk0203-oss.github.io/youth-bible-reflection/",
             "label": "로마서 5분 말씀 묵상"
           }
+        },
+        {
+          "color": "sage",
+          "flag": "3",
+          "title": "다음 주(8월 16일) 대표기도는 임다은 학생입니다."
         }
       ]
     },
