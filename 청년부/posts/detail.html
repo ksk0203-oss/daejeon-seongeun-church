@@ -139,7 +139,7 @@ function render(post){
 var params = new URLSearchParams(window.location.search);
 var id = params.get('id');
 
-fetch('../data/posts.json')
+fetch('../data/posts.json', { cache: 'no-store' })
   .then(function(r){ return r.json(); })
   .then(function(data){
     var posts = data.posts || [];
