@@ -24,8 +24,19 @@ function esc(s){
 
 function renderOrder(order){
   var html = '<div class="order-card"><div class="order-list">';
-  (order || []).forEach(function(item){
-    if (item.sermon) {
+  (order || []).forEach(function(item, idx){
+    var stepId = 'step-' + idx;
+    if (item.verseText && item.verseText.length) {
+      html += '<div class="step step-verse-toggle" data-target="' + stepId + '">' +
+        '<span class="step-role">' + esc(item.role) + '</span>' +
+        '<span class="step-dots"></span>' +
+        '<span class="step-who">' + esc(item.who) + ' <span class="step-icon">' + '\u25be' + '</span></span>' +
+      '</div>';
+      html += '<div class="verse-panel" id="' + stepId + '" hidden>' +
+        (item.verseVersion ? '<div class="verse-version">' + esc(item.verseVersion) + '</div>' : '') +
+        item.verseText.map(function(v){ return '<p class="verse-line">' + esc(v) + '</p>'; }).join('') +
+      '</div>';
+    } else if (item.sermon) {
       html += '<div class="step step-sermon">' +
         '<div class="step-top">' +
           '<span class="step-role">' + esc(item.role) + '</span>' +
@@ -35,6 +46,12 @@ function renderOrder(order){
         (item.series ? '<div class="step-series">' + esc(item.series) + '</div>' : '') +
         (item.title ? '<div class="step-title">&quot;' + esc(item.title) + '&quot;</div>' : '') +
       '</div>';
+    } else if (item.sheetUrl) {
+      html += '<a class="step step-link" href="' + esc(item.sheetUrl) + '" target="_blank" rel="noopener">' +
+        '<span class="step-role">' + esc(item.role) + '</span>' +
+        '<span class="step-dots"></span>' +
+        '<span class="step-who">' + esc(item.who) + ' <span class="step-icon">♪</span></span>' +
+      '</a>';
     } else {
       html += '<div class="step">' +
         '<span class="step-role">' + esc(item.role) + '</span>' +
@@ -107,6 +124,16 @@ function render(post){
   '</div>';
 
   document.getElementById('content-container').innerHTML = html;
+
+  document.querySelectorAll('.step-verse-toggle').forEach(function(el){
+    el.addEventListener('click', function(){
+      var target = document.getElementById(el.getAttribute('data-target'));
+      if (!target) return;
+      var isHidden = target.hasAttribute('hidden');
+      if (isHidden) { target.removeAttribute('hidden'); el.classList.add('is-open'); }
+      else { target.setAttribute('hidden', ''); el.classList.remove('is-open'); }
+    });
+  });
 }
 
 var params = new URLSearchParams(window.location.search);
