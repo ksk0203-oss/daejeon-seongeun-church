@@ -26,37 +26,24 @@ function renderOrder(order){
   var html = '<div class="order-card"><div class="order-list">';
   (order || []).forEach(function(item, idx){
     var stepId = 'step-' + idx;
-    if (item.badge) {
-      var badgeInner = '<span class="step-badge-text">' + esc(item.badge) + '</span>';
-      if (item.badgeSheetUrl) {
-        badgeInner = '<a class="step-badge is-link" href="' + esc(item.badgeSheetUrl) + '">' + badgeInner + ' <span class="step-icon">\u266a</span></a>';
-      } else if (item.badgeVerseText && item.badgeVerseText.length) {
-        badgeInner = '<span class="step-badge is-toggle" data-target="' + stepId + '">' + badgeInner + ' <span class="step-icon">\u25be</span></span>';
-      } else {
-        badgeInner = '<span class="step-badge">' + badgeInner + '</span>';
-      }
-      html += '<div class="step step-badged">' +
-        '<span class="step-role">' + esc(item.role) + '</span>' +
-        '<span class="step-dots"></span>' +
-        badgeInner +
-        (item.who ? '<span class="step-dots"></span><span class="step-who">' + esc(item.who) + '</span>' : '') +
-      '</div>';
-      if (item.badgeVerseText && item.badgeVerseText.length) {
-        html += '<div class="verse-panel" id="' + stepId + '" hidden>' +
-          (item.badgeVerseVersion ? '<div class="verse-version">' + esc(item.badgeVerseVersion) + '</div>' : '') +
-          item.badgeVerseText.map(function(v){ return '<p class="verse-line">' + esc(v) + '</p>'; }).join('') +
-        '</div>';
-      }
-    } else if (item.verseText && item.verseText.length) {
+    var hasVerse = item.verseText && item.verseText.length;
+    var hasSheet = !!item.sheetUrl;
+    if (hasVerse || hasSheet) {
       html += '<div class="step step-verse-toggle" data-target="' + stepId + '">' +
         '<span class="step-role">' + esc(item.role) + '</span>' +
         '<span class="step-dots"></span>' +
-        '<span class="step-who">' + esc(item.who) + ' <span class="step-icon">' + '\u25be' + '</span></span>' +
+        '<span class="step-who">' + esc(item.who) + ' <span class="step-icon">' + (hasSheet ? '\u266a' : '\u25be') + '</span></span>' +
       '</div>';
-      html += '<div class="verse-panel" id="' + stepId + '" hidden>' +
-        (item.verseVersion ? '<div class="verse-version">' + esc(item.verseVersion) + '</div>' : '') +
-        item.verseText.map(function(v){ return '<p class="verse-line">' + esc(v) + '</p>'; }).join('') +
-      '</div>';
+      if (hasSheet) {
+        html += '<div class="verse-panel sheet-panel" id="' + stepId + '" hidden>' +
+          '<img class="sheet-image" src="' + esc(item.sheetUrl) + '" alt="' + esc(item.who) + ' \uc545\ubcf4">' +
+        '</div>';
+      } else {
+        html += '<div class="verse-panel" id="' + stepId + '" hidden>' +
+          (item.verseVersion ? '<div class="verse-version">' + esc(item.verseVersion) + '</div>' : '') +
+          item.verseText.map(function(v){ return '<p class="verse-line">' + esc(v) + '</p>'; }).join('') +
+        '</div>';
+      }
     } else if (item.sermon) {
       html += '<div class="step step-sermon">' +
         '<div class="step-top">' +
@@ -146,7 +133,7 @@ function render(post){
 
   document.getElementById('content-container').innerHTML = html;
 
-  document.querySelectorAll('.step-verse-toggle, .step-badge.is-toggle').forEach(function(el){
+  document.querySelectorAll('.step-verse-toggle').forEach(function(el){
     el.addEventListener('click', function(){
       var target = document.getElementById(el.getAttribute('data-target'));
       if (!target) return;
