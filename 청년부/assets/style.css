@@ -181,20 +181,29 @@ body{
   margin-left: 8px;
 }
 
-/* ---------- ORDER OF SERVICE (left-right, dotted middle) ---------- */
+/* ---------- ORDER OF SERVICE (refined) ---------- */
 .order-card{
+  position: relative;
   background: var(--paper-card);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 8px 26px 6px;
-  box-shadow: 0 2px 14px rgba(27,42,74,.05);
+  border-radius: 20px;
+  padding: 6px 28px 4px;
+  box-shadow: 0 4px 22px rgba(27,42,74,.06);
+  overflow: hidden;
+}
+.order-card::before{
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--dawn) 0%, var(--dawn-soft) 45%, transparent 100%);
 }
 .order-list{ }
 .step{
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  padding: 16px 0;
+  gap: 14px;
+  padding: 17px 0;
 }
 .step:not(:last-child){
   border-bottom: 1px solid var(--line);
@@ -203,110 +212,146 @@ body{
   flex: none;
   font-family: 'Noto Serif KR', serif;
   font-weight: 700;
-  font-size: 16.5px;
-  letter-spacing: .08em;
+  font-size: 16px;
+  letter-spacing: .1em;
   color: var(--navy);
   white-space: nowrap;
 }
 .step-dots{
   flex: 1;
   height: 0;
-  border-bottom: 1.5px dotted var(--ink-soft);
-  opacity: .45;
-  transform: translateY(-5px);
+  border-bottom: 1.5px dotted rgba(107,110,118,.38);
   margin: 0 2px;
+  align-self: center;
 }
 .step-who{
   flex: none;
   font-family: 'Noto Serif KR', serif;
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--ink-soft);
-  letter-spacing: .03em;
+  letter-spacing: .02em;
   white-space: nowrap;
 }
 
 .step-sermon{
+  position: relative;
   flex-direction: column;
   align-items: stretch;
-  margin: 6px 0;
-  padding: 18px 16px;
-  background: linear-gradient(155deg, #FFFBF8 0%, #FFF2E7 100%);
+  margin: 8px 0;
+  padding: 22px 20px 20px;
+  background: linear-gradient(160deg, #FFFCFA 0%, #FFF1E5 100%);
   border: 1px solid var(--dawn-soft);
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(232,147,90,.14);
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(232,147,90,.16);
+  overflow: hidden;
+}
+.step-sermon::after{
+  content: "”";
+  position: absolute;
+  top: -34px; right: 4px;
+  font-family: Georgia, serif;
+  font-size: 128px;
+  font-weight: 700;
+  color: rgba(232,147,90,.10);
+  line-height: 1;
+  pointer-events: none;
 }
 .step-sermon .step-top{
+  position: relative; z-index: 1;
   display: flex; align-items: baseline; gap: 12px;
 }
-.step-sermon .step-role{ color: var(--dawn); font-size: 17px; }
+.step-sermon .step-role{
+  color: var(--dawn);
+  font-size: 16.5px;
+  letter-spacing: .14em;
+}
 .step-sermon .step-series{
+  position: relative; z-index: 1;
   font-family: 'Noto Serif KR', serif;
-  font-size: 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
   color: var(--ink-soft);
-  margin-top: 10px;
+  margin-top: 12px;
   text-align: center;
 }
 .step-sermon .step-title{
+  position: relative; z-index: 1;
   font-family: 'Noto Serif KR', serif;
   font-style: italic;
-  font-weight: 600;
-  font-size: 15.5px;
+  font-weight: 700;
+  font-size: 16px;
   color: var(--navy);
-  margin-top: 4px;
+  margin-top: 5px;
   text-align: center;
 }
 
 /* ---------- STEP TOGGLE (찬양 악보 / 성경봉독 본문 펼치기) ---------- */
-.step-toggle{ flex-wrap: wrap; }
-.step-badge{
+.step-link{
   flex: none;
   font-family: 'Noto Serif KR', serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--dawn);
-  background: rgba(232,147,90,.1);
-  border: 1px solid var(--dawn-soft);
-  border-radius: 999px;
-  padding: 5px 14px;
+  background: none;
+  border: none;
+  border-bottom: 1.5px dashed var(--dawn-soft);
+  padding: 0 0 2px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background .15s ease;
+  letter-spacing: .02em;
+  transition: color .15s ease, border-color .15s ease;
 }
-.step-badge:hover{ background: rgba(232,147,90,.18); }
-.step-badge.is-open{ background: var(--dawn); color: #fff; }
+.step-link:hover{ color: var(--navy); }
+.step-link.is-open{
+  color: var(--navy);
+  border-color: var(--navy);
+}
 .toggle-panel{
-  flex-basis: 100%;
-  margin-top: 12px;
-  padding: 14px 16px;
-  background: #FBF9F5;
-  border: 1px solid var(--line);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
   border-radius: 12px;
+  background: #FBF9F5;
+  border: 1px solid transparent;
+  transition: max-height .35s ease, opacity .3s ease, margin-top .3s ease, padding .3s ease, border-color .3s ease;
+}
+.toggle-panel.is-open{
+  max-height: 1400px;
+  opacity: 1;
+  margin: 4px 0 14px;
+  padding: 16px 18px;
+  border-color: var(--line);
 }
 .sheet-panel{ text-align: center; }
 .sheet-image{
   max-width: 100%;
-  border-radius: 6px;
+  height: auto;
+  border-radius: 8px;
   display: block;
   margin: 0 auto;
+  box-shadow: 0 4px 14px rgba(27,42,74,.08);
 }
 .verse-panel .verse-version{
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--dawn);
-  letter-spacing: .04em;
-  margin-bottom: 8px;
+  letter-spacing: .08em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 .verse-panel .verse-line{
-  margin: 0 0 8px;
+  margin: 0 0 9px;
   font-size: 14px;
   color: var(--ink);
-  line-height: 1.85;
+  line-height: 1.9;
 }
 .verse-panel .verse-line:last-child{ margin-bottom: 0; }
 .verse-panel .verse-num{
   font-family: 'Noto Serif KR', serif;
   font-weight: 700;
-  font-size: 11.5px;
+  font-size: 11px;
   color: var(--dawn);
   margin-right: 5px;
   vertical-align: super;
