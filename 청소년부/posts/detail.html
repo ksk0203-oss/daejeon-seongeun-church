@@ -28,10 +28,9 @@ function renderOrder(order){
     var stepId = 'step-' + idx;
     if (item.badge) {
       var badgeInner = '<span class="step-badge-text">' + esc(item.badge) + '</span>';
-      if (item.badgeSheetUrl) {
-        badgeInner = '<a class="step-badge is-link" href="' + esc(item.badgeSheetUrl) + '" target="_blank" rel="noopener">' + badgeInner + ' <span class="step-icon">\u266a</span></a>';
-      } else if (item.badgeVerseText && item.badgeVerseText.length) {
-        badgeInner = '<span class="step-badge is-toggle" data-target="' + stepId + '">' + badgeInner + ' <span class="step-icon">\u25be</span></span>';
+      var hasPanel = !!(item.badgeSheetUrl || (item.badgeVerseText && item.badgeVerseText.length));
+      if (hasPanel) {
+        badgeInner = '<span class="step-badge is-toggle" data-target="' + stepId + '">' + badgeInner + (item.badgeSheetUrl ? ' <span class="step-icon">\u266a</span>' : '') + ' <span class="step-icon">\u25be</span></span>';
       } else {
         badgeInner = '<span class="step-badge">' + badgeInner + '</span>';
       }
@@ -42,7 +41,11 @@ function renderOrder(order){
         '<span class="step-dots"></span>' +
         '<span class="step-who">' + esc(item.who) + '</span>' +
       '</div>';
-      if (item.badgeVerseText && item.badgeVerseText.length) {
+      if (item.badgeSheetUrl) {
+        html += '<div class="verse-panel sheet-panel" id="' + stepId + '" hidden>' +
+          '<img class="sheet-image" src="' + esc(item.badgeSheetUrl) + '" alt="' + esc(item.badge) + ' \uc545\ubcf4">' +
+        '</div>';
+      } else if (item.badgeVerseText && item.badgeVerseText.length) {
         html += '<div class="verse-panel" id="' + stepId + '" hidden>' +
           (item.badgeVerseVersion ? '<div class="verse-version">' + esc(item.badgeVerseVersion) + '</div>' : '') +
           item.badgeVerseText.map(function(v){ return '<p class="verse-line">' + esc(v) + '</p>'; }).join('') +
