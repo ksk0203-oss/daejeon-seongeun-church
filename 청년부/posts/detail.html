@@ -22,6 +22,8 @@ function esc(s){
   });
 }
 
+var toggleSeq = 0;
+
 function renderOrder(order){
   var html = '<div class="order-card"><div class="order-list">';
   (order || []).forEach(function(item){
@@ -35,6 +37,16 @@ function renderOrder(order){
         (item.series ? '<div class="step-series">' + esc(item.series) + '</div>' : '') +
         (item.title ? '<div class="step-title">&quot;' + esc(item.title) + '&quot;</div>' : '') +
       '</div>';
+    } else if (item.toggle) {
+      var pid = 'toggle-panel-' + (toggleSeq++);
+      html += '<div class="step step-toggle">' +
+        '<span class="step-role">' + esc(item.role) + '</span>' +
+        '<span class="step-dots"></span>' +
+        '<button type="button" class="step-badge" data-target="' + pid + '">' + esc(item.toggle.label) + '</button>' +
+        '<span class="step-dots"></span>' +
+        '<span class="step-who">' + esc(item.who) + '</span>' +
+      '</div>';
+      html += '<div class="toggle-panel" id="' + pid + '" hidden>' + renderTogglePanel(item.toggle) + '</div>';
     } else {
       html += '<div class="step">' +
         '<span class="step-role">' + esc(item.role) + '</span>' +
@@ -45,6 +57,22 @@ function renderOrder(order){
   });
   html += '</div></div>';
   return html;
+}
+
+function renderTogglePanel(t){
+  if (t.type === 'sheet') {
+    return '<div class="sheet-panel"><img class="sheet-image" src="' + esc(t.image) + '" alt="' + esc(t.label) + ' 악보"></div>';
+  }
+  if (t.type === 'verse') {
+    var lines = (t.verses || []).map(function(v){
+      return '<p class="verse-line"><span class="verse-num">' + esc(v.num) + '</span>' + esc(v.text) + '</p>';
+    }).join('');
+    return '<div class="verse-panel">' +
+      (t.version ? '<div class="verse-version">' + esc(t.version) + '</div>' : '') +
+      lines +
+    '</div>';
+  }
+  return '';
 }
 
 function renderNotices(notices){
@@ -127,6 +155,15 @@ fetch('../data/posts.json')
       return;
     }
     render(target);
+    document.getElementById('content-container').addEventListener('click', function(e){
+      var btn = e.target.closest('.step-badge');
+      if (!btn) return;
+      var panel = document.getElementById(btn.getAttribute('data-target'));
+      if (!panel) return;
+      var open = !panel.hidden;
+      panel.hidden = open;
+      btn.classList.toggle('is-open', !open);
+    });
   })
   .catch(function(){
     document.getElementById('content-container').innerHTML =
