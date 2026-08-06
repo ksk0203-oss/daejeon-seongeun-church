@@ -156,7 +156,7 @@
       "linear-gradient(165deg, #101B32 0%, #1B2A4A 55%, #2C3F63 100%)";
   }
 
-  fetch('data/posts.json', { cache: 'no-store' })
+  fetch('data/posts.json?t=' + Date.now(), { cache: 'no-store' })
     .then(function(r){ return r.json(); })
     .then(function(data){
       var posts = (data.posts || []).slice().sort(function(a,b){
