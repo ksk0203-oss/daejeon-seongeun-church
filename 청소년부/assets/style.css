@@ -462,4 +462,10 @@ body{
   .week-bar{ margin: 0 22px; padding: 18px 20px; }
   .notice-card{ padding: 18px 18px 4px; }
   .vision{ margin: 34px 22px 0; }
+
+  .step-badged{ flex-wrap: wrap; row-gap: 8px; }
+  .step-badged .step-dots{ display: none; }
+  .step-badged .step-who{ margin-left: auto; }
+  .step-badge{ font-size: 12px; padding: 3px 10px; gap: 3px; }
+  .step-badge-text{ white-space: normal; }
 }
