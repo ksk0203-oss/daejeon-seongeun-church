@@ -7,9 +7,8 @@
       "order": [
         {
           "role": "찬양",
-          "badge": "찬 289",
-          "badgeSheetUrl": "../hymns/새찬송가_289장.jpg",
-          "who": "다같이"
+          "who": "찬 289",
+          "sheetUrl": "../hymns/새찬송가_289장.jpg"
         },
         {
           "role": "봉헌",
