@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/style.css?v=3">
 </head>
 <body>
 <div class="wrap">
@@ -42,11 +42,9 @@ function renderOrder(order){
       html += '<div class="step step-toggle">' +
         '<span class="step-role">' + esc(item.role) + '</span>' +
         '<span class="step-dots"></span>' +
-        '<button type="button" class="step-badge" data-target="' + pid + '">' + esc(item.toggle.label) + '</button>' +
-        '<span class="step-dots"></span>' +
-        '<span class="step-who">' + esc(item.who) + '</span>' +
+        '<button type="button" class="step-link" data-target="' + pid + '">' + esc(item.toggle.label) + '</button>' +
       '</div>';
-      html += '<div class="toggle-panel" id="' + pid + '" hidden>' + renderTogglePanel(item.toggle) + '</div>';
+      html += '<div class="toggle-panel" id="' + pid + '">' + renderTogglePanel(item.toggle) + '</div>';
     } else {
       html += '<div class="step">' +
         '<span class="step-role">' + esc(item.role) + '</span>' +
@@ -156,13 +154,12 @@ fetch('../data/posts.json', { cache: 'no-store' })
     }
     render(target);
     document.getElementById('content-container').addEventListener('click', function(e){
-      var btn = e.target.closest('.step-badge');
+      var btn = e.target.closest('.step-link');
       if (!btn) return;
       var panel = document.getElementById(btn.getAttribute('data-target'));
       if (!panel) return;
-      var open = !panel.hidden;
-      panel.hidden = open;
-      btn.classList.toggle('is-open', !open);
+      var open = panel.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
     });
   })
   .catch(function(){
