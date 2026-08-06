@@ -295,17 +295,15 @@ body{
   color: var(--dawn);
   background: none;
   border: none;
-  border-bottom: 1.5px dashed var(--dawn-soft);
   padding: 0 0 2px;
   cursor: pointer;
   white-space: nowrap;
   letter-spacing: .02em;
-  transition: color .15s ease, border-color .15s ease;
+  transition: color .15s ease;
 }
 .step-link:hover{ color: var(--navy); }
 .step-link.is-open{
   color: var(--navy);
-  border-color: var(--navy);
 }
 .toggle-panel{
   max-height: 0;
