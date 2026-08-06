@@ -256,6 +256,62 @@ body{
   text-align: center;
 }
 
+/* ---------- STEP TOGGLE (찬양 악보 / 성경봉독 본문 펼치기) ---------- */
+.step-toggle{ flex-wrap: wrap; }
+.step-badge{
+  flex: none;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dawn);
+  background: rgba(232,147,90,.1);
+  border: 1px solid var(--dawn-soft);
+  border-radius: 999px;
+  padding: 5px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s ease;
+}
+.step-badge:hover{ background: rgba(232,147,90,.18); }
+.step-badge.is-open{ background: var(--dawn); color: #fff; }
+.toggle-panel{
+  flex-basis: 100%;
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: #FBF9F5;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.sheet-panel{ text-align: center; }
+.sheet-image{
+  max-width: 100%;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+}
+.verse-panel .verse-version{
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--dawn);
+  letter-spacing: .04em;
+  margin-bottom: 8px;
+}
+.verse-panel .verse-line{
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.85;
+}
+.verse-panel .verse-line:last-child{ margin-bottom: 0; }
+.verse-panel .verse-num{
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  font-size: 11.5px;
+  color: var(--dawn);
+  margin-right: 5px;
+  vertical-align: super;
+}
+
 /* ---------- ANNOUNCEMENTS ---------- */
 .notice-card{
   background: var(--paper-card);
