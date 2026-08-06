@@ -326,6 +326,17 @@ body{
   color: var(--ink);
 }
 .verse-line:last-child{ margin-bottom: 0; }
+.sheet-panel{
+  padding: 10px;
+  text-align: center;
+}
+.sheet-image{
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+}
 .step-badged{
   display: flex;
   align-items: baseline;
