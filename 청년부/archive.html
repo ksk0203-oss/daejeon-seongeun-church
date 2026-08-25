@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>주보 목록 · 청년부 주보</title>
-<link rel="stylesheet" href="assets/style.css?v=4">
+<link rel="stylesheet" href="assets/style.css?v=5">
 <style>
   .page-head{
     padding: 44px 32px 0;
@@ -47,6 +47,13 @@ fetch('data/posts.json?t=' + Date.now(), { cache: 'no-store' })
       return;
     }
     var html = '<div class="archive-list">';
+    html += '<a class="archive-item is-gallery" href="gallery/여수성지순례.html">' +
+        '<div class="archive-left">' +
+          '<span class="archive-date">청년부 국내성지순례</span>' +
+          '<span class="archive-week">여수 · 사진첩</span>' +
+        '</div>' +
+        '<span class="archive-badge badge-gallery">앨범</span>' +
+      '</a>';
     posts.forEach(function(p, i){
       html += '<a class="archive-item' + (i === 0 ? ' is-latest' : '') + '" href="posts/detail.html?id=' + p.id + '">' +
         '<div class="archive-left">' +
