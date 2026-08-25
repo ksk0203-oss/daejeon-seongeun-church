@@ -152,6 +152,14 @@ body{
   border-radius: 6px; padding: 3px 9px;
   white-space: nowrap;
 }
+.archive-item.is-gallery{
+  border-color: rgba(27,42,74,.25);
+  background: linear-gradient(180deg, #F7F9FC 0%, #EEF2F8 100%);
+}
+.archive-badge.badge-gallery{
+  color: #fff;
+  background: linear-gradient(135deg, var(--navy), var(--navy-deep));
+}
 
 /* ---------- WEEK / DETAIL TOP BAR ---------- */
 .week-bar{
