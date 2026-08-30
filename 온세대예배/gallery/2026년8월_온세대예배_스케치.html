@@ -21,10 +21,11 @@
     --navy:#12223c; --navy2:#1b3050; --dawn:#e8935a; --dawn2:#f0b98b;
     --ink:#2c2c2c; --soft:#7c8494; --line:#e8e4dc; --bg:#f5f3ee;
   }
-  html { scroll-behavior:smooth; }
+  html { scroll-behavior:smooth; overflow-x:hidden; }
   body {
     background:var(--bg); color:var(--ink);
     font-family:'Noto Sans KR',sans-serif; -webkit-font-smoothing:antialiased; line-height:1.6;
+    overflow-x:hidden;
   }
   .wrap { max-width:1120px; margin:0 auto; padding:0 18px 80px; }
 
@@ -113,6 +114,8 @@
     .grid { grid-template-columns:repeat(2, 1fr); }
     .card { grid-column:span 1 !important; grid-row:span 24 !important; }
     .card.big { grid-column:span 2 !important; grid-row:span 22 !important; }
+    .card.reveal.from-left,
+    .card.reveal.from-right { transform:translate(0, 26px); }
   }
   /* mobile */
   @media (max-width:520px) {
@@ -124,6 +127,8 @@
     .card.big, .card.tall { grid-row:span 26 !important; }
     .card.big { grid-column:span 2 !important; }
     .card .cap { font-size:13px; }
+    .card.reveal.from-left,
+    .card.reveal.from-right { transform:translate(0, 26px); }
   }
 </style>
 </head>
@@ -306,7 +311,6 @@
         </figcaption>
       </figure>
     </div>
-
     <div class="closing">
       <p class="verse">"보라 형제가 연합하여 동거함이 어찌 그리 선하고 아름다운고"</p>
       <p class="ref">시편 133:1</p>
