@@ -120,15 +120,16 @@
     .card.reveal.from-left,
     .card.reveal.from-right { transform:translate(0, 26px); }
   }
-  /* mobile — same fix, narrower still */
+  /* mobile — one photo per row (single column), full width so the photo keeps
+     close to its natural crop instead of being squeezed into a half-width cell */
   @media (max-width:520px) {
     .wrap { padding:0 12px 60px; }
     .hero { padding:56px 16px 44px; }
     .hero h1 { font-size:24px; }
-    .grid { grid-template-columns:repeat(2, 1fr); gap:10px; grid-auto-rows:auto; }
-    .card { grid-column:span 1 !important; grid-row:auto !important; aspect-ratio:4/3.2 !important; }
-    .card.big { grid-column:span 2 !important; aspect-ratio:16/10 !important; }
-    .card .cap { font-size:13px; }
+    .grid { grid-template-columns:1fr; gap:16px; grid-auto-rows:auto; }
+    .card { grid-column:1 !important; grid-row:auto !important; aspect-ratio:4/3 !important; }
+    .card.big { aspect-ratio:16/10 !important; }
+    .card .cap { font-size:14px; }
     .card.reveal.from-left,
     .card.reveal.from-right { transform:translate(0, 26px); }
   }
