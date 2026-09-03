@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.className="js";</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바울 서신, 입체적으로 읽다 — 2026년 가을 성경공부</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --night: #0B1220;
+    --night-2: #131C2C;
+    --gold: #D8B26A;
+    --gold-deep: #A8813C;
+    --sea: #6FA3A8;
+    --paper: #F3ECDC;
+    --paper-2: #E9DFC6;
+    --ink: #1E2734;
+    --text: #333333;
+    --text-light: #E9E2D2;
+    --sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+    --serif: 'Noto Serif KR', serif;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--night); color:var(--text-light);
+    font-family:var(--sans); font-size:16px; line-height:1.95;
+    word-break:keep-all; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{ max-width:960px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- HERO: 시간여행 ---------- */
+  .hero{
+    position:relative; min-height:100vh; min-height:100svh;
+    display:flex; align-items:flex-end; overflow:hidden;
+    background:var(--night);
+    perspective:1000px;
+  }
+  /* 패럴랙스 레이어 컨테이너 (가장자리 여유를 두어 이동해도 빈 공간이 생기지 않게) */
+  .plate{
+    position:absolute; inset:-8%;
+    will-change:transform;
+  }
+  .hero .bg{
+    position:absolute; inset:0;
+    background-image:url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ind2E80Ri2zWRpRAMgdcdkggf6/hf_20260903_030635_26a2f04d-2821-427e-9102-b411804925e7.png");
+    background-size:cover; background-position:center;
+  }
+  .js .hero .bg{
+    transform:scale(1.12); filter:saturate(.55) brightness(.55) blur(6px);
+    animation:arrive 4.2s cubic-bezier(.2,.7,.2,1) .4s forwards;
+  }
+  @keyframes arrive{
+    to{ transform:scale(1.0); filter:saturate(1) brightness(1) blur(0); }
+  }
+  .hero .now{
+    position:absolute; inset:0;
+    background-image:url("https://d8j0ntlcm91z4.cloudfront.net/user_3Ind2E80Ri2zWRpRAMgdcdkggf6/hf_20260903_031012_5dd37bec-7a83-4b30-8acf-4bff70075882.png");
+    background-size:cover; background-position:center;
+    opacity:0;
+  }
+  .js .hero .now{
+    opacity:1; animation:dissolve 3.2s ease-in-out 1.2s forwards;
+  }
+  @keyframes dissolve{
+    0%{ opacity:1; filter:blur(0); }
+    60%{ opacity:.35; filter:blur(4px) saturate(.6); }
+    100%{ opacity:0; filter:blur(10px); }
+  }
+  .hero .shade{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(to top, rgba(11,18,32,.96) 0%, rgba(11,18,32,.75) 30%, rgba(11,18,32,.15) 65%, rgba(11,18,32,.45) 100%);
+  }
+  .hero canvas{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+
+  .counter{
+    position:absolute; top:44px; left:0; right:0; text-align:center;
+    font-family:var(--serif); font-weight:500; color:var(--gold);
+    font-size:clamp(15px, 2vw, 18px); letter-spacing:.06em;
+  }
+  .counter .year{
+    display:block; font-weight:900; font-size:clamp(3rem, 9vw, 6rem);
+    line-height:1; letter-spacing:.02em; margin-top:6px;
+    font-variant-numeric:tabular-nums;
+  }
+  .counter .lbl{ opacity:.8; }
+
+  .hero .content{
+    position:relative; width:100%; padding:0 0 72px;
+  }
+  .js .hero .content{
+    opacity:0; transform:translateY(18px);
+    animation:reveal 1.4s cubic-bezier(.2,.7,.2,1) 4.2s forwards;
+  }
+  @keyframes reveal{ to{ opacity:1; transform:none; } }
+
+  .hero .over{
+    font-family:var(--serif); font-weight:500; color:var(--gold);
+    font-size:clamp(15px, 2vw, 18px); margin:0 0 16px; letter-spacing:.04em;
+  }
+  h1{
+    font-family:var(--serif); font-weight:900; color:#fff;
+    font-size:clamp(2.4rem, 7vw, 4.4rem); line-height:1.25; margin:0 0 22px;
+    text-shadow:0 2px 24px rgba(0,0,0,.45);
+  }
+  .hero .lede{
+    max-width:560px; font-size:clamp(16px, 1.9vw, 18px); line-height:2;
+    color:rgba(243,236,220,.9); margin:0 0 34px;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:10px 26px; font-size:14.5px; color:rgba(243,236,220,.85); }
+  .chips span b{ color:var(--gold); font-weight:600; margin-right:8px; }
+
+  .scrollhint{
+    position:absolute; right:28px; bottom:28px; color:var(--gold); font-size:13px;
+    letter-spacing:.08em; writing-mode:vertical-rl;
+  }
+  .js .scrollhint{ opacity:0; animation:reveal 1s 5.2s forwards; }
+  .scrollhint::after{
+    content:""; display:block; width:1px; height:44px; background:var(--gold); margin:10px auto 0;
+  }
+
+  /* ---------- WHY ---------- */
+  .why{ background:var(--night-2); padding:110px 0 100px; border-top:1px solid rgba(216,178,106,.18); }
+  .why .grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:64px; align-items:start; }
+  .why h2{
+    font-family:var(--serif); font-weight:700; color:#fff;
+    font-size:clamp(1.7rem, 3.4vw, 2.4rem); line-height:1.4; margin:0;
+  }
+  .why h2 em{ font-style:normal; color:var(--gold); }
+  .why p{ margin:0 0 22px; font-size:16.5px; color:rgba(243,236,220,.86); }
+  .why p:last-child{ margin:0; }
+  .why .quote{
+    margin-top:36px; padding:22px 0 0; border-top:1px solid rgba(216,178,106,.35);
+    font-family:var(--serif); color:var(--gold); font-size:17px; line-height:1.9;
+  }
+
+  /* ---------- JOURNEY ---------- */
+  .journey{ background:var(--paper); color:var(--text); padding:100px 0 110px; }
+  .journey .head{ text-align:center; margin-bottom:64px; }
+  .journey .head h2{
+    font-family:var(--serif); font-weight:900; color:var(--ink);
+    font-size:clamp(1.8rem, 3.6vw, 2.5rem); margin:0 0 12px;
+  }
+  .journey .head p{ margin:0; color:#5B5344; font-size:16px; }
+
+  .route{ position:relative; display:grid; grid-template-columns:1fr; gap:0; }
+  .route::before{
+    content:""; position:absolute; left:120px; top:0; bottom:0; width:2px;
+    background:repeating-linear-gradient(to bottom, var(--gold-deep) 0 6px, transparent 6px 14px);
+  }
+  .stop{
+    display:grid; grid-template-columns:120px 1fr; gap:0 44px;
+    padding:0 0 56px; position:relative;
+  }
+  .stop:last-child{ padding-bottom:0; }
+  .stop .when{
+    text-align:right; padding-right:0; position:relative;
+  }
+  .stop .when::after{
+    content:""; position:absolute; right:-52px; top:10px; width:14px; height:14px;
+    border-radius:50%; background:var(--paper); border:3px solid var(--gold-deep);
+  }
+  .stop .ad{
+    font-family:var(--serif); font-weight:900; color:var(--gold-deep);
+    font-size:1.55rem; line-height:1.15; display:block;
+  }
+  .stop .date{ display:block; font-size:14px; color:#6C6353; margin-top:6px; }
+  .stop .wk{ display:block; font-size:13px; color:#8C8270; }
+
+  .stop .what{ padding-left:20px; }
+  .stop .city{
+    font-size:13px; color:#3E6F73; border:1px solid #3E6F73; border-radius:20px;
+    padding:1px 10px; display:inline-block; margin-bottom:10px;
+  }
+  .stop h3{
+    font-family:var(--serif); font-weight:900; color:var(--ink);
+    font-size:1.5rem; margin:0 0 4px; line-height:1.3;
+  }
+  .stop .sub{ font-family:var(--serif); color:#7A5E2A; font-size:16px; margin:0 0 14px; }
+  .stop .teaser{ margin:0; font-size:16px; max-width:560px; color:var(--text); }
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative; padding:120px 0; text-align:center; overflow:hidden;
+    background:
+      radial-gradient(80% 60% at 50% 0%, rgba(216,178,106,.18), transparent 70%),
+      var(--night);
+  }
+  .closing h2{
+    font-family:var(--serif); font-weight:900; color:#fff;
+    font-size:clamp(1.9rem, 4vw, 2.8rem); margin:0 0 18px; line-height:1.35;
+  }
+  .closing p{ max-width:520px; margin:0 auto 40px; font-size:16.5px; color:rgba(243,236,220,.86); }
+  .facts{
+    display:inline-grid; grid-template-columns:auto auto; gap:10px 28px;
+    text-align:left; margin:0 auto 44px; font-size:15.5px;
+  }
+  .facts dt{ color:var(--gold); font-weight:600; }
+  .facts dd{ margin:0; color:#fff; }
+  .cta{
+    display:inline-block; background:var(--gold); color:var(--night);
+    font-weight:700; font-size:16px; padding:16px 40px; border-radius:2px;
+    text-decoration:none; letter-spacing:.02em;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta:hover{ transform:translateY(-1px); box-shadow:0 10px 30px rgba(216,178,106,.3); }
+  .cta.ghost{
+    background:transparent; color:var(--gold); border:1px solid var(--gold);
+    font-size:15px; padding:13px 30px; font-weight:600;
+  }
+  .cta.ghost:hover{ background:var(--gold); color:var(--night); }
+  .hero .cta{ margin-top:30px; }
+  .cta:focus-visible, a:focus-visible{ outline:3px solid var(--sea); outline-offset:4px; }
+  footer{ text-align:center; padding:26px 0 40px; font-size:13px; color:rgba(243,236,220,.5); background:var(--night); }
+
+  @media (max-width:720px){
+    .hero .content{ padding-bottom:64px; }
+    .scrollhint{ display:none; }
+    .why .grid{ grid-template-columns:1fr; gap:36px; }
+    .route::before{ left:16px; }
+    .stop{ grid-template-columns:1fr; gap:6px; padding-left:44px; padding-bottom:48px; }
+    .stop .when{ text-align:left; }
+    .stop .when::after{ right:auto; left:-35px; top:12px; }
+    .stop .ad{ font-size:1.3rem; }
+    .stop .what{ padding-left:0; }
+    .facts{ grid-template-columns:1fr; gap:4px; }
+    .facts dt{ margin-top:10px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    .hero .bg{ transform:none !important; filter:none !important; }
+    .hero .now{ display:none !important; }
+    .plate, .parallax{ transform:none !important; }
+    .hero .content, .scrollhint{ opacity:1 !important; transform:none !important; }
+  }
+
+  /* 안전장치: 연출이 끝났거나 실행되지 않았을 때 무조건 최종 상태로 */
+  html.done .hero .bg{ transform:none !important; filter:none !important; }
+  html.done .hero .now{ opacity:0 !important; }
+  html.done .hero .content,
+  html.done .scrollhint{ opacity:1 !important; }
+</style>
+</head>
+<body>
+
+<section class="hero" id="top">
+  <div class="plate" data-depth="14" aria-hidden="true"><div class="bg"></div></div>
+  <div class="plate" data-depth="26" aria-hidden="true"><div class="now"></div></div>
+  <div class="shade" aria-hidden="true"></div>
+  <canvas id="dust" class="plate" data-depth="-40" aria-hidden="true"></canvas>
+
+  <div class="counter parallax" data-depth="-10" aria-live="polite">
+    <span class="lbl" id="yearLabel">지금, 여기서</span>
+    <span class="year" id="year">2026</span>
+  </div>
+
+  <div class="content">
+    <div class="wrap parallax" data-depth="-6">
+      <p class="over">2026년 가을 · 6주간의 성경공부</p>
+      <h1>바울 서신,<br>입체적으로 읽다</h1>
+      <p class="lede">
+        이천 년 전, 감옥에서, 박해받는 성도들 앞에서, 자신을 공격하는 이들을 마주하며 쓰인 편지들.
+        그 편지가 쓰인 자리로 돌아가 다시 읽습니다.
+      </p>
+      <div class="chips">
+        <span><b>일시</b>매주일 오후 2:00–3:30</span>
+        <span><b>기간</b>10월 4·11·18일, 11월 8·15·22일</span>
+        <span><b>장소</b>3층 아가페홀</span>
+        <span><b>대상</b>세례교인 이상</span>
+        <span><b>강사</b>김성국 목사</span>
+      </div>
+      <a class="cta ghost" href="https://forms.gle/8fRhyTWdqVzavENz8" target="_blank" rel="noopener">참여 신청하기</a>
+    </div>
+  </div>
+  <a class="scrollhint" href="#why">여정 시작</a>
+</section>
+
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="grid">
+      <h2>같은 구절도,<br>그가 서 있던 자리에서 읽으면<br><em>전혀 다르게 들립니다.</em></h2>
+      <div>
+        <p>
+          바울의 서신은 신학 논문이 아니라 실제로 오간 편지였습니다.
+          데살로니가, 갈라디아, 고린도, 골로새, 에베소 — 지중해를 사이에 둔 다섯 도시의 교회는
+          저마다 다른 위기와 오해, 질문을 안고 있었고, 바울은 바로 그 자리를 향해 펜을 들었습니다.
+        </p>
+        <p>
+          이번 공부는 본문을 그냥 읽고 넘어가지 않습니다. 사도행전과 대조해 편지가 쓰인 시기와 장소를 추적하고,
+          바울의 반대자들이 실제로 무엇을 문제 삼았는지, 각 교회가 어떤 상황에 있었는지를
+          질문으로 함께 파고듭니다.
+        </p>
+        <p class="quote">
+          여섯 주가 끝나면, 익숙했던 구절이 다시 들리기 시작할 것입니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="journey" id="journey">
+  <div class="wrap">
+    <div class="head">
+      <h2>여섯 번의 주일, 다섯 도시로</h2>
+      <p>10월 4일부터 11월 22일까지 · 매주 한 서신씩 시간을 거슬러 갑니다</p>
+    </div>
+
+    <div class="route">
+
+      <div class="stop">
+        <div class="when">
+          <span class="ad">AD 50–51</span>
+          <span class="date">10월 4일</span>
+          <span class="wk">1주</span>
+        </div>
+        <div class="what">
+          <span class="city">데살로니가</span>
+          <h3>데살로니가전·후서</h3>
+          <p class="sub">하나님의 은혜의 복음, 그리고 박해</p>
+          <p class="teaser">지도자를 빼앗기고 박해받으면서도 무너지지 않은 작은 공동체. 바울은 왜 같은 이야기를 그토록 여러 번 되풀이했을까요.</p>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="when">
+          <span class="ad">AD 49</span>
+          <span class="date">10월 11일</span>
+          <span class="wk">2주</span>
+        </div>
+        <div class="what">
+          <span class="city">갈라디아</span>
+          <h3>갈라디아서</h3>
+          <p class="sub">유대교의 공격을 받는 은혜의 복음</p>
+          <p class="teaser">사도의 권위와 복음의 순수성이 동시에 도전받던 자리. 바울은 무엇을 근거로, 어떻게 자신을 변호했을까요.</p>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="when">
+          <span class="ad">AD 53–54</span>
+          <span class="date">10월 18일</span>
+          <span class="wk">3주</span>
+        </div>
+        <div class="what">
+          <span class="city">고린도</span>
+          <h3>고린도전서</h3>
+          <p class="sub">은혜의 복음과 인간의 지혜</p>
+          <p class="teaser">분쟁, 소송, 방종, 은사 다툼까지 — 가장 시끄러웠던 교회를 향한 편지. 자유와 질서 사이에서 바울이 세운 원리를 봅니다.</p>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="when">
+          <span class="ad">AD 55–56</span>
+          <span class="date">11월 8일</span>
+          <span class="wk">4주</span>
+        </div>
+        <div class="what">
+          <span class="city">고린도</span>
+          <h3>고린도후서</h3>
+          <p class="sub">고린도의 문제들에 대한 복음의 효력</p>
+          <p class="teaser">흔들리던 관계를 다시 세우는 편지. 가장 인간적이고, 가장 상처받은 바울의 목소리를 만납니다.</p>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="when">
+          <span class="ad">AD 60–62</span>
+          <span class="date">11월 15일</span>
+          <span class="wk">5주</span>
+        </div>
+        <div class="what">
+          <span class="city">골로새</span>
+          <h3>골로새서</h3>
+          <p class="sub">옥중에서 쓴, 그리스도의 완전한 충만</p>
+          <p class="teaser">직접 세우지도 않은 교회에, 감옥에서 쓴 편지. "그리스도만으로 충분하다"는 선언이 왜 그토록 절박했을까요.</p>
+        </div>
+      </div>
+
+      <div class="stop">
+        <div class="when">
+          <span class="ad">AD 60–62</span>
+          <span class="date">11월 22일</span>
+          <span class="wk">6주</span>
+        </div>
+        <div class="what">
+          <span class="city">에베소</span>
+          <h3>에베소서</h3>
+          <p class="sub">옥중에서 쓴, 그리스도의 몸 된 교회</p>
+          <p class="teaser">골로새서와 나란히 쓰인 자매 서신. 한 교회를 넘어 교회 전체를 향한 바울의 큰 그림으로 여정을 마칩니다.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="apply">
+  <div class="wrap">
+    <h2>이천 년을 거슬러,<br>함께 걸어가시겠습니까</h2>
+    <p>말씀을 사모하는 마음 하나면 충분합니다. 세례교인이라면 누구나 참여하실 수 있습니다.</p>
+    <dl class="facts">
+      <dt>일시</dt><dd>매주일 오후 2:00 – 3:30 (총 6회)</dd>
+      <dt>기간</dt><dd>10월 4·11·18일, 11월 8·15·22일</dd>
+      <dt>장소</dt><dd>3층 아가페홀 (소그룹실)</dd>
+      <dt>대상</dt><dd>세례교인 이상 모든 성도</dd>
+      <dt>강사</dt><dd>김성국 목사</dd>
+    </dl>
+    <br>
+    <a class="cta" href="https://forms.gle/8fRhyTWdqVzavENz8" target="_blank" rel="noopener">참여 신청하기</a>
+  </div>
+</section>
+
+<footer>바울 서신 입체적으로 읽기 · 2026년 가을 성경공부</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var yearEl = document.getElementById('year');
+  var lblEl  = document.getElementById('yearLabel');
+
+  /* 연도 카운트다운: 2026 → AD 50 */
+  var start = 2026, end = 50, dur = 4000, t0 = null;
+  function fmt(y){ return y > 0 ? (y >= 1000 ? String(y) : 'AD ' + y) : String(y); }
+  function tick(ts){
+    if(!t0) t0 = ts;
+    var p = Math.min((ts - t0) / dur, 1);
+    var e = 1 - Math.pow(1 - p, 3);
+    var y = Math.round(start - (start - end) * e);
+    yearEl.textContent = fmt(y);
+    if(p < 0.45) lblEl.textContent = '지금, 여기서';
+    else if(p < 0.85) lblEl.textContent = '시간을 거슬러';
+    else lblEl.textContent = '바울이 편지를 쓰던 그때';
+    if(p < 1) requestAnimationFrame(tick);
+  }
+  if(reduce){ yearEl.textContent = 'AD 50'; lblEl.textContent = '바울이 편지를 쓰던 그때'; }
+  else setTimeout(function(){ requestAnimationFrame(tick); }, 500);
+
+  /* 안전장치: 애니메이션이 실행되지 않아도 최종 화면이 보이도록 */
+  setTimeout(function(){ document.documentElement.classList.add('done'); }, reduce ? 0 : 6500);
+
+  /* ---------- 2.5D 패럴랙스 ---------- */
+  (function(){
+    if(reduce) return;
+    var hero   = document.getElementById('top');
+    var layers = [].slice.call(document.querySelectorAll('.plate, .parallax'));
+    if(!hero || !layers.length) return;
+
+    var tx = 0, ty = 0;   // 목표값 (-1 ~ 1)
+    var cx = 0, cy = 0;   // 현재값
+    var scrollY = 0, ticking = false;
+
+    function apply(){
+      cx += (tx - cx) * 0.08;
+      cy += (ty - cy) * 0.08;
+      for(var i=0;i<layers.length;i++){
+        var el = layers[i];
+        var d  = parseFloat(el.getAttribute('data-depth')) || 0;
+        // 스크롤 시 배경이 더 느리게 흐르도록 (깊이가 클수록 더 많이 밀림)
+        var sy = scrollY * (d > 0 ? d / 90 : 0);
+        var x  = (cx * d).toFixed(2);
+        var y  = (cy * d + sy).toFixed(2);
+        el.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+      }
+      requestAnimationFrame(apply);
+    }
+    requestAnimationFrame(apply);
+
+    /* 마우스 / 터치 */
+    hero.addEventListener('pointermove', function(e){
+      var r = hero.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+      ty = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+    });
+    hero.addEventListener('pointerleave', function(){ tx = 0; ty = 0; });
+
+    /* 스크롤 (히어로가 화면에 있을 때만 계산) */
+    window.addEventListener('scroll', function(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        var y = window.scrollY || window.pageYOffset;
+        scrollY = y < window.innerHeight ? y : window.innerHeight;
+        ticking = false;
+      });
+    }, { passive:true });
+
+    /* 모바일 기울기 */
+    if(window.DeviceOrientationEvent && !('ontouchstart' in window === false)){
+      window.addEventListener('deviceorientation', function(e){
+        if(e.gamma == null || e.beta == null) return;
+        tx = Math.max(-1, Math.min(1, e.gamma / 30));
+        ty = Math.max(-1, Math.min(1, (e.beta - 45) / 30));
+      });
+    }
+  })();
+
+  /* 금빛 먼지 입자 */
+  var c = document.getElementById('dust');
+  if(!c || reduce) return;
+  var ctx = c.getContext('2d'), W, H, P = [];
+  function size(){ W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+  size(); window.addEventListener('resize', size);
+  for(var i=0;i<110;i++){
+    P.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.8+.4,
+            vx:(Math.random()-.5)*.25, vy:-(Math.random()*.35+.08), a:Math.random()});
+  }
+  var born = performance.now();
+  function draw(now){
+    ctx.clearRect(0,0,W,H);
+    var life = Math.min((now-born)/6000, 1);
+    var globalA = life < .7 ? .9 : .9 - (life-.7)/.3*.55;
+    for(var i=0;i<P.length;i++){
+      var p = P[i];
+      p.x += p.vx; p.y += p.vy; p.a += .01;
+      if(p.y < -5){ p.y = H+5; p.x = Math.random()*W; }
+      var a = (Math.sin(p.a)*.5+.5) * globalA;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(216,178,106,'+a.toFixed(3)+')'; ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
