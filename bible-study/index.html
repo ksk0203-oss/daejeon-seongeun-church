@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <script>document.documentElement.className="js";</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="2026년 가을 6주 성경공부. 데살로니가·갈라디아·고린도·골로새·에베소, 편지가 쓰인 자리로 돌아가 다시 읽습니다. 매주일 오후 2시, 3층 아가페홀.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="바울 서신, 입체적으로 읽다">
+<meta property="og:description" content="2026년 가을 6주 성경공부 · 매주일 오후 2:00–3:30 · 3층 아가페홀 · 김성국 목사">
+<meta property="og:image" content="https://ksk0203-oss.github.io/daejeon-seongeun-church/bible-study/thumb.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ksk0203-oss.github.io/daejeon-seongeun-church/bible-study/">
+<meta name="twitter:card" content="summary_large_image">
 <title>바울 서신, 입체적으로 읽다 — 2026년 가을 성경공부</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +61,7 @@
   }
   .js .hero .bg{
     transform:scale(1.12); filter:saturate(.55) brightness(.55) blur(6px);
-    animation:arrive 2.7s cubic-bezier(.2,.7,.2,1) .3s forwards;
+    animation:arrive 1.8s cubic-bezier(.2,.7,.2,1) .2s forwards;
   }
   @keyframes arrive{
     to{ transform:scale(1.0); filter:saturate(1) brightness(1) blur(0); }
@@ -64,7 +73,7 @@
     opacity:0;
   }
   .js .hero .now{
-    opacity:1; animation:dissolve 1.9s ease-in-out .6s forwards;
+    opacity:1; animation:dissolve 1.3s ease-in-out .35s forwards;
   }
   @keyframes dissolve{
     0%{ opacity:1; filter:blur(0); }
@@ -96,7 +105,7 @@
   }
   .js .hero .content{
     opacity:0; transform:translateY(18px);
-    animation:reveal 1s cubic-bezier(.2,.7,.2,1) 2.4s forwards;
+    animation:reveal .7s cubic-bezier(.2,.7,.2,1) 1.5s forwards;
   }
   @keyframes reveal{ to{ opacity:1; transform:none; } }
 
@@ -121,7 +130,7 @@
     position:absolute; right:28px; bottom:28px; color:var(--gold); font-size:13px;
     letter-spacing:.08em; writing-mode:vertical-rl;
   }
-  .js .scrollhint{ opacity:0; animation:reveal .8s 3.1s forwards; }
+  .js .scrollhint{ opacity:0; animation:reveal .6s 2.1s forwards; }
   .scrollhint::after{
     content:""; display:block; width:1px; height:44px; background:var(--gold); margin:10px auto 0;
   }
@@ -227,6 +236,11 @@
         rgba(11,18,32,.30) 60%, rgba(11,18,32,.72) 100%);
     }
     .hero .content{ padding-bottom:64px; }
+    /* 좁은 화면에서는 연도 표시와 제목이 겹치므로, 연출이 끝나면 사라지게 한다 */
+    .counter{ display:none; }
+    .js .counter{ display:block; transition:opacity .55s ease, visibility .55s; }
+    html.done .counter{ opacity:0 !important; visibility:hidden; }
+    .counter .year{ font-size:clamp(2.4rem, 13vw, 3.4rem); }
     .scrollhint{ display:none; }
     .why .grid{ grid-template-columns:1fr; gap:36px; }
     .route::before{ left:16px; }
@@ -432,7 +446,7 @@
   var lblEl  = document.getElementById('yearLabel');
 
   /* 연도 카운트다운: 2026 → AD 50 */
-  var start = 2026, end = 50, dur = 2500, t0 = null;
+  var start = 2026, end = 50, dur = 1700, t0 = null;
   function fmt(y){ return y > 0 ? (y >= 1000 ? String(y) : 'AD ' + y) : String(y); }
   function tick(ts){
     if(!t0) t0 = ts;
@@ -446,10 +460,10 @@
     if(p < 1) requestAnimationFrame(tick);
   }
   if(reduce){ yearEl.textContent = 'AD 50'; lblEl.textContent = '바울이 편지를 쓰던 그때'; }
-  else setTimeout(function(){ requestAnimationFrame(tick); }, 300);
+  else setTimeout(function(){ requestAnimationFrame(tick); }, 200);
 
   /* 안전장치: 애니메이션이 실행되지 않아도 최종 화면이 보이도록 */
-  setTimeout(function(){ document.documentElement.classList.add('done'); }, reduce ? 0 : 4500);
+  setTimeout(function(){ document.documentElement.classList.add('done'); }, reduce ? 0 : 3000);
 
   /* ---------- 2.5D 패럴랙스 ---------- */
   (function(){
