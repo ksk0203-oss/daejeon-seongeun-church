@@ -52,7 +52,7 @@
   }
   .js .hero .bg{
     transform:scale(1.12); filter:saturate(.55) brightness(.55) blur(6px);
-    animation:arrive 4.2s cubic-bezier(.2,.7,.2,1) .4s forwards;
+    animation:arrive 2.7s cubic-bezier(.2,.7,.2,1) .3s forwards;
   }
   @keyframes arrive{
     to{ transform:scale(1.0); filter:saturate(1) brightness(1) blur(0); }
@@ -64,7 +64,7 @@
     opacity:0;
   }
   .js .hero .now{
-    opacity:1; animation:dissolve 3.2s ease-in-out 1.2s forwards;
+    opacity:1; animation:dissolve 1.9s ease-in-out .6s forwards;
   }
   @keyframes dissolve{
     0%{ opacity:1; filter:blur(0); }
@@ -82,6 +82,7 @@
     position:absolute; top:44px; left:0; right:0; text-align:center;
     font-family:var(--serif); font-weight:500; color:var(--gold);
     font-size:clamp(15px, 2vw, 18px); letter-spacing:.06em;
+    text-shadow:0 1px 3px rgba(11,18,32,.9), 0 2px 16px rgba(11,18,32,.75);
   }
   .counter .year{
     display:block; font-weight:900; font-size:clamp(3rem, 9vw, 6rem);
@@ -95,13 +96,14 @@
   }
   .js .hero .content{
     opacity:0; transform:translateY(18px);
-    animation:reveal 1.4s cubic-bezier(.2,.7,.2,1) 4.2s forwards;
+    animation:reveal 1s cubic-bezier(.2,.7,.2,1) 2.4s forwards;
   }
   @keyframes reveal{ to{ opacity:1; transform:none; } }
 
   .hero .over{
     font-family:var(--serif); font-weight:500; color:var(--gold);
     font-size:clamp(15px, 2vw, 18px); margin:0 0 16px; letter-spacing:.04em;
+    text-shadow:0 1px 3px rgba(11,18,32,.9), 0 2px 16px rgba(11,18,32,.75);
   }
   h1{
     font-family:var(--serif); font-weight:900; color:#fff;
@@ -119,7 +121,7 @@
     position:absolute; right:28px; bottom:28px; color:var(--gold); font-size:13px;
     letter-spacing:.08em; writing-mode:vertical-rl;
   }
-  .js .scrollhint{ opacity:0; animation:reveal 1s 5.2s forwards; }
+  .js .scrollhint{ opacity:0; animation:reveal .8s 3.1s forwards; }
   .scrollhint::after{
     content:""; display:block; width:1px; height:44px; background:var(--gold); margin:10px auto 0;
   }
@@ -219,6 +221,11 @@
   footer{ text-align:center; padding:26px 0 40px; font-size:13px; color:rgba(243,236,220,.5); background:var(--night); }
 
   @media (max-width:720px){
+    .hero .shade{
+      background:linear-gradient(to top,
+        rgba(11,18,32,.96) 0%, rgba(11,18,32,.82) 34%,
+        rgba(11,18,32,.30) 60%, rgba(11,18,32,.72) 100%);
+    }
     .hero .content{ padding-bottom:64px; }
     .scrollhint{ display:none; }
     .why .grid{ grid-template-columns:1fr; gap:36px; }
@@ -425,7 +432,7 @@
   var lblEl  = document.getElementById('yearLabel');
 
   /* 연도 카운트다운: 2026 → AD 50 */
-  var start = 2026, end = 50, dur = 4000, t0 = null;
+  var start = 2026, end = 50, dur = 2500, t0 = null;
   function fmt(y){ return y > 0 ? (y >= 1000 ? String(y) : 'AD ' + y) : String(y); }
   function tick(ts){
     if(!t0) t0 = ts;
@@ -439,10 +446,10 @@
     if(p < 1) requestAnimationFrame(tick);
   }
   if(reduce){ yearEl.textContent = 'AD 50'; lblEl.textContent = '바울이 편지를 쓰던 그때'; }
-  else setTimeout(function(){ requestAnimationFrame(tick); }, 500);
+  else setTimeout(function(){ requestAnimationFrame(tick); }, 300);
 
   /* 안전장치: 애니메이션이 실행되지 않아도 최종 화면이 보이도록 */
-  setTimeout(function(){ document.documentElement.classList.add('done'); }, reduce ? 0 : 6500);
+  setTimeout(function(){ document.documentElement.classList.add('done'); }, reduce ? 0 : 4500);
 
   /* ---------- 2.5D 패럴랙스 ---------- */
   (function(){
