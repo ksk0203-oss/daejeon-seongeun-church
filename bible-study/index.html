@@ -463,7 +463,12 @@
   else setTimeout(function(){ requestAnimationFrame(tick); }, 200);
 
   /* 안전장치: 애니메이션이 실행되지 않아도 최종 화면이 보이도록 */
-  setTimeout(function(){ document.documentElement.classList.add('done'); }, reduce ? 0 : 3000);
+  setTimeout(function(){
+    document.documentElement.classList.add('done');
+    /* 백그라운드 탭에서는 카운트다운이 멈추므로 최종값으로 확정 */
+    yearEl.textContent = 'AD 50';
+    lblEl.textContent  = '바울이 편지를 쓰던 그때';
+  }, reduce ? 0 : 3000);
 
   /* ---------- 2.5D 패럴랙스 ---------- */
   (function(){
