@@ -524,7 +524,7 @@ body{
       "linear-gradient(165deg, #0A262E 0%, #123C48 55%, #234A55 100%)";
   }
 
-  fetch('data/posts.json')
+  fetch('data/posts.json?t=' + Date.now(), { cache: 'no-store' })
     .then(function(r){ return r.json(); })
     .then(function(data){
       var posts = (data.posts || []).slice().sort(function(a,b){

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>주보 목록 · 청소년부 주보</title>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=1">
 <style>
   .page-head{
     padding: 44px 32px 0;
@@ -35,7 +35,7 @@
 </div>
 
 <script>
-fetch('data/posts.json')
+fetch('data/posts.json?t=' + Date.now(), { cache: 'no-store' })
   .then(function(r){ return r.json(); })
   .then(function(data){
     var posts = (data.posts || []).slice().sort(function(a,b){
