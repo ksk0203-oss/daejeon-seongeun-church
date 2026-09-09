@@ -125,7 +125,7 @@
       "date": "2026. 08. 16.",
       "week": "주일예배",
       "order": [
-        { "role": "찬양", "who": "내가 늘 의지하는 예수", "toggle": { "type": "sheet", "label": "내가 늘 의지하는 예수 ♪", "image": "../hymns/새찬송가_086장.jpg" } },
+        { "role": "찬양", "who": "찬 86", "toggle": { "type": "sheet", "label": "찬 86 ♪", "image": "../hymns/새찬송가_086장.jpg" } },
         { "role": "봉헌", "who": "다같이" },
         { "role": "대표기도", "who": "김지원 자매" },
         { "role": "성경봉독", "who": "고린도후서 5:14-15", "toggle": { "type": "verse", "label": "고린도후서 5:14-15 ▾", "version": "새한글성경", "verses": [
@@ -179,7 +179,7 @@
       "date": "2026. 09. 13.",
       "week": "주일예배",
       "order": [
-        { "role": "찬양", "who": "내가 매일 기쁘게", "toggle": { "type": "sheet", "label": "내가 매일 기쁘게 ♪", "image": "../hymns/새찬송가_191장.jpg" } },
+        { "role": "찬양", "who": "찬 191", "toggle": { "type": "sheet", "label": "찬 191 ♪", "image": "../hymns/새찬송가_191장.jpg" } },
         { "role": "봉헌", "who": "다같이" },
         { "role": "대표기도", "who": "허예준 형제" },
         { "role": "성경봉독", "who": "빌립보서 3:15-4:1", "toggle": { "type": "verse", "label": "빌립보서 3:15-4:1 ▾", "version": "새한글성경", "verses": [
