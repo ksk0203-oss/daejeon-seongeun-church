@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청소년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/style.css?v=1">
 </head>
 <body>
 <div class="wrap">
@@ -74,9 +74,10 @@ function renderOrder(order){
 
 function renderSharing(sharing){
   var html = '<div class="notice-card">';
-  (sharing || []).forEach(function(item){
+  (sharing || []).forEach(function(item, i){
+    var colorClass = (i % 2 === 0) ? 'c-sage' : 'c-dawn';
     html += '<div class="notice">' +
-      '<div class="flag c-dawn">' + esc(item.flag || '') + '</div>' +
+      '<div class="flag ' + colorClass + '">' + esc(item.flag || '') + '</div>' +
       '<div class="notice-body">' +
         '<div class="title">' + esc(item.text) + '</div>' +
       '</div>' +
@@ -88,8 +89,9 @@ function renderSharing(sharing){
 
 function renderNotices(notices){
   var html = '<div class="notice-card">';
-  (notices || []).forEach(function(n){
-    var colorClass = n.color === 'dawn' ? 'c-dawn' : 'c-sage';
+  (notices || []).forEach(function(n, i){
+    var colorClass = n.color ? (n.color === 'dawn' ? 'c-dawn' : 'c-sage')
+                             : ((i % 2 === 0) ? 'c-sage' : 'c-dawn');
     html += '<div class="notice">' +
       '<div class="flag ' + colorClass + '">' + esc(n.flag || '') + '</div>' +
       '<div class="notice-body">' +
@@ -147,7 +149,7 @@ function render(post){
 var params = new URLSearchParams(window.location.search);
 var id = params.get('id');
 
-fetch('../data/posts.json')
+fetch('../data/posts.json?t=' + Date.now(), { cache: 'no-store' })
   .then(function(r){ return r.json(); })
   .then(function(data){
     var posts = data.posts || [];
