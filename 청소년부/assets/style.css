@@ -26,7 +26,7 @@
   --navy-deep: #0A262E;
   --dawn: #2FBFA8;
   --dawn-soft: #7FDFCF;
-  --sage: #FF8A65;
+  --coral: #FF8A65;
   --paper: #F7F4EE;
   --paper-card: #FFFFFF;
   --ink: #34363B;
@@ -282,7 +282,7 @@ body{
   font-size: 18px; font-weight: 700;
   color: #fff;
 }
-.notice .flag.c-sage{ background: var(--sage); }
+.notice .flag.c-coral{ background: var(--coral); }
 .notice .flag.c-dawn{ background: var(--dawn); }
 .notice-body{ flex: 1; }
 .notice-body .title{
