@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css?v=6">
+<link rel="stylesheet" href="../assets/style.css?v=7">
 </head>
 <body>
 <div class="wrap">
@@ -94,11 +94,14 @@ function renderNotices(notices){
 
 function renderDiscussion(list){
   if (!list || !list.length) return '';
-  var html = '<div class="disc-card">';
+  var html = '<div class="notice-card">';
   list.forEach(function(q, i){
-    html += '<div class="disc-item">' +
-      '<span class="disc-num ' + ((i % 2 === 0) ? 'c-sage' : 'c-dawn') + '">' + (i + 1) + '</span>' +
-      '<p class="disc-text">' + esc(q) + '</p>' +
+    var colorClass = (i % 2 === 0) ? 'c-sage' : 'c-dawn';
+    html += '<div class="notice">' +
+      '<div class="flag ' + colorClass + '">' + (i + 1) + '</div>' +
+      '<div class="notice-body">' +
+        '<div class="title">' + esc(q) + '</div>' +
+      '</div>' +
     '</div>';
   });
   html += '</div>';
