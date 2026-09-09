@@ -27,6 +27,7 @@
   --dawn: #E8935A;
   --dawn-soft: #F3B98B;
   --sage: #8FA98C;
+  --sage-soft: #B4C6B1;
   --paper: #F7F4EE;
   --paper-card: #FFFFFF;
   --ink: #34363B;
@@ -451,6 +452,8 @@ body{
   justify-content: center;
   margin-top: 2px;
 }
+.disc-num.c-sage{ background: linear-gradient(135deg, var(--sage-soft), var(--sage)); }
+.disc-num.c-dawn{ background: linear-gradient(135deg, var(--dawn-soft), var(--dawn)); }
 .disc-text{
   margin: 0;
   font-size: 14.5px;

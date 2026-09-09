@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css?v=5">
+<link rel="stylesheet" href="../assets/style.css?v=6">
 </head>
 <body>
 <div class="wrap">
@@ -75,8 +75,9 @@ function renderTogglePanel(t){
 
 function renderNotices(notices){
   var html = '<div class="notice-card">';
-  (notices || []).forEach(function(n){
-    var colorClass = n.color === 'dawn' ? 'c-dawn' : 'c-sage';
+  (notices || []).forEach(function(n, i){
+    var colorClass = n.color ? (n.color === 'dawn' ? 'c-dawn' : 'c-sage')
+                             : ((i % 2 === 0) ? 'c-sage' : 'c-dawn');
     html += '<div class="notice">' +
       '<div class="flag ' + colorClass + '">' + esc(n.flag || '') + '</div>' +
       '<div class="notice-body">' +
@@ -96,7 +97,7 @@ function renderDiscussion(list){
   var html = '<div class="disc-card">';
   list.forEach(function(q, i){
     html += '<div class="disc-item">' +
-      '<span class="disc-num">' + (i + 1) + '</span>' +
+      '<span class="disc-num ' + ((i % 2 === 0) ? 'c-sage' : 'c-dawn') + '">' + (i + 1) + '</span>' +
       '<p class="disc-text">' + esc(q) + '</p>' +
     '</div>';
   });
