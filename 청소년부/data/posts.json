@@ -7,7 +7,8 @@
       "order": [
         {
           "role": "찬양",
-          "who": "찬 85"
+          "who": "찬 85",
+          "sheetUrl": "../hymns/새찬송가_085장.jpg"
         },
         {
           "role": "봉헌",
