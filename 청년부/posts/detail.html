@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css?v=7">
+<link rel="stylesheet" href="../assets/style.css?v=8">
 </head>
 <body>
 <div class="wrap">
@@ -141,13 +141,33 @@ function render(post){
   document.getElementById('content-container').innerHTML = html;
 }
 
+// publishAt(YYYY-MM-DD)이 오늘보다 미래면 목록/표지에서 숨긴다.
+// 주소에 ?preview=1 을 붙이면 숨김을 무시하고 볼 수 있다(미리보기용).
+function todayStr(){
+  var t = new Date();
+  return t.getFullYear() + '-' +
+    ('0' + (t.getMonth() + 1)).slice(-2) + '-' +
+    ('0' + t.getDate()).slice(-2);
+}
+function isPreviewMode(){
+  return new URLSearchParams(window.location.search).get('preview') === '1';
+}
+function isPublished(p){
+  if (!p || !p.publishAt) return true;
+  return todayStr() >= p.publishAt;
+}
+function visiblePosts(list){
+  if (isPreviewMode()) return list.slice();
+  return list.filter(isPublished);
+}
+
 var params = new URLSearchParams(window.location.search);
 var id = params.get('id');
 
 fetch('../data/posts.json?t=' + Date.now(), { cache: 'no-store' })
   .then(function(r){ return r.json(); })
   .then(function(data){
-    var posts = data.posts || [];
+    var posts = visiblePosts(data.posts || []);
     var target = id
       ? posts.filter(function(p){ return p.id === id; })[0]
       : posts.slice().sort(function(a,b){ return b.id.localeCompare(a.id); })[0];
