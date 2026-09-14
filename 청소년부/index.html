@@ -524,10 +524,30 @@ body{
       "linear-gradient(165deg, #0A262E 0%, #123C48 55%, #234A55 100%)";
   }
 
+  // publishAt(YYYY-MM-DD)이 오늘보다 미래면 목록/표지에서 숨긴다.
+  // 주소에 ?preview=1 을 붙이면 숨김을 무시하고 볼 수 있다(미리보기용).
+  function todayStr(){
+    var t = new Date();
+    return t.getFullYear() + '-' +
+      ('0' + (t.getMonth() + 1)).slice(-2) + '-' +
+      ('0' + t.getDate()).slice(-2);
+  }
+  function isPreviewMode(){
+    return new URLSearchParams(window.location.search).get('preview') === '1';
+  }
+  function isPublished(p){
+    if (!p || !p.publishAt) return true;
+    return todayStr() >= p.publishAt;
+  }
+  function visiblePosts(list){
+    if (isPreviewMode()) return list.slice();
+    return list.filter(isPublished);
+  }
+
   fetch('data/posts.json?t=' + Date.now(), { cache: 'no-store' })
     .then(function(r){ return r.json(); })
     .then(function(data){
-      var posts = (data.posts || []).slice().sort(function(a,b){
+      var posts = visiblePosts(data.posts || []).sort(function(a,b){
         return b.id.localeCompare(a.id);
       });
       var latest = posts[0];
