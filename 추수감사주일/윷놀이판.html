@@ -390,9 +390,11 @@ details.foldable[open] summary::after{content:'▴'}
 :fullscreen .col-board{height:100%;display:flex}
 :fullscreen .board-stage{flex:1;display:flex;flex-direction:column;justify-content:center}
 /* 머리말·골인 자리·여백을 뺀 남은 높이를 판이 전부 차지한다 */
-:fullscreen .board-box{max-width:min(100%,calc(100vh - 262px));margin:0 auto}
-/* 난 말 두는 곳도 화면에 맞춰 함께 키운다 */
-:fullscreen .goal-tray{max-width:min(100%,calc(100vh - 262px));padding:14px 22px;gap:20px;border-width:2px}
+:fullscreen .board-box{max-width:min(100%,calc(100vh - 233px));margin:0 auto}
+/* 난 말 두는 곳도 화면에 맞춰 함께 키운다.
+   flex 컬럼 안에서 margin:auto 때문에 내용 크기로 쪼그라들지 않도록 width 를 못박는다. */
+:fullscreen .goal-tray{width:min(100%,calc(100vh - 233px));max-width:none;
+  padding:14px 22px;gap:20px;border-width:2px}
 :fullscreen .gt-label{font-size:16.5px}
 :fullscreen .gt-label small{font-size:13px;margin-top:3px}
 :fullscreen .gt-tokens{min-height:62px;gap:10px}
