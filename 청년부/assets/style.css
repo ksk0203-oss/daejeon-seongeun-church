@@ -354,6 +354,24 @@ body{
   line-height: 1.9;
 }
 .verse-panel .verse-line:last-child{ margin-bottom: 0; }
+.verse-poster{
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+  text-align: center;
+}
+.verse-poster img{
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(27,42,74,.12);
+}
+.verse-poster .poster-caption{
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+}
 .verse-panel .verse-num{
   font-family: 'Noto Serif KR', serif;
   font-weight: 700;

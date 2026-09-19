@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css?v=8">
+<link rel="stylesheet" href="../assets/style.css?v=9">
 </head>
 <body>
 <div class="wrap">
@@ -68,6 +68,9 @@ function renderTogglePanel(t){
     return '<div class="verse-panel">' +
       (t.version ? '<div class="verse-version">' + esc(t.version) + '</div>' : '') +
       lines +
+      (t.poster ? '<div class="verse-poster"><img src="' + esc(t.poster.image) + '" alt="' + esc(t.poster.alt || '') + '">' +
+        (t.poster.caption ? '<div class="poster-caption">' + esc(t.poster.caption) + '</div>' : '') +
+      '</div>' : '') +
     '</div>';
   }
   return '';
