@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css?v=10">
+<link rel="stylesheet" href="../assets/style.css?v=11">
 </head>
 <body>
 <div class="wrap">
@@ -63,6 +63,7 @@ function renderTogglePanel(t){
   }
   if (t.type === 'verse') {
     var lines = (t.verses || []).map(function(v){
+      if (v.heading) return '<div class="verse-heading">' + esc(v.heading) + '</div>';
       return '<p class="verse-line"><span class="verse-num">' + esc(v.num) + '</span>' + esc(v.text) + '</p>';
     }).join('');
     return '<div class="verse-panel">' +
