@@ -250,7 +250,7 @@
       "week": "주일예배",
       "publishAt": "2026-10-05",
       "order": [
-        { "role": "찬양", "who": "찬 419" },
+        { "role": "찬양", "who": "찬 419", "toggle": { "type": "sheet", "label": "찬 419 ♪", "image": "../hymns/새찬송가_419장.jpg" } },
         { "role": "봉헌", "who": "다같이" },
         { "role": "대표기도", "who": "정수연 자매" },
         { "role": "성경봉독", "who": "요한복음 9:1-5 / 욥기 38:1-7", "toggle": { "type": "verse", "label": "요한복음 9:1-5 / 욥기 38:1-7 ▾", "version": "새한글성경", "verses": [
