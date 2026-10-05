@@ -306,6 +306,7 @@ body{
   padding: 0 0 2px;
   cursor: pointer;
   white-space: nowrap;
+  text-align: right;
   letter-spacing: .02em;
   transition: color .15s ease;
 }

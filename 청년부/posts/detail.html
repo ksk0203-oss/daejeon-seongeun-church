@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css?v=11">
+<link rel="stylesheet" href="../assets/style.css?v=12">
 </head>
 <body>
 <div class="wrap">
@@ -42,7 +42,7 @@ function renderOrder(order){
       html += '<div class="step step-toggle">' +
         '<span class="step-role">' + esc(item.role) + '</span>' +
         '<span class="step-dots"></span>' +
-        '<button type="button" class="step-link" data-target="' + pid + '">' + esc(item.toggle.label) + '</button>' +
+        '<button type="button" class="step-link" data-target="' + pid + '">' + esc(item.toggle.label).split(' / ').join('<br>') + '</button>' +
       '</div>';
       html += '<div class="toggle-panel" id="' + pid + '">' + renderTogglePanel(item.toggle) + '</div>';
     } else {
