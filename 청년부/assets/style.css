@@ -354,6 +354,13 @@ body{
   line-height: 1.9;
 }
 .verse-panel .verse-line:last-child{ margin-bottom: 0; }
+.verse-panel .verse-heading{
+  margin: 14px 0 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.verse-panel .verse-version + .verse-heading{ margin-top: 0; }
 .verse-poster{
   margin-top: 16px;
   padding-top: 14px;
