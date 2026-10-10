@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css?v=13">
+<link rel="stylesheet" href="../assets/style.css?v=14">
 </head>
 <body>
 <div class="wrap">
@@ -23,6 +23,40 @@ function esc(s){
 }
 
 var toggleSeq = 0;
+
+// 포스터를 누르면 화면 가득 크게 보여 준다. 누르거나 Esc를 누르면 닫힌다.
+// data-full(원본)이 있으면 먼저 작은 이미지를 보여 주고, 원본이 로드되면 바꿔 끼운다.
+function openLightbox(thumb){
+  var box = document.getElementById('lightbox');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'lightbox';
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', '이미지 크게 보기');
+    box.innerHTML = '<button type="button" class="lightbox-close" aria-label="닫기">&times;</button><img class="lightbox-img" alt="">';
+    box.addEventListener('click', closeLightbox);
+    document.body.appendChild(box);
+  }
+  var img = box.querySelector('.lightbox-img');
+  var full = thumb.getAttribute('data-full');
+  img.alt = thumb.alt || '';
+  img.src = thumb.src;
+  if (full) {
+    var pre = new Image();
+    pre.onload = function(){ if (box.classList.contains('is-open')) img.src = pre.src; };
+    pre.src = full;
+  }
+  box.classList.add('is-open');
+  document.body.classList.add('lightbox-open');
+}
+function closeLightbox(){
+  var box = document.getElementById('lightbox');
+  if (box) box.classList.remove('is-open');
+  document.body.classList.remove('lightbox-open');
+}
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLightbox(); });
 
 function renderOrder(order){
   var html = '<div class="order-card"><div class="order-list">';
@@ -89,7 +123,8 @@ function renderNotices(notices){
         (n.desc || []).map(function(d){ return '<div class="desc">' + esc(d) + '</div>'; }).join('') +
         (n.tag ? '<span class="tag">' + esc(n.tag) + '</span>' : '') +
         (n.link ? '<a class="notice-link" href="' + esc(n.link.url) + '" target="_blank" rel="noopener">' + esc(n.link.label) + ' →</a>' : '') +
-        (n.image ? '<div class="notice-image"><img src="' + esc(n.image.src) + '" alt="' + esc(n.image.alt || '') + '">' +
+        (n.image ? '<div class="notice-image"><img src="' + esc(n.image.src) + '" alt="' + esc(n.image.alt || '') + '"' +
+          (n.image.full ? ' data-full="' + esc(n.image.full) + '"' : '') + '>' +
           (n.image.caption ? '<div class="notice-image-caption">' + esc(n.image.caption) + '</div>' : '') +
         '</div>' : '') +
       '</div>' +
@@ -188,6 +223,8 @@ fetch('../data/posts.json?t=' + Date.now(), { cache: 'no-store' })
     }
     render(target);
     document.getElementById('content-container').addEventListener('click', function(e){
+      var poster = e.target.closest('.notice-image img, .verse-poster img');
+      if (poster) { openLightbox(poster); return; }
       var btn = e.target.closest('.step-link');
       if (!btn) return;
       var panel = document.getElementById(btn.getAttribute('data-target'));
