@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>청년부 주보</title>
-<link rel="stylesheet" href="../assets/style.css?v=12">
+<link rel="stylesheet" href="../assets/style.css?v=13">
 </head>
 <body>
 <div class="wrap">
@@ -89,6 +89,9 @@ function renderNotices(notices){
         (n.desc || []).map(function(d){ return '<div class="desc">' + esc(d) + '</div>'; }).join('') +
         (n.tag ? '<span class="tag">' + esc(n.tag) + '</span>' : '') +
         (n.link ? '<a class="notice-link" href="' + esc(n.link.url) + '" target="_blank" rel="noopener">' + esc(n.link.label) + ' →</a>' : '') +
+        (n.image ? '<div class="notice-image"><img src="' + esc(n.image.src) + '" alt="' + esc(n.image.alt || '') + '">' +
+          (n.image.caption ? '<div class="notice-image-caption">' + esc(n.image.caption) + '</div>' : '') +
+        '</div>' : '') +
       '</div>' +
     '</div>';
   });
