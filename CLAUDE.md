@@ -15,3 +15,13 @@
 - 설교 자료(docx 등)에 인용된 본문이 있어도 주보에는 성경봉독 본문만 넣는다.
 - 반복해서 되묻지 않는다. 정말 찾을 수 없을 때(파일 없음, 사이트 접속 차단 등)만 무엇이 왜 막혔는지 한 번에 간단히 알린다.
 - 작업이 끝나면 PR을 만들어 `main`에 머지해야 사이트에 반영된다.
+
+## 청년부 주보 데이터 형식 (`청년부/data/posts.json`)
+청년부는 위의 `sheetUrl`/`verseText`가 아니라 `toggle` 형식을 쓴다.
+- 찬송가: `{ "role": "찬양", "who": "찬 270", "toggle": { "type": "sheet", "label": "찬 270 ♪", "image": "../hymns/새찬송가_270장.jpg" } }` (악보 파일은 `청년부/hymns/`)
+- 성경봉독: `toggle`의 `type: "verse"`, `version: "새한글성경"`, `verses: [{ "num": 1, "text": "..." }]`
+  - 본문이 두 곳이면 `{ "heading": "요한복음 9:1-5" }` 줄로 구분한다.
+  - 시처럼 줄을 바꿔야 하는 본문은 `text`에 `\n`을 넣는다(화면에서 그대로 줄바꿈된다).
+- 광고에 이미지를 넣을 때: `notices[].image` = `{ "src": "../movies/파일.jpg", "full": "../movies/원본.jpg", "alt": "..." }` (`full`은 누르면 크게 볼 때 쓰는 원본, 선택)
+- 화면 스타일(`assets/style.css`)을 바꾸면 `index.html`, `archive.html`, `posts/detail.html`의 `style.css?v=` 숫자를 함께 올린다.
+- 이 환경에서는 Dropbox 파일을 찾을 수는 있어도, 내려받는 서버(`dropboxusercontent.com`)가 막혀 있을 수 있다. 막혀 있으면 우회하지 말고, 사용자가 채팅에 첨부한 파일을 쓰거나 허용 도메인 추가를 요청한다.
