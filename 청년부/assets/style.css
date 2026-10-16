@@ -349,6 +349,7 @@ body{
   text-transform: uppercase;
 }
 .verse-panel .verse-line{
+  white-space: pre-line;
   margin: 0 0 9px;
   font-size: 14px;
   color: var(--ink);
