@@ -356,7 +356,7 @@
       "week": "주일예배",
       "publishAt": "2026-10-26",
       "order": [
-        { "role": "찬양", "who": "찬 20" },
+        { "role": "찬양", "who": "찬 20", "toggle": { "type": "sheet", "label": "찬 20 ♪", "image": "../hymns/새찬송가_020장.jpg" } },
         { "role": "봉헌", "who": "다같이" },
         { "role": "대표기도", "who": "허예나 청년" },
         { "role": "성경봉독", "who": "요나 2:1-10" },
