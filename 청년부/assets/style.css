@@ -325,7 +325,7 @@ body{
   transition: max-height .35s ease, opacity .3s ease, margin-top .3s ease, padding .3s ease, border-color .3s ease;
 }
 .toggle-panel.is-open{
-  max-height: 1400px;
+  max-height: 6000px;
   opacity: 1;
   margin: 4px 0 14px;
   padding: 16px 18px;
