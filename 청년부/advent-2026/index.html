@@ -492,7 +492,7 @@ body.nb-lock{overflow:hidden}
 .nbclose:hover{background:rgba(255,255,255,.24)}
 .nbbody{width:min(100% - 32px,780px);margin:0 auto;padding:22px 0 80px}
 .nbintro{margin:0 0 16px;font-size:.92rem;line-height:1.75;color:var(--ink-soft)}
-.nbstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.nbstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px}
 .nbstats div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center}
 .nbstats b{display:block;font-family:var(--sans);font-weight:800;font-size:1.5rem;line-height:1.1;color:var(--w1-text)}
 .nbstats span{display:block;margin-top:4px;font-size:.76rem;color:var(--ink-soft);font-weight:600}
@@ -659,7 +659,7 @@ footer.yf .ysign b{display:block;font-family:var(--serif);font-size:1.55rem;lett
       <span><i style="background:var(--w3)"></i>셋째 주 사랑 (장미)</span>
       <span><i style="background:var(--w4)"></i>넷째 주 기쁨 (진보라)</span>
       <span><i style="background:linear-gradient(135deg,#F3DC97,#D5A93C)"></i>성탄절 (흰색·금색)</span>
-      <span>● 주일 &nbsp; ✓ 실천 완료</span>
+      <span>● 주일</span>
     </div>
   </section>
 
@@ -789,9 +789,8 @@ function calendar(){
     const firstWd=WD.indexOf(r[0].weekday);
     for(let i=0;i<firstWd;i++)html+='<span class="blank"></span>';
     r.forEach(d=>{
-      const done=NB.isDone(d.date);
       const isT=todayDay&&todayDay.date===d.date;
-      html+=`<a class="cell${d.sunday?' sun':''}${d.week===5?' xmas':''}${done?' done':''}${isT?' today':''}" style="--c:var(--w${d.week})" href="#${id(d)}" title="${d.month}월 ${d.day}일 ${d.title}"><span>${d.day}</span><small>${d.week===5?'성탄':(d.sunday?'주일':d.weekday)}</small></a>`;
+      html+=`<a class="cell${d.sunday?' sun':''}${d.week===5?' xmas':''}${isT?' today':''}" style="--c:var(--w${d.week})" href="#${id(d)}" title="${d.month}월 ${d.day}일 ${d.title}"><span>${d.day}</span><small>${d.week===5?'성탄':(d.sunday?'주일':d.weekday)}</small></a>`;
     });
     const rest=7-(firstWd+r.length);for(let i=0;i<rest;i++)html+='<span class="blank"></span>';
     html+='</div>';
@@ -816,7 +815,7 @@ function weeksHTML(){
 <blockquote class="q">${d.verses&&d.verses.length?d.verses.map(v=>`<sup class="vn">${v.n}</sup>${esc(v.t)}`).join(' '):esc(d.quote)}${d.quoteRef?`<cite>${esc(d.quoteRef)}</cite>`:''}</blockquote>
 <div class="label">오늘의 말씀 묵상하기</div><div class="med">${d.paras.map((p,i)=>`<p>${esc(p)}</p>`+(d.poem&&d.poem.after===i?poemHTML(d.poem):'')).join('')}</div>
 <div class="label">오늘의 기도</div><div class="prayer">${esc(d.prayer)}</div>
-<div class="label">오늘의 실천</div><div class="practice">${d.practice.length>1?'<ul>'+d.practice.map(p=>`<li>${esc(p)}</li>`).join('')+'</ul>':`<p>${esc(d.practice[0]||'')}</p>`}<label class="check"><input type="checkbox" class="nb-done" data-nd="${d.date}" aria-label="오늘의 실천 완료"> 실천함</label></div>
+<div class="label">오늘의 실천</div><div class="practice">${d.practice.length>1?'<ul>'+d.practice.map(p=>`<li>${esc(p)}</li>`).join('')+'</ul>':`<p>${esc(d.practice[0]||'')}</p>`}</div>
 <details class="note"><summary>묵상 노트 쓰기</summary><textarea class="nb-text" data-nd="${d.date}" maxlength="6000" placeholder="오늘의 말씀과 실천에서 느낀 점을 적어 보세요. 적은 내용은 자동으로 저장되고, 「묵상 노트」에서 모아 볼 수 있습니다."></textarea><div class="nb-foot"><span class="nb-status" data-nd-status="${d.date}" aria-live="polite"></span><button type="button" class="nb-open">묵상 노트 전체 보기 →</button></div></details>
 ${d.slot>0||d.slot<DAYS.length-1?`<nav class="pn" aria-label="이전·다음 묵상">${d.slot>0?`<button type="button" class="pn-b prev" data-go="${id(DAYS[d.slot-1])}"><small>← 이전 묵상</small><b>${DAYS[d.slot-1].month}/${DAYS[d.slot-1].day} ${esc(DAYS[d.slot-1].title)}</b></button>`:''}${d.slot<DAYS.length-1?`<button type="button" class="pn-b next" data-go="${id(DAYS[d.slot+1])}"><small>다음 묵상 →</small><b>${DAYS[d.slot+1].month}/${DAYS[d.slot+1].day} ${esc(DAYS[d.slot+1].title)}</b></button>`:''}</nav>`:''}
 </div></div></div></article>`;
@@ -918,7 +917,6 @@ const NB=(()=>{
   function applyDay(date,except){
     const n=get(date);
     $$('.nb-text[data-nd="'+date+'"]').forEach(t=>{if(t!==except&&t!==document.activeElement){t.value=n.note||'';}autosize(t);});
-    $$('.nb-done[data-nd="'+date+'"]').forEach(c=>{if(c!==except)c.checked=!!n.done;});
   }
   function applyAll(){
     DAYS.forEach(d=>{applyDay(d.date);const det=document.querySelector('#'+id(d)+' details.note');if(det&&hasNote(d.date))det.open=true;});
@@ -928,16 +926,16 @@ const NB=(()=>{
   /* 전체 보기(묵상 노트) */
   function paintStats(){
     const el=$('#nbstats');if(!el)return;
-    const nNote=DAYS.filter(d=>hasNote(d.date)).length, nDone=DAYS.filter(d=>isDone(d.date)).length;
+    const nNote=DAYS.filter(d=>hasNote(d.date)).length;
     const chars=DAYS.reduce((a,d)=>a+get(d.date).note.length,0);
-    el.innerHTML='<div><b>'+nNote+'</b><span>기록한 날 / '+DAYS.length+'일</span></div><div><b>'+nDone+'</b><span>실천한 날</span></div><div><b>'+chars.toLocaleString('ko-KR')+'</b><span>기록한 글자</span></div>';
+    el.innerHTML='<div><b>'+nNote+'</b><span>기록한 날 / '+DAYS.length+'일</span></div><div><b>'+chars.toLocaleString('ko-KR')+'</b><span>기록한 글자</span></div>';
   }
   function entryHTML(d){
     const n=get(d.date), first=d.readings[0]||'';
     return '<article class="nbe" data-w="'+d.week+'" style="--wk:var(--w'+d.week+');--wk-tint:var(--w'+d.week+'-tint);--wk-text:var(--w'+d.week+'-text)">'
       +'<header><span class="nbd"><b>'+d.month+'/'+d.day+'</b><i>'+wd(d)+'</i></span>'
       +'<div class="nbt"><strong>'+esc(d.title)+'</strong><small>'+esc(first)+(d.readings.length>1?' 외':'')+'</small></div>'
-      +'<label class="check"><input type="checkbox" class="nb-done" data-nd="'+d.date+'"'+(n.done?' checked':'')+'> 실천함</label></header>'
+      +'</header>'
       +'<textarea class="nb-text" data-nd="'+d.date+'" maxlength="6000" placeholder="이날의 묵상을 적어 보세요." aria-label="'+d.month+'월 '+d.day+'일 묵상 노트">'+esc(n.note||'')+'</textarea>'
       +'<footer><button type="button" class="nb-go" data-day="'+id(d)+'">그날 묵상 열기 →</button></footer></article>';
   }
@@ -955,7 +953,6 @@ const NB=(()=>{
     const L=['2026 대림절 묵상 노트',''];
     DAYS.forEach(d=>{const n=get(d.date);if(!n.note.trim()&&!n.done)return;
       L.push('■ '+d.month+'월 '+d.day+'일('+wd(d)+') '+d.title,'  본문: '+d.readings.join(' · '));
-      if(n.done)L.push('  ✓ 오늘의 실천을 했습니다');
       if(n.note.trim())L.push('',n.note.trim());
       L.push('');});
     return L.length>2?L.join('\n'):'아직 적은 묵상 노트가 없습니다.';
@@ -985,8 +982,7 @@ const NB=(()=>{
       if(t.classList.contains('nb-text')){change(t.dataset.nd,{note:t.value});autosize(t);applyDay(t.dataset.nd,t);}
       else if(t.id==='nbq')render();});
     document.addEventListener('change',e=>{const t=e.target;if(!t.classList)return;
-      if(t.classList.contains('nb-done')){change(t.dataset.nd,{done:t.checked});applyDay(t.dataset.nd,t);calendar();}
-      else if(t.id==='nbempty')render();});
+      if(t.id==='nbempty')render();});
     document.addEventListener('click',e=>{
       const o=e.target.closest&&e.target.closest('[data-open-nb],.nb-open');if(o){e.preventDefault();open();return;}
       const g=e.target.closest&&e.target.closest('.nb-go');if(g){const day=document.getElementById(g.dataset.day);close();if(day){setOpen(day,true);setTimeout(()=>day.scrollIntoView({block:'start'}),60);}}
