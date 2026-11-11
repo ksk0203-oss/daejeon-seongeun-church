@@ -549,9 +549,10 @@ body.nb-lock{overflow:hidden}
 /* ===== 마무리 다듬기 2 ===== */
 /* 표지: 정보 막대와 버튼 폭을 맞춤 */
 @media (min-width:641px){
-  .infobar{width:min(100%,560px);grid-template-columns:repeat(3,minmax(0,1fr))}
-  .infobar>div{padding:13px 10px}
-  .hero-actions{max-width:560px!important}
+  .infobar{width:min(100%,640px);grid-template-columns:repeat(3,minmax(0,1fr))}
+  .infobar>div{padding:13px 8px}
+  .infobar b{font-size:clamp(.86rem,1.9vw,.98rem)}
+  .hero-actions{max-width:640px!important}
 }
 .hero .sub{position:relative;padding-bottom:22px}
 .hero .sub::after{content:"";position:absolute;left:50%;bottom:0;width:64px;height:2px;margin-left:-32px;border-radius:2px;background:linear-gradient(90deg,transparent,#E6CD8A,transparent)}
