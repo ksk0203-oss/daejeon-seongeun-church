@@ -38,6 +38,16 @@
   .btn:hover{ transform: translateY(-1px); }
   .btn-primary{ background: var(--dawn); color: #fff; }
   .btn-ghost{ background: rgba(247,244,238,.1); color: #F4EEE2; border: 1px solid rgba(247,244,238,.3); }
+  /* 이번 주 주보 카드 바로 아래 대림절 묵상집 링크 */
+  .advent-link{
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    margin-top: 12px; padding: 16px 20px;
+    background: var(--paper-card); border: 1px solid var(--line); border-radius: 14px;
+    text-decoration: none; transition: transform .15s ease;
+  }
+  .advent-link:hover{ transform: translateY(-1px); }
+  .advent-title{ font-weight: 700; font-size: 15.5px; color: var(--navy); }
+  .advent-go{ font-size: 12.5px; font-weight: 600; color: var(--dawn); white-space: nowrap; }
 .vision-panel{
   margin: 40px 32px 0;
   background: var(--paper-card);
@@ -120,7 +130,6 @@
       <div class="cta-row">
         <a class="btn btn-primary" id="latest-link" href="posts/detail.html">이번 주 주보 보기</a>
         <a class="btn btn-ghost" href="archive.html">전체 목록 보기</a>
-        <a class="btn btn-ghost" href="advent-2026/">2026 대림절 묵상집</a>
       </div>
     </div>
   </div>
@@ -134,6 +143,10 @@
     <div id="latest-preview">
       <div class="state-msg">불러오는 중…</div>
     </div>
+    <a class="advent-link" href="advent-2026/">
+      <span class="advent-title">2026 대림절 묵상집</span>
+      <span class="advent-go">바로가기 →</span>
+    </a>
   </div>
 
   <div class="footer">
