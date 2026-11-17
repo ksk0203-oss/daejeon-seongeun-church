@@ -149,7 +149,7 @@ details[open] summary::after{content:"－"}
 <script>
 (() => {
   "use strict";
-  const N = 11, L = 15, STORE = "sadari-2026-v1";
+  const N = 11, L = 15, STORE = "sadari-2026-v2";
   let G = {};
   function setGeo() {
     const w = (document.querySelector(".ladder-wrap") || {}).clientWidth || 900;
@@ -190,7 +190,7 @@ details[open] summary::after{content:"－"}
       rungs.push(row);
     }
     return {
-      names: names || Array.from({ length: N }, (_, i) => (i + 1) + "팀"),
+      names: names || Array.from({ length: N }, (_, i) => String(i + 1)),
       rungs,
       jit: Array.from({ length: L }, () => Math.round((rnd() - 0.5) * 10)),
       slots: shuffle(["bye","bye","bye","bye","bye","m1","m1","m2","m2","m3","m3"]),
@@ -212,7 +212,7 @@ details[open] summary::after{content:"－"}
   let S = load() || fresh();
   let busy = false;
 
-  const nm = i => (S.names[i] || "").trim() || (i + 1) + "팀";
+  const nm = i => (S.names[i] || "").trim() || String(i + 1);
   const short = n => { const a = Array.from(n); return a.length > 5 ? a.slice(0, 5).join("") + "…" : n; };
   const yOf = l => G.TOP + (l + 0.5) * G.STEP + S.jit[l];
 
@@ -264,7 +264,7 @@ details[open] summary::after{content:"－"}
 
   function renderMap() {
     const el = $("#teamMap");
-    const custom = S.names.some((n, i) => (n || "").trim() && n.trim() !== (i + 1) + "팀");
+    const custom = S.names.some((n, i) => (n || "").trim() && n.trim() !== String(i + 1));
     if (!G.compact || !custom) { el.innerHTML = ""; return; }
     el.innerHTML = Array.from({ length: N }, (_, i) => `<span><b style="color:${COLORS[i]}">${i + 1}</b> ${esc(nm(i))}</span>`).join("");
   }
@@ -351,7 +351,7 @@ details[open] summary::after{content:"－"}
 
   (function buildNames() {
     let h = "";
-    for (let i = 0; i < N; i++) h += `<label>${i + 1}<input type="text" maxlength="10" data-i="${i}" value="${esc(S.names[i])}" placeholder="${i + 1}팀" aria-label="${i + 1}번 팀 이름"></label>`;
+    for (let i = 0; i < N; i++) h += `<label>${i + 1}<input type="text" maxlength="10" data-i="${i}" value="${esc(S.names[i])}" placeholder="${i + 1}" aria-label="${i + 1}번 팀 이름"></label>`;
     $("#nameGrid").innerHTML = h;
     $("#nameGrid").addEventListener("input", e => {
       const el = e.target; if (!el.matches("input")) return;
