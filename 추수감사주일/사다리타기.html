@@ -137,11 +137,6 @@ details[open] summary::after{content:"－"}
   <section class="board" id="board" aria-live="polite"></section>
   <p id="doneMsg"></p>
 
-  <details class="card names">
-    <summary>팀 이름 바꾸기</summary>
-    <div class="name-grid" id="nameGrid"></div>
-  </details>
-
   <p class="note">사다리는 이 기기에서 무작위로 만들어져 이 기기에만 저장됩니다. 새로고침해도 결과는 그대로이지만, 다른 기기에서는 다른 사다리가 나오니 한 화면에서 진행해 주세요.</p>
 </div>
 <div class="toast" id="toast" role="status"></div>
@@ -154,7 +149,7 @@ details[open] summary::after{content:"－"}
   function setGeo() {
     const w = (document.querySelector(".ladder-wrap") || {}).clientWidth || 900;
     if (w >= 620) {
-      G = { compact: false, COL: 68, PADX: 44, TOP: 112, STEP: 36, GAP: 30, R: 21, CY: 46, NUMFS: 16, SW: 60, SH: 46, TAIL: 34 };
+      G = { compact: false, COL: 68, PADX: 44, TOP: 84, STEP: 36, GAP: 30, R: 21, CY: 46, NUMFS: 16, SW: 60, SH: 46, TAIL: 34 };
     } else {
       const PADX = 18, COL = Math.max(24, Math.floor((w - 12 - 2 * PADX) / (N - 1)));
       G = { compact: true, COL, PADX, TOP: 58, STEP: 34, GAP: 22, R: Math.min(13, Math.floor(COL / 2) - 1), CY: 24, NUMFS: 12, SW: COL - 4, SH: 44, TAIL: 26 };
@@ -243,7 +238,7 @@ details[open] summary::after{content:"－"}
       s += `<g class="team${done ? " done" : ""}" data-i="${i}" tabindex="${done ? -1 : 0}" role="button" aria-label="${esc(nm(i))} 사다리 타기${done ? " (완료)" : ""}" style="--c:${COLORS[i]}">` +
            `<title>${esc(nm(i))}</title><rect class="hit" x="${X(i) - G.COL / 2}" y="0" width="${G.COL}" height="${top}"/>` +
            `<circle cx="${X(i)}" cy="${G.CY}" r="${G.R}"/><text class="num" x="${X(i)}" y="${G.CY}" style="font-size:${G.NUMFS}px">${i + 1}</text>` +
-           (G.compact ? "" : `<text class="nm" x="${X(i)}" y="${G.CY + 40}">${esc(short(nm(i)))}</text>`) + `</g>`;
+           `</g>`;
     }
     const sy = bot + G.GAP, SPLIT = { bye: ["부전", "승"], m1: ["시합", "1"], m2: ["시합", "2"], m3: ["시합", "3"] };
     for (let c = 0; c < N; c++) {
@@ -348,16 +343,6 @@ details[open] summary::after{content:"－"}
     };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, fallback); else fallback();
   });
-
-  (function buildNames() {
-    let h = "";
-    for (let i = 0; i < N; i++) h += `<label>${i + 1}<input type="text" maxlength="10" data-i="${i}" value="${esc(S.names[i])}" placeholder="${i + 1}" aria-label="${i + 1}번 팀 이름"></label>`;
-    $("#nameGrid").innerHTML = h;
-    $("#nameGrid").addEventListener("input", e => {
-      const el = e.target; if (!el.matches("input")) return;
-      S.names[+el.dataset.i] = el.value; save(); if (!busy) render();
-    });
-  })();
 
   let rsz;
   window.addEventListener("resize", () => {
